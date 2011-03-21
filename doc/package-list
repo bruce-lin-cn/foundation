@@ -1,0 +1,11 @@
+grails-app.conf
+grails-app.conf.spring
+grails-app.domain.platform
+grails-app.taglib.platform
+plugins.hibernate-1.3.7
+plugins.hibernate-1.3.7.scripts
+plugins.tomcat-1.3.7
+plugins.tomcat-1.3.7.scripts
+plugins.tomcat-1.3.7.src.groovy.org.grails.tomcat
+plugins.tomcat-1.3.7.src.main.java.org.grails.tomcat
+test.unit.platform

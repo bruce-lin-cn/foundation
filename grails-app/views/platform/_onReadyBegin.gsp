@@ -1,0 +1,2 @@
+<script>
+	Ext.onReady(function(){
