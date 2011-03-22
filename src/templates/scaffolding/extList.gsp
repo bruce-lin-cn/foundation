@@ -13,8 +13,7 @@
         Ext.onReady(function(){
             var cbsm= new Ext.grid.CheckboxSelectionModel()
             var cm = new Ext.grid.ColumnModel([
-            cbsm,
-            <%  excludedProps = Event.allEvents.toList() << 'version'
+            cbsm,<%  excludedProps = Event.allEvents.toList() << 'version'
             allowedNames = domainClass.persistentProperties*.name << 'id' << 'dateCreated' << 'lastUpdated'
             props = domainClass.properties.findAll { allowedNames.contains(it.name) && !excludedProps.contains(it.name) && !Collection.isAssignableFrom(it.type) }
             Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
@@ -24,15 +23,13 @@
                 {header:'\${cgDomainProperties.${p.name}.chinese}',dataIndex:'${p.name}'} <% if(props.size()>i+1){out<<","} %><%  }   }   } %>
             ]);
 
-            var data=[
-                    <g:each in="\${${propertyName}List}" status="i" var="${propertyName}">
-                        [<%  props.eachWithIndex { p, i -> %>'\${fieldValue(bean: ${propertyName}, field: "${p.name}")}'<% if(props.size()>i+1){out<<","} %><%}%>]<g:if test="\${${propertyName}List.size() > i +1}">,</g:if>
-                    </g:each>
-             ];
-
             var store= new Ext.data.Store({
-                proxy: new Ext.data.MemoryProxy(data),
-                reader: new Ext.data.ArrayReader({},[<%  props.eachWithIndex { p, i ->
+                autoLoad:true,
+                proxy: new Ext.data.HttpProxy({url:'/foundation/${domainClass.propertyName}/listJSON'}),
+                reader: new Ext.data.JsonReader({
+                    totalProperty:'total',
+                    root:'root'
+                },[<%  props.eachWithIndex { p, i ->
                                 if (i < 10) {
                                     if (p.isAssociation()) { %><%      } else { %>
                     {name:'${p.name}'}<% if(props.size()>i+1){out<<","} %><%  }   }   } %>
@@ -63,7 +60,7 @@
                 })
             });
 
-            store.load();
+            store.load({params:{start:0,limit:10}});
         });
     </script>
     <body>

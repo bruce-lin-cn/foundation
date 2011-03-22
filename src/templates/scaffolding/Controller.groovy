@@ -5,64 +5,50 @@
     def cgClass=grailsApplication.getArtefact("Domain","${packageName}.${className}")
     def cgConstraints=cgClass.getConstrainedProperties()
     def cgDomainProperties=[:]
+    def initialized=false
 
     def index = {
         redirect(action: "list", params: params)
     }
 
+    def listJSON = {
+
+        def total=${className}.count()
+        def max=10
+        def start=params.int('start')
+
+        if(start==null)
+        {
+            start=0
+        }
+        def lists=[]
+        def end=start+max-1
+        if(end>=total)
+        {
+            end=total-1
+        }
+
+        lists=${className}.findAll()[start..end]
+
+        def json=lists as grails.converters.JSON
+        def output="{total:"+total+",root:"+json+ "}"
+
+        render output
+    }
+
     def list = {
-        cgDomainProperties.cgChinese=${className}.cgDomain.chinese
-
-        cgClass.getProperties().each{
-            def namePropertiy=it.getName()
-
-            if(namePropertiy == 'id')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'编号']
-            }else if(namePropertiy == 'dateCreated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'创建时间']
-            }else if(namePropertiy=='version')
-	    {
-
-	    }
-	    else if(namePropertiy == 'lastUpdated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'更新时间']
-            }else if(it.isPersistent()==true && cgConstraints[namePropertiy]!=null && namePropertiy!='version'){
-                cgDomainProperties[namePropertiy]=[chinese:cgConstraints[namePropertiy].attributes.chinese?:namePropertiy]
-            }else{
-                println ">>>>>> Unhandled propertiy:"+namePropertiy
-            }
+        if(initialized==false)
+        {
+            init()
         }
 
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [${propertyName}List: ${className}.list(params), ${propertyName}Total: ${className}.count(),cgDomainProperties:cgDomainProperties]
     }
     def extList = {
-        cgDomainProperties.cgChinese=${className}.cgDomain.chinese
-
-        cgClass.getProperties().each{
-            def namePropertiy=it.getName()
-
-            if(namePropertiy == 'id')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'编号']
-            }else if(namePropertiy == 'dateCreated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'创建时间']
-            }else if(namePropertiy=='version')
-	    {
-
-	    }
-	    else if(namePropertiy == 'lastUpdated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'更新时间']
-            }else if(it.isPersistent()==true && cgConstraints[namePropertiy]!=null && namePropertiy!='version'){
-                cgDomainProperties[namePropertiy]=[chinese:cgConstraints[namePropertiy].attributes.chinese?:namePropertiy]
-            }else{
-                println ">>>>>> Unhandled propertiy:"+namePropertiy
-            }
+        if(initialized==false)
+        {
+            init()
         }
 
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
@@ -70,28 +56,9 @@
     }
 
     def create = {
-        cgDomainProperties.cgChinese=${className}.cgDomain.chinese
-
-        cgClass.getProperties().each{
-            def namePropertiy=it.getName()
-
-            if(namePropertiy == 'id')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'编号']
-            }else if(namePropertiy=='version')
-	    {
-
-	    }else if(namePropertiy == 'dateCreated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'创建时间']
-            }else if(namePropertiy == 'lastUpdated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'更新时间']
-            }else if(it.isPersistent()==true && cgConstraints[namePropertiy]!=null && namePropertiy!='version'){
-                cgDomainProperties[namePropertiy]=[chinese:cgConstraints[namePropertiy].attributes.chinese?:namePropertiy]
-            }else{
-                println ">>>>>> Unhandled propertiy:"+namePropertiy
-            }
+        if(initialized==false)
+        {
+            init()
         }
 
         def ${propertyName} = new ${className}()
@@ -111,30 +78,11 @@
     }
 
     def show = {
-        cgDomainProperties.cgChinese=${className}.cgDomain.chinese
-
-        cgClass.getProperties().each{
-            def namePropertiy=it.getName()
-
-            if(namePropertiy == 'id')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'编号']
-            }else if(namePropertiy=='version')
-	    {
-
-	    }else if(namePropertiy == 'dateCreated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'创建时间']
-            }else if(namePropertiy == 'lastUpdated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'更新时间']
-            }else if(it.isPersistent()==true && cgConstraints[namePropertiy]!=null && namePropertiy!='version'){
-                cgDomainProperties[namePropertiy]=[chinese:cgConstraints[namePropertiy].attributes.chinese?:namePropertiy]
-            }else{
-                println ">>>>>> Unhandled propertiy:"+namePropertiy
-            }
+        if(initialized==false)
+        {
+            init()
         }
-
+        
         def ${propertyName} = ${className}.get(params.id)
         if (!${propertyName}) {
             flash.message = "\${message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])}"
@@ -146,30 +94,11 @@
     }
 
     def edit = {
-        cgDomainProperties.cgChinese=${className}.cgDomain.chinese
-
-        cgClass.getProperties().each{
-            def namePropertiy=it.getName()
-
-            if(namePropertiy == 'id')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'编号']
-            }else if(namePropertiy=='version')
-	    {
-
-	    }else if(namePropertiy == 'dateCreated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'创建时间']
-            }else if(namePropertiy == 'lastUpdated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'更新时间']
-            }else if(it.isPersistent()==true && cgConstraints[namePropertiy]!=null && namePropertiy!='version'){
-                cgDomainProperties[namePropertiy]=[chinese:cgConstraints[namePropertiy].attributes.chinese?:namePropertiy]
-            }else{
-                println ">>>>>> Unhandled propertiy:"+namePropertiy
-            }
+        if(initialized==false)
+        {
+            init()
         }
-
+        
         def ${propertyName} = ${className}.get(params.id)
         if (!${propertyName}) {
             flash.message = "\${message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])}"
@@ -224,5 +153,33 @@
             flash.message = "\${message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])}"
             redirect(action: "list")
         }
+    }
+
+    def init(){
+        cgDomainProperties.cgChinese=${className}.cgDomain.chinese
+
+        cgClass.getProperties().each{
+            def namePropertiy=it.getName()
+
+            if(namePropertiy == 'id')
+            {
+                cgDomainProperties[namePropertiy]=[chinese:'编号']
+            }else if(namePropertiy=='version')
+	    {
+
+	    }else if(namePropertiy == 'dateCreated')
+            {
+                cgDomainProperties[namePropertiy]=[chinese:'创建']
+            }else if(namePropertiy == 'lastUpdated')
+            {
+                cgDomainProperties[namePropertiy]=[chinese:'更新']
+            }else if(it.isPersistent()==true && cgConstraints[namePropertiy]!=null && namePropertiy!='version'){
+                cgDomainProperties[namePropertiy]=[chinese:cgConstraints[namePropertiy].attributes.chinese?:namePropertiy]
+            }else{
+                println ">>>>>> Unhandled propertiy:"+namePropertiy
+            }
+        }
+
+        initialized=true
     }
 }

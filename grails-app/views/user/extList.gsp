@@ -14,7 +14,6 @@
             var cbsm= new Ext.grid.CheckboxSelectionModel()
             var cm = new Ext.grid.ColumnModel([
             cbsm,
-            
                 {header:'${cgDomainProperties.id.chinese}',dataIndex:'id'} ,
                 {header:'${cgDomainProperties.name.chinese}',dataIndex:'name'} ,
                 {header:'${cgDomainProperties.mobile.chinese}',dataIndex:'mobile'} ,
@@ -23,12 +22,6 @@
                 {header:'${cgDomainProperties.lastUpdated.chinese}',dataIndex:'lastUpdated'} 
             ]);
 
-            //var data=[
-            //        <g:each in="${userInstanceList}" status="i" var="userInstance">
-            //            ['${fieldValue(bean: userInstance, field: "id")}','${fieldValue(bean: userInstance, field: "name")}','${fieldValue(bean: userInstance, field: "mobile")}','${fieldValue(bean: userInstance, field: "identityCardNum")}','${fieldValue(bean: userInstance, field: "dateCreated")}','${fieldValue(bean: userInstance, field: "lastUpdated")}']<g:if test="${userInstanceList.size() > i +1}">,</g:if>
-            //        </g:each>
-            // ];
-       
             var store= new Ext.data.Store({
                 autoLoad:true,
                 proxy: new Ext.data.HttpProxy({url:'/foundation/user/listJSON'}),

@@ -61,64 +61,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="extList.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/user/extList.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="30" selection-start="1698" selection-end="1698" vertical-scroll-proportion="-3.347826">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Controller.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="56" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0">
+            <state line="87" column="124" selection-start="2614" selection-end="2641" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserController.groovy" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="UserController.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/platform/UserController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="39" selection-start="687" selection-end="687" vertical-scroll-proportion="0.48554912">
+            <state line="19" column="37" selection-start="489" selection-end="489" vertical-scroll-proportion="26.833334">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="09-02-01.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://E:/b.资料/深入浅出EXTJS(第二版)/ext-3.2.0/examples/03.grid/09-02-01.html">
+      <file leaf-file-name="extList.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/user/extList.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+            <state line="27" column="49" selection-start="1234" selection-end="1234" vertical-scroll-proportion="-5.478261">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SimpleControllerHandlerAdapter.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://C:/Java/GRAILS/lib/org.springframework.web.servlet-3.0.5.RELEASE.jar!/org/springframework/web/servlet/mvc/SimpleControllerHandlerAdapter.class">
+      <file leaf-file-name="extList.gsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/extList.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="56" selection-start="481" selection-end="481" vertical-scroll-proportion="-6.16">
+            <state line="27" column="63" selection-start="1365" selection-end="1365" vertical-scroll-proportion="0.5570292">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/index.gsp">
+      <file leaf-file-name="Config.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="8" selection-start="113" selection-end="113" vertical-scroll-proportion="-1.6956521">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/user/list.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="24" selection-start="2947" selection-end="2957" vertical-scroll-proportion="-18.26087">
+            <state line="59" column="60" selection-start="2721" selection-end="2731" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -147,10 +129,10 @@
         <option value="$PROJECT_DIR$/grails-app/views/user/ext.gsp" />
         <option value="$PROJECT_DIR$/src/templates/scaffolding/ext.gsp" />
         <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
-        <option value="$PROJECT_DIR$/src/templates/scaffolding/extList.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/platform/UserController.groovy" />
         <option value="$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/user/extList.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/platform/UserController.groovy" />
+        <option value="$PROJECT_DIR$/src/templates/scaffolding/extList.gsp" />
       </list>
     </option>
   </component>
@@ -184,6 +166,9 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -352,9 +337,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Favorites" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -403,13 +385,6 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" class_name="" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" method_name="" module_name="" output_log_level="" package_name="" player_path="FlashPlayer.exe" port="0" run_mode="HtmlOrSwfFile" run_trusted="false" scope="Class" socket_policy_port="0" url_to_launch="http://">
-      <method>
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="SpecsRunConfiguration" factoryName="Specs">
       <module name="" />
       <setting name="path" value="" />
@@ -419,6 +394,13 @@
       <setting name="workingDirectory" value="$PROJECT_DIR$" />
       <setting name="sysFilter" value=".*" />
       <setting name="exampleFilter" value=".*" />
+      <method>
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" class_name="" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" method_name="" module_name="" output_log_level="" package_name="" player_path="FlashPlayer.exe" port="0" run_mode="HtmlOrSwfFile" run_trusted="false" scope="Class" socket_policy_port="0" url_to_launch="http://">
       <method>
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
@@ -568,14 +550,14 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24797407" sideWeight="0.67244095" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2471637" sideWeight="0.67244095" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959481" sideWeight="0.67244095" order="4" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32755905" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32755905" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959481" sideWeight="0.67244095" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -612,11 +594,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/taglib/platform/ExtjsTagLib.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="53" selection-start="646" selection-end="646" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/user/extjs.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="29" selection-start="1387" selection-end="1387" vertical-scroll-proportion="0.32384342" />
@@ -629,23 +606,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/list.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/user/ext.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="15" selection-start="3255" selection-end="3257" vertical-scroll-proportion="0.88095236">
-          <folding />
-        </state>
+        <state line="84" column="15" selection-start="3255" selection-end="3257" vertical-scroll-proportion="0.88095236" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/platform/User.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="32" selection-start="366" selection-end="366" vertical-scroll-proportion="0.44537815">
-          <folding />
-        </state>
+        <state line="17" column="32" selection-start="366" selection-end="366" vertical-scroll-proportion="0.44537815" />
       </provider>
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
         <state />
@@ -653,70 +624,71 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/index2.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="26" selection-start="1409" selection-end="1409" vertical-scroll-proportion="0.99469495">
-          <folding />
-        </state>
+        <state line="50" column="26" selection-start="1409" selection-end="1409" vertical-scroll-proportion="0.99469495" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/platform/_extjs.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="4" selection-start="107" selection-end="107" vertical-scroll-proportion="0.27683616">
-          <folding />
-        </state>
+        <state line="7" column="4" selection-start="107" selection-end="107" vertical-scroll-proportion="0.27683616" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/index.gsp">
+    <entry file="jar://C:/Java/GRAILS/lib/org.springframework.web.servlet-3.0.5.RELEASE.jar!/org/springframework/web/servlet/mvc/SimpleControllerHandlerAdapter.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="8" selection-start="113" selection-end="113" vertical-scroll-proportion="-1.6956521">
+        <state line="11" column="56" selection-start="481" selection-end="481" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/user/list.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="24" selection-start="2947" selection-end="2957" vertical-scroll-proportion="-18.26087">
+        <state line="60" column="24" selection-start="2947" selection-end="2957" vertical-scroll-proportion="0.5483871">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Java/GRAILS/lib/org.springframework.web.servlet-3.0.5.RELEASE.jar!/org/springframework/web/servlet/mvc/SimpleControllerHandlerAdapter.class">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="56" selection-start="481" selection-end="481" vertical-scroll-proportion="-6.16">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="56" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0">
+        <state line="4" column="8" selection-start="113" selection-end="113" vertical-scroll-proportion="0.037135277">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://E:/b.资料/深入浅出EXTJS(第二版)/ext-3.2.0/examples/03.grid/09-02-01.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/extList.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="25" selection-start="2848" selection-end="2848" vertical-scroll-proportion="1.2947977">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/user/extList.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="30" selection-start="1698" selection-end="1698" vertical-scroll-proportion="-3.347826">
+        <state line="59" column="60" selection-start="2721" selection-end="2731" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/platform/UserController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="39" selection-start="687" selection-end="687" vertical-scroll-proportion="0.48554912">
+        <state line="19" column="37" selection-start="489" selection-end="489" vertical-scroll-proportion="26.833334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="124" selection-start="2614" selection-end="2641" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/user/extList.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="49" selection-start="1234" selection-end="1234" vertical-scroll-proportion="-5.478261">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/extList.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="63" selection-start="1365" selection-end="1365" vertical-scroll-proportion="0.5570292">
           <folding />
         </state>
       </provider>
