@@ -1,4 +1,5 @@
 import platform.User
+import business.Customer
 
 class BootStrap {
 
@@ -10,6 +11,17 @@ class BootStrap {
         for( int i=0; i< 30; i++)
         {
             new User(name:"姓名"+i,mobile:"189060570"+i,identityCardNum: "35010519790118000"+i).save();
+        }
+
+        String name
+    String mobile
+    String identityCardNum
+    String level
+    String balance
+
+        for( int i=0;i<100;i++)
+        {
+            new Customer(name:"姓名"+i,mobile:"189060570"+i,identityCardNum: "35010519790118000"+i,level:"高级",balance:"100").save()
         }
     }
     def destroy = {

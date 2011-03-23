@@ -1,5 +1,5 @@
 
-<%@ page import="platform.User" %>
+<%@ page import="business.Customer" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -11,53 +11,6 @@
 
     <script>
         Ext.onReady(function(){
-            var handleAction = function(action){
-        Ext.example.msg('<b>Action</b>', 'You clicked "'+action+'"');
-    };
-
-    var p = new Ext.Window({
-        title: 'Standard',
-        closable: false,
-        height:250,
-        width: 500,
-        bodyStyle: 'padding:10px',
-        contentEl: 'content',
-        autoScroll: true,
-        tbar: new Ext.Toolbar({
-            enableOverflow: false,
-            items: [{
-                xtype:'splitbutton',
-                text: 'Menu Button',
-                iconCls: 'add16',
-                handler: handleAction.createCallback('Menu Button'),
-                menu: [{text: 'Menu Item 1', handler: handleAction.createCallback('Menu Item 1')}]
-            },'-',{
-                xtype:'splitbutton',
-                text: 'Cut',
-                iconCls: 'add16',
-                handler: handleAction.createCallback('Cut'),
-                menu: [{text: 'Cut menu', handler: handleAction.createCallback('Cut menu')}]
-            },{
-                text: 'Copy',
-                iconCls: 'add16',
-                handler: handleAction.createCallback('Copy')
-            },{
-                text: 'Paste',
-                iconCls: 'add16',
-                menu: [{text: 'Paste menu', handler: handleAction.createCallback('Paste menu')}]
-            },'-',{
-                text: 'Format',
-                iconCls: 'add16',
-                handler: handleAction.createCallback('Format')
-            },'->',{
-                text: 'Right',
-                iconCls: 'add16',
-                handler: handleAction.createCallback('Right')
-            }]
-        })
-    });
-    p.show();
-
             var cbsm= new Ext.grid.CheckboxSelectionModel()
             var cm = new Ext.grid.ColumnModel([
             cbsm,
@@ -65,13 +18,15 @@
                 {header:'${cgDomainProperties.name.chinese}',dataIndex:'name'} ,
                 {header:'${cgDomainProperties.mobile.chinese}',dataIndex:'mobile'} ,
                 {header:'${cgDomainProperties.identityCardNum.chinese}',dataIndex:'identityCardNum'} ,
+                {header:'${cgDomainProperties.level.chinese}',dataIndex:'level'} ,
+                {header:'${cgDomainProperties.balance.chinese}',dataIndex:'balance'} ,
                 {header:'${cgDomainProperties.dateCreated.chinese}',dataIndex:'dateCreated'} ,
                 {header:'${cgDomainProperties.lastUpdated.chinese}',dataIndex:'lastUpdated'} 
             ]);
 
             var store= new Ext.data.Store({
                 autoLoad:true,
-                proxy: new Ext.data.HttpProxy({url:'/foundation/user/listJSON'}),
+                proxy: new Ext.data.HttpProxy({url:'/foundation/customer/listJSON'}),
                 reader: new Ext.data.JsonReader({
                     totalProperty:'total',
                     root:'root'
@@ -80,6 +35,8 @@
                     {name:'name'},
                     {name:'mobile'},
                     {name:'identityCardNum'},
+                    {name:'level'},
+                    {name:'balance'},
                     {name:'dateCreated'},
                     {name:'lastUpdated'}
                 ])
@@ -113,7 +70,6 @@
         });
     </script>
     <body>
-        <div id="content"></div>
-    <div id="grid"></div>
+        <div id="grid"></div>
     </body>
 </html>
