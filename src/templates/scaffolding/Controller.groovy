@@ -155,6 +155,27 @@
         }
     }
 
+    def extDelete = {
+        def ${propertyName} = ${className}.get(params.id)
+
+        println("AJAX: Deleting "+${propertyName}?.toString())
+
+        if (${propertyName}) {
+            try {
+                def record= ${propertyName}.toString()
+                ${propertyName}.delete()
+
+                render "{success:true,msg:'"+record+"记录已删除'}";
+            }
+            catch (org.springframework.dao.DataIntegrityViolationException e) {
+                render "{success:false,msg:'记录删除失败'}";
+            }
+        }
+        else {
+            render "{success:false,msg:'记录不存在！'}";
+        }
+    }
+
     def init(){
         cgDomainProperties.cgChinese=${className}.cgDomain.chinese
 

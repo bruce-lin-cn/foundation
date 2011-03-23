@@ -11,6 +11,51 @@
 
     <script>
         Ext.onReady(function(){
+            // 创建工具条
+            var tb = new Ext.Toolbar();
+            tb.render('toolbar');
+
+            tb.add({
+                text: '新建',
+                icon: '/foundation/images/skin/database_add.png'
+            },{
+                text: '修改',
+                icon: '/foundation/images/skin/database_edit.png'
+            },{
+                text: '删除',
+                icon: '/foundation/images/skin/database_delete.png',
+                handler: function(){
+                    var id = (grid.getSelectionModel().getSelected()).id;
+                    if (id){
+                        Ext.Ajax.request({
+                            url: '/foundation/${domainClass.propertyName}/extDelete?id='+id,
+                            success: function(result){
+                                var json_str = Ext.util.JSON.decode(result.responseText);
+                                Ext.Msg.alert('信息',json_str.msg);
+                                    store.reload();
+                            },
+                            failure:function(){
+                                //Ext.Msg.alert('信息','服务器出现错误，稍后再试!');
+                            }
+                        });
+                    }
+                }
+            },{
+                text: '详细',
+                icon: '/foundation/images/skin/database_save.png'
+            },
+            '->',
+            {
+                xtype: 'textfield',
+                name: 'searchBar',
+                emptyText: '请输入搜索条件'
+            },{
+                text: '搜索',
+                icon: '/foundation/images/skin/database_search.png'
+            });
+
+            tb.doLayout();
+
             var cbsm= new Ext.grid.CheckboxSelectionModel()
             var cm = new Ext.grid.ColumnModel([
             cbsm,<%  excludedProps = Event.allEvents.toList() << 'version'
@@ -64,6 +109,7 @@
         });
     </script>
     <body>
+        <div id="toolbar"></div>
         <div id="grid"></div>
     </body>
 </html>

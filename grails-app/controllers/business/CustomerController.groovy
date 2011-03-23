@@ -157,6 +157,27 @@ package business
         }
     }
 
+    def extDelete = {
+        def customerInstance = Customer.get(params.id)
+
+        println("AJAX: Deleting "+customerInstance?.toString())
+
+        if (customerInstance) {
+            try {
+                def record= customerInstance.toString()
+                customerInstance.delete()
+
+                render "{success:true,msg:'"+record+"数据删除成功！'}";
+            }
+            catch (org.springframework.dao.DataIntegrityViolationException e) {
+                render "{success:false,msg:'数据删除失败！'}";
+            }
+        }
+        else {
+            render "{success:false,msg:'数据不存在！'}";
+        }
+    }
+
     def init(){
         cgDomainProperties.cgChinese=Customer.cgDomain.chinese
 

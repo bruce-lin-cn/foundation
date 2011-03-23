@@ -9,6 +9,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <link rel="stylesheet" type="text/css" href="/foundation/ext/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="/foundation/ext/resources/css/styles.css" />
 <script type="text/javascript" src="/foundation/ext/adapter/ext/ext-base.js" ></script>
 <script type="text/javascript" src="/foundation/ext/ext-all.js" ></script>
 <script type="text/javascript" src="/foundation/ext/ext-lang-zh_CN.js" ></script>
