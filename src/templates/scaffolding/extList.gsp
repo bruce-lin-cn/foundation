@@ -1,4 +1,5 @@
 <% import grails.persistence.Event %>
+<% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %>
 <%=packageName%>
 <html>
     <head>
@@ -11,13 +12,67 @@
 
     <script>
         Ext.onReady(function(){
-            // 创建工具条
+
+            var ${domainClass.propertyName}Form = new Ext.form.FormPanel({
+                labelAlign: 'right',
+                labelWidth: 50,
+                frame: true,
+                url: '/foundation/${domainClass.propertyName}/createJSON',
+                defaultType: 'textfield',
+                items: [<%  excludedProps = Event.allEvents.toList() << 'version' << 'id' << 'dateCreated' << 'lastUpdated'
+                    persistentPropNames = domainClass.persistentProperties*.name
+                    props = domainClass.properties.findAll { persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) }
+                    Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
+                    display = true
+                    boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')
+                    props.eachWithIndex { p, i ->
+                                if (!Collection.class.isAssignableFrom(p.type)) {
+                                    if (hasHibernate) {
+                                        cp = domainClass.constrainedProperties[p.name]
+                                        display = (cp ? cp.display : true)
+                                    }
+                                    if (display) { %>
+                    {fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype: <% if(p.type==String.class){ out << "'textfield'"} else if(p.type==Date.class){ out << "'datefield',format:'Y-m-d'"}%>}<% if(props.size()>i+1){out<<","} %><%  }   }   } %>
+                ]
+            });
+
+            var ${domainClass.propertyName}Win = new Ext.Window({
+                el: '${domainClass.propertyName}Win',
+                closable:false,
+                layout: 'fit',
+                width: 400,
+                title: '创建\${entityName}',
+                height: 300,
+                closeAction: 'hide',
+                items: [${domainClass.propertyName}Form],
+                buttons: [{
+                    text:'创建',
+                    handler: function(){
+                        ${domainClass.propertyName}Form.getForm().submit({
+                            success:function(${domainClass.propertyName}Form, action){
+                                Ext.Msg.alert('信息',action.result.msg);},
+                            failure:function(){
+                                Ext.Msg.alert('信息',"创建\${entityName}失败!");}
+                            }
+                        });
+                    }
+                },{
+                    text: '取 消',
+                    handler: function(){
+                        ${domainClass.propertyName}Win.hide();
+                    }
+                }]
+            });
+
             var tb = new Ext.Toolbar();
             tb.render('toolbar');
 
             tb.add({
                 text: '新建',
-                icon: '/foundation/images/skin/database_add.png'
+                icon: '/foundation/images/skin/database_add.png',
+                handler:function(){
+                    ${domainClass.propertyName}Win.show(this);
+                }
             },{
                 text: '修改',
                 icon: '/foundation/images/skin/database_edit.png'
@@ -28,7 +83,7 @@
                     var id = (grid.getSelectionModel().getSelected()).id;
                     if (id){
                         Ext.Ajax.request({
-                            url: '/foundation/${domainClass.propertyName}/extDelete?id='+id,
+                            url: '/foundation/${domainClass.propertyName}/deleteJSON?id='+id,
                             success: function(result){
                                 var json_str = Ext.util.JSON.decode(result.responseText);
                                 Ext.Msg.alert('信息',json_str.msg);
@@ -56,7 +111,7 @@
 
             tb.doLayout();
 
-            var cbsm= new Ext.grid.CheckboxSelectionModel()
+            var cbsm= new Ext.grid.CheckboxSelectionModel({singleSelect:false})
             var cm = new Ext.grid.ColumnModel([
             cbsm,<%  excludedProps = Event.allEvents.toList() << 'version'
             allowedNames = domainClass.persistentProperties*.name << 'id' << 'dateCreated' << 'lastUpdated'
@@ -111,5 +166,8 @@
     <body>
         <div id="toolbar"></div>
         <div id="grid"></div>
+        <div id="${domainClass.propertyName}Win">
+            <div id="grid"></div>
+        </div>
     </body>
 </html>

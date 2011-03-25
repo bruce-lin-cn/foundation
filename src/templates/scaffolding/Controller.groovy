@@ -155,7 +155,7 @@
         }
     }
 
-    def extDelete = {
+    def deleteJSON = {
         def ${propertyName} = ${className}.get(params.id)
 
         println("AJAX: Deleting "+${propertyName}?.toString())

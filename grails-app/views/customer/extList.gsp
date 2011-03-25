@@ -1,4 +1,5 @@
 
+
 <%@ page import="business.Customer" %>
 <html>
     <head>
@@ -11,13 +12,58 @@
 
     <script>
         Ext.onReady(function(){
-            // 创建工具条
+
+            var customerForm = new Ext.form.FormPanel({
+                labelAlign: 'right',
+                labelWidth: 50,
+                frame: true,
+                url: '/foundation/customer/createJSON',
+                defaultType: 'textfield',
+                items: [
+                    {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield'},
+                    {fieldLabel: '${cgDomainProperties.mobile.chinese}',name: 'mobile',xtype: 'textfield'},
+                    {fieldLabel: '${cgDomainProperties.identityCardNum.chinese}',name: 'identityCardNum',xtype: 'textfield'},
+                    {fieldLabel: '${cgDomainProperties.level.chinese}',name: 'level',xtype: 'textfield'},
+                    {fieldLabel: '${cgDomainProperties.balance.chinese}',name: 'balance',xtype: 'textfield'}
+                ]
+            });
+
+            var customerWin = new Ext.Window({
+                el: 'customerWin',
+                closable:false,
+                layout: 'fit',
+                width: 400,
+                title: '创建${entityName}',
+                height: 250,
+                closeAction: 'hide',
+                items: [customerForm],
+                buttons: [{
+                    text:'创建',
+                    handler: function(){
+                        customerForm.getForm().submit({
+                            success:function(customerForm, action){
+                                Ext.Msg.alert('信息',action.result.msg);},
+                            failure:function(){
+                                Ext.Msg.alert('信息',"创建${entityName}失败!");}
+                        });
+                    }
+                },{
+                    text: '取 消',
+                    handler: function(){
+                        customerWin.hide();
+                    }
+                }]
+            });
+
             var tb = new Ext.Toolbar();
             tb.render('toolbar');
 
             tb.add({
                 text: '新建',
-                icon: '/foundation/images/skin/database_add.png'
+                icon: '/foundation/images/skin/database_add.png',
+                handler:function(){
+                    customerWin.show(this);
+                }
             },{
                 text: '修改',
                 icon: '/foundation/images/skin/database_edit.png'
@@ -28,7 +74,7 @@
                     var id = (grid.getSelectionModel().getSelected()).id;
                     if (id){
                         Ext.Ajax.request({
-                            url: '/foundation/customer/extDelete?id='+id,
+                            url: '/foundation/customer/deleteJSON?id='+id,
                             success: function(result){
                                 var json_str = Ext.util.JSON.decode(result.responseText);
                                 Ext.Msg.alert('信息',json_str.msg);
@@ -56,7 +102,7 @@
 
             tb.doLayout();
 
-            var cbsm= new Ext.grid.CheckboxSelectionModel()
+            var cbsm= new Ext.grid.CheckboxSelectionModel({singleSelect:false})
             var cm = new Ext.grid.ColumnModel([
             cbsm,
                 {header:'${cgDomainProperties.id.chinese}',dataIndex:'id'} ,
@@ -117,5 +163,8 @@
     <body>
         <div id="toolbar"></div>
         <div id="grid"></div>
+        <div id="customerWin">
+            <div id="grid"></div>
+        </div>
     </body>
 </html>

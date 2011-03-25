@@ -13,6 +13,12 @@ package business
         redirect(action: "list", params: params)
     }
 
+    def createJSON = {
+        println("AJAX: Creating "+params.toString())
+
+        render "{success:true,msg:'记录已创建'}";
+
+    }
     def listJSON = {
 
         def total=Customer.count()
@@ -157,7 +163,7 @@ package business
         }
     }
 
-    def extDelete = {
+    def deleteJSON = {
         def customerInstance = Customer.get(params.id)
 
         println("AJAX: Deleting "+customerInstance?.toString())
@@ -167,14 +173,14 @@ package business
                 def record= customerInstance.toString()
                 customerInstance.delete()
 
-                render "{success:true,msg:'"+record+"数据删除成功！'}";
+                render "{success:true,msg:'"+record+"记录已删除'}";
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
-                render "{success:false,msg:'数据删除失败！'}";
+                render "{success:false,msg:'记录删除失败'}";
             }
         }
         else {
-            render "{success:false,msg:'数据不存在！'}";
+            render "{success:false,msg:'记录不存在！'}";
         }
     }
 
