@@ -1,5 +1,8 @@
 <%=packageName ? "package ${packageName}\n\n" : ''%> class ${className}Controller {
 
+<% import grails.persistence.Event %>
+<% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %>
+
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def cgClass=grailsApplication.getArtefact("Domain","${packageName}.${className}")
@@ -8,7 +11,17 @@
     def initialized=false
 
     def index = {
-        redirect(action: "list", params: params)
+        redirect(action: "extList", params: params)
+    }
+
+    def extList = {
+        if(initialized==false)
+        {
+            init()
+        }
+
+        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        [${propertyName}List: ${className}.list(params), ${propertyName}Total: ${className}.count(),cgDomainProperties:cgDomainProperties]
     }
 
     def listJSON = {
@@ -36,6 +49,53 @@
         render output
     }
 
+    def createJSON = {
+        println("AJAX: Creating "+params.toString())
+
+        def ${domainClass.propertyName}=new ${className}()
+
+            <%  excludedProps = Event.allEvents.toList() << 'version'<< 'dateCreated' << 'lastUpdated'
+                    persistentPropNames = domainClass.persistentProperties*.name
+                    props = domainClass.properties.findAll { persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) }
+                    Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
+                    display = true
+                    boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')
+                    props.eachWithIndex { p, i ->
+                                if (!Collection.class.isAssignableFrom(p.type)) {
+                                    if (hasHibernate) {
+                                        cp = domainClass.constrainedProperties[p.name]
+                                        display = (cp ? cp.display : true)
+                                    }
+                                    if (display) { %>
+        ${domainClass.propertyName}.${p.name}=params.${p.name}<%  }   }   } %>
+        ${domainClass.propertyName}.id=null
+        ${domainClass.propertyName}.save()
+
+        render "{success:true,msg:'记录已创建'}";
+
+    }
+
+    def deleteJSON = {
+        def ${propertyName} = ${className}.get(params.id)
+
+        println("AJAX: Deleting "+${propertyName}?.toString())
+
+        if (${propertyName}) {
+            try {
+                def record= ${propertyName}.toString()
+                ${propertyName}.delete()
+
+                render "{success:true,msg:'"+record+"记录已删除'}";
+            }
+            catch (org.springframework.dao.DataIntegrityViolationException e) {
+                render "{success:false,msg:'记录删除失败'}";
+            }
+        }
+        else {
+            render "{success:false,msg:'记录不存在！'}";
+        }
+    }
+
     def list = {
         if(initialized==false)
         {
@@ -45,15 +105,7 @@
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [${propertyName}List: ${className}.list(params), ${propertyName}Total: ${className}.count(),cgDomainProperties:cgDomainProperties]
     }
-    def extList = {
-        if(initialized==false)
-        {
-            init()
-        }
 
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [${propertyName}List: ${className}.list(params), ${propertyName}Total: ${className}.count(),cgDomainProperties:cgDomainProperties]
-    }
 
     def create = {
         if(initialized==false)
@@ -155,26 +207,7 @@
         }
     }
 
-    def deleteJSON = {
-        def ${propertyName} = ${className}.get(params.id)
 
-        println("AJAX: Deleting "+${propertyName}?.toString())
-
-        if (${propertyName}) {
-            try {
-                def record= ${propertyName}.toString()
-                ${propertyName}.delete()
-
-                render "{success:true,msg:'"+record+"记录已删除'}";
-            }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
-                render "{success:false,msg:'记录删除失败'}";
-            }
-        }
-        else {
-            render "{success:false,msg:'记录不存在！'}";
-        }
-    }
 
     def init(){
         cgDomainProperties.cgChinese=${className}.cgDomain.chinese

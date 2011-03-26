@@ -20,6 +20,7 @@
                 url: '/foundation/customer/createJSON',
                 defaultType: 'textfield',
                 items: [
+                    
                     {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield'},
                     {fieldLabel: '${cgDomainProperties.mobile.chinese}',name: 'mobile',xtype: 'textfield'},
                     {fieldLabel: '${cgDomainProperties.identityCardNum.chinese}',name: 'identityCardNum',xtype: 'textfield'},
@@ -34,7 +35,7 @@
                 layout: 'fit',
                 width: 400,
                 title: '创建${entityName}',
-                height: 250,
+                height: 300,
                 closeAction: 'hide',
                 items: [customerForm],
                 buttons: [{
@@ -42,7 +43,10 @@
                     handler: function(){
                         customerForm.getForm().submit({
                             success:function(customerForm, action){
-                                Ext.Msg.alert('信息',action.result.msg);},
+                                customerWin.hide(this);
+                                Ext.Msg.alert('信息',action.result.msg);
+                                store.reload();
+                                },
                             failure:function(){
                                 Ext.Msg.alert('信息',"创建${entityName}失败!");}
                         });

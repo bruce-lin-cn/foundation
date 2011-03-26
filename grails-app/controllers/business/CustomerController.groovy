@@ -2,6 +2,9 @@ package business
 
  class CustomerController {
 
+
+
+
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def cgClass=grailsApplication.getArtefact("Domain","business.Customer")
@@ -10,15 +13,19 @@ package business
     def initialized=false
 
     def index = {
-        redirect(action: "list", params: params)
+        redirect(action: "extList", params: params)
     }
 
-    def createJSON = {
-        println("AJAX: Creating "+params.toString())
+    def extList = {
+        if(initialized==false)
+        {
+            init()
+        }
 
-        render "{success:true,msg:'记录已创建'}";
-
+        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        [customerInstanceList: Customer.list(params), customerInstanceTotal: Customer.count(),cgDomainProperties:cgDomainProperties]
     }
+
     def listJSON = {
 
         def total=Customer.count()
@@ -44,6 +51,45 @@ package business
         render output
     }
 
+    def createJSON = {
+        println("AJAX: Creating "+params.toString())
+
+        def customer=new Customer()
+
+            
+        customer.name=params.name
+        customer.mobile=params.mobile
+        customer.identityCardNum=params.identityCardNum
+        customer.level=params.level
+        customer.balance=params.balance
+        //customer.id=null
+        customer.save()
+
+        render "{success:true,msg:'记录已创建'}";
+
+    }
+
+    def deleteJSON = {
+        def customerInstance = Customer.get(params.id)
+
+        println("AJAX: Deleting "+customerInstance?.toString())
+
+        if (customerInstance) {
+            try {
+                def record= customerInstance.toString()
+                customerInstance.delete()
+
+                render "{success:true,msg:'"+record+"记录已删除'}";
+            }
+            catch (org.springframework.dao.DataIntegrityViolationException e) {
+                render "{success:false,msg:'记录删除失败'}";
+            }
+        }
+        else {
+            render "{success:false,msg:'记录不存在！'}";
+        }
+    }
+
     def list = {
         if(initialized==false)
         {
@@ -53,15 +99,7 @@ package business
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [customerInstanceList: Customer.list(params), customerInstanceTotal: Customer.count(),cgDomainProperties:cgDomainProperties]
     }
-    def extList = {
-        if(initialized==false)
-        {
-            init()
-        }
 
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [customerInstanceList: Customer.list(params), customerInstanceTotal: Customer.count(),cgDomainProperties:cgDomainProperties]
-    }
 
     def create = {
         if(initialized==false)
@@ -163,26 +201,7 @@ package business
         }
     }
 
-    def deleteJSON = {
-        def customerInstance = Customer.get(params.id)
 
-        println("AJAX: Deleting "+customerInstance?.toString())
-
-        if (customerInstance) {
-            try {
-                def record= customerInstance.toString()
-                customerInstance.delete()
-
-                render "{success:true,msg:'"+record+"记录已删除'}";
-            }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
-                render "{success:false,msg:'记录删除失败'}";
-            }
-        }
-        else {
-            render "{success:false,msg:'记录不存在！'}";
-        }
-    }
 
     def init(){
         cgDomainProperties.cgChinese=Customer.cgDomain.chinese

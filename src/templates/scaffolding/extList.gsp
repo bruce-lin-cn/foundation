@@ -17,9 +17,10 @@
                 labelAlign: 'right',
                 labelWidth: 50,
                 frame: true,
-                url: '/foundation/${domainClass.propertyName}/createJSON',
+                url: '/foundation/${domainClass.propertyName}/createJSON?id=0',
                 defaultType: 'textfield',
-                items: [<%  excludedProps = Event.allEvents.toList() << 'version' << 'id' << 'dateCreated' << 'lastUpdated'
+                items: [
+                    {fieldLabel:'id',name: 'id',xtype: 'numberfield',hideLabel:true},<%  excludedProps = Event.allEvents.toList() << 'version' << 'id' << 'dateCreated' << 'lastUpdated'
                     persistentPropNames = domainClass.persistentProperties*.name
                     props = domainClass.properties.findAll { persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) }
                     Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
@@ -50,10 +51,12 @@
                     handler: function(){
                         ${domainClass.propertyName}Form.getForm().submit({
                             success:function(${domainClass.propertyName}Form, action){
-                                Ext.Msg.alert('信息',action.result.msg);},
+                                Ext.Msg.alert('信息',action.result.msg);
+                                ${domainClass.propertyName}Win.hide(this);
+                                store.reload();
+                                },
                             failure:function(){
                                 Ext.Msg.alert('信息',"创建\${entityName}失败!");}
-                            }
                         });
                     }
                 },{
