@@ -1,6 +1,4 @@
-<% import grails.persistence.Event %>
-<% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %>
-<%=packageName%>
+<% import grails.persistence.Event %><% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %><%=packageName%>
 <% boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate') %>
 <html>
     <head>
@@ -286,9 +284,6 @@
 
             store.load({params:{start:0,limit:10}});
         });
-
-
-
     </script>
     <body>
         <div id="toolbar"></div>

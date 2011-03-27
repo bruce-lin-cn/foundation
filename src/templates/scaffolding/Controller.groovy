@@ -1,8 +1,4 @@
-<%=packageName ? "package ${packageName}\n\n" : ''%> class ${className}Controller {
-
-<% import grails.persistence.Event %>
-<% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %>
-<% boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate') %>
+<%=packageName ? "package ${packageName}\n\n" : ''%>class ${className}Controller {<% import grails.persistence.Event %><% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %><% boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate') %>
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 

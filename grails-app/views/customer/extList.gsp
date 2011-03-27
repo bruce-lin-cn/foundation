@@ -1,5 +1,3 @@
-
-
 <%@ page import="business.Customer" %>
 
 <html>
