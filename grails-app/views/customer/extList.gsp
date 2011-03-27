@@ -172,15 +172,19 @@
                 handler: function(){
                     var id = (grid.getSelectionModel().getSelected()).id;
                     if (id){
-                        Ext.Ajax.request({
-                            url: '/foundation/customer/deleteJSON?id='+id,
-                            success: function(result){
-                                var json_str = Ext.util.JSON.decode(result.responseText);
-                                Ext.foundation.msg('信息', json_str.msg);
-                                store.reload();
-                            },
-                            failure:function(){
-                                Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
+                        Ext.MessageBox.confirm('信息', '您确定删除'+id+'记录?', function(btn){
+                            if(btn=='yes'){
+                                Ext.Ajax.request({
+                                    url: '/foundation/customer/deleteJSON?id='+id,
+                                    success: function(result){
+                                        var json_str = Ext.util.JSON.decode(result.responseText);
+                                        Ext.foundation.msg('信息', json_str.msg);
+                                        store.reload();
+                                    },
+                                    failure:function(){
+                                        Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
+                                    }
+                                });
                             }
                         });
                     }
