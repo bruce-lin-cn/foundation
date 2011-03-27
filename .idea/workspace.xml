@@ -85,10 +85,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extList.gsp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="extList.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/extList.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="142" column="102" selection-start="7810" selection-end="7810" vertical-scroll-proportion="0.91715974">
+            <state line="271" column="26" selection-start="13442" selection-end="13442" vertical-scroll-proportion="-1.2083334">
               <folding />
             </state>
           </provider>
@@ -97,7 +97,7 @@
       <file leaf-file-name="BootStrap.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="10" selection-start="305" selection-end="305" vertical-scroll-proportion="0.0">
+            <state line="10" column="26" selection-start="420" selection-end="420" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -112,10 +112,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extList.gsp" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="extList.gsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/views/customer/extList.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="177" column="0" selection-start="7883" selection-end="7883" vertical-scroll-proportion="-7.152174">
+            <state line="258" column="26" selection-start="11241" selection-end="11241" vertical-scroll-proportion="0.34117648">
               <folding />
             </state>
           </provider>
@@ -146,11 +146,11 @@
         <option value="$PROJECT_DIR$/grails-app/views/user/extList.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/platform/_extjs.gsp" />
         <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/customer/extList.gsp" />
         <option value="$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/business/CustomerController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
         <option value="$PROJECT_DIR$/src/templates/scaffolding/extList.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/customer/extList.gsp" />
       </list>
     </option>
   </component>
@@ -557,16 +557,16 @@
         <state line="59" column="60" selection-start="2721" selection-end="2731" vertical-scroll-proportion="0.035" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/CustomerController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="10" selection-start="305" selection-end="305" vertical-scroll-proportion="0.0">
+        <state line="243" column="0" selection-start="7781" selection-end="7781" vertical-scroll-proportion="-18.666666">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/customer/extList.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="177" column="0" selection-start="7883" selection-end="7883" vertical-scroll-proportion="-7.152174">
+        <state line="10" column="26" selection-start="420" selection-end="420" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -578,16 +578,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/CustomerController.groovy">
+    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/extList.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="243" column="0" selection-start="7781" selection-end="7781" vertical-scroll-proportion="-18.666666">
+        <state line="271" column="26" selection-start="13442" selection-end="13442" vertical-scroll-proportion="-1.2083334">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/extList.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/customer/extList.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="102" selection-start="7810" selection-end="7810" vertical-scroll-proportion="0.91715974">
+        <state line="258" column="26" selection-start="11241" selection-end="11241" vertical-scroll-proportion="0.34117648">
           <folding />
         </state>
       </provider>

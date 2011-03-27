@@ -200,16 +200,19 @@
 
                     customerDetailWin.show();
                 }
-            },
-            '->',
+            },'->',
             {
                 xtype: 'textfield',
                 name: 'searchBar',
                 emptyText: '请输入搜索条件'
             },{
                 text: '搜索',
-                icon: '/foundation/images/skin/database_search.png'
-            });
+                icon: '/foundation/images/skin/database_search.png',
+                handler: function(){
+
+                }
+            }
+            );
 
             tb.doLayout();
 
@@ -253,7 +256,7 @@
                 loadMask:true,
                 cm: cm,
                 sm: new Ext.grid.RowSelectionModel({singleSelect:false}),
-                autoHeight: true,
+                height: 270,
 
                 viewConfig: {
                     forceFit:true
@@ -270,6 +273,9 @@
 
             store.load({params:{start:0,limit:10}});
         });
+
+
+
     </script>
     <body>
         <div id="toolbar"></div>
