@@ -1,6 +1,7 @@
 
 
 <%@ page import="business.Customer" %>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -11,16 +12,17 @@
     </head>
 
     <script>
+        Ext.QuickTips.init();
         Ext.onReady(function(){
 
-            var customerForm = new Ext.form.FormPanel({
+            var customerCreateForm = new Ext.form.FormPanel({
                 labelAlign: 'right',
-                labelWidth: 50,
+                labelWidth: 80,
                 frame: true,
                 url: '/foundation/customer/createJSON',
                 defaultType: 'textfield',
                 items: [
-                    
+                    {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
                     {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield'},
                     {fieldLabel: '${cgDomainProperties.mobile.chinese}',name: 'mobile',xtype: 'textfield'},
                     {fieldLabel: '${cgDomainProperties.identityCardNum.chinese}',name: 'identityCardNum',xtype: 'textfield'},
@@ -29,22 +31,22 @@
                 ]
             });
 
-            var customerWin = new Ext.Window({
-                el: 'customerWin',
+            var customerCreateWin = new Ext.Window({
+                el: 'customerCreateWin',
                 closable:false,
                 layout: 'fit',
                 width: 400,
                 title: '创建${entityName}',
                 height: 300,
                 closeAction: 'hide',
-                items: [customerForm],
+                items: [customerCreateForm],
                 buttons: [{
                     text:'创建',
                     handler: function(){
-                        customerForm.getForm().submit({
-                            success:function(customerForm, action){
-                                customerWin.hide(this);
+                        customerCreateForm.getForm().submit({
+                            success:function(customerCreateForm, action){
                                 Ext.Msg.alert('信息',action.result.msg);
+                                customerCreateWin.hide();
                                 store.reload();
                                 },
                             failure:function(){
@@ -54,7 +56,88 @@
                 },{
                     text: '取 消',
                     handler: function(){
-                        customerWin.hide();
+                        customerCreateWin.hide();
+                    }
+                }]
+            });
+
+            var customerUpdateForm = new Ext.form.FormPanel({
+                labelAlign: 'right',
+                labelWidth: 80,
+                frame: true,
+                url: '/foundation/customer/updateJSON',
+                defaultType: 'textfield',
+                items: [
+                    {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
+                    {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield'},
+                    {fieldLabel: '${cgDomainProperties.mobile.chinese}',name: 'mobile',xtype: 'textfield'},
+                    {fieldLabel: '${cgDomainProperties.identityCardNum.chinese}',name: 'identityCardNum',xtype: 'textfield'},
+                    {fieldLabel: '${cgDomainProperties.level.chinese}',name: 'level',xtype: 'textfield'},
+                    {fieldLabel: '${cgDomainProperties.balance.chinese}',name: 'balance',xtype: 'textfield'}
+                ]
+            });
+
+            var customerUpdateWin = new Ext.Window({
+                el: 'customerUpdateWin',
+                closable:false,
+                layout: 'fit',
+                width: 400,
+                title: '修改${entityName}',
+                height: 300,
+                closeAction: 'hide',
+                items: [customerUpdateForm],
+                buttons: [{
+                    text:'更新',
+                    handler: function(){
+                        customerUpdateForm.getForm().submit({
+                            success:function(customerUpdateForm, action){
+                                Ext.Msg.alert('信息',action.result.msg);
+                                customerUpdateWin.hide();
+                                store.reload();
+                                },
+                            failure:function(){
+                                Ext.Msg.alert('信息',"更新${entityName}失败!");}
+                        });
+                    }
+                },{
+                    text: '取 消',
+                    handler: function(){
+                        customerUpdateWin.hide();
+                    }
+                }]
+            });
+
+            var customerDetailForm = new Ext.form.FormPanel({
+                labelAlign: 'right',
+                labelWidth: 80,
+                frame: true,
+                url: '/foundation/customer/detailJSON',
+                defaultType: 'textfield',
+                items: [
+                    {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
+                    {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',readOnly: true, xtype: 'textfield'},
+                    {fieldLabel: '${cgDomainProperties.mobile.chinese}',name: 'mobile',readOnly: true, xtype: 'textfield'},
+                    {fieldLabel: '${cgDomainProperties.identityCardNum.chinese}',name: 'identityCardNum',readOnly: true, xtype: 'textfield'},
+                    {fieldLabel: '${cgDomainProperties.level.chinese}',name: 'level',readOnly: true, xtype: 'textfield'},
+                    {fieldLabel: '${cgDomainProperties.balance.chinese}',name: 'balance',readOnly: true, xtype: 'textfield'},
+                    {fieldLabel: '${cgDomainProperties.dateCreated.chinese}',name: 'dateCreated',readOnly: true, xtype: 'datefield',format:'Y-m-d'},
+                    {fieldLabel: '${cgDomainProperties.lastUpdated.chinese}',name: 'lastUpdated',readOnly: true, xtype: 'datefield',format:'Y-m-d'}
+                ]
+            });
+
+            var customerDetailWin = new Ext.Window({
+                el: 'customerDetailWin',
+                closable:false,
+                layout: 'fit',
+                width: 400,
+                title: '${entityName}明细',
+                height: 300,
+                closeAction: 'hide',
+                items: [customerDetailForm],
+                buttons: [{
+                    text: '确定',
+                    handler: function(){
+                        customerDetailWin.hide();
                     }
                 }]
             });
@@ -66,11 +149,23 @@
                 text: '新建',
                 icon: '/foundation/images/skin/database_add.png',
                 handler:function(){
-                    customerWin.show(this);
+                    customerCreateWin.show(this);
                 }
             },{
                 text: '修改',
-                icon: '/foundation/images/skin/database_edit.png'
+                icon: '/foundation/images/skin/database_edit.png',
+                handler: function(){
+                    var id = (grid.getSelectionModel().getSelected()).id;
+                    customerUpdateForm.getForm().load({
+                        url:'/foundation/customer/detailJSON?id='+id,
+                        success:function(form,action){},
+                        failure:function(){
+                            Ext.Msg.alert('信息','服务器出现错误，稍后再试!');
+                        }
+                    });
+
+                    customerUpdateWin.show();
+                }
             },{
                 text: '删除',
                 icon: '/foundation/images/skin/database_delete.png',
@@ -85,14 +180,26 @@
                                     store.reload();
                             },
                             failure:function(){
-                                //Ext.Msg.alert('信息','服务器出现错误，稍后再试!');
+                                Ext.Msg.alert('信息','服务器出现错误，稍后再试!');
                             }
                         });
                     }
                 }
             },{
                 text: '详细',
-                icon: '/foundation/images/skin/database_save.png'
+                icon: '/foundation/images/skin/database_save.png',
+                handler: function(){
+                    var id = (grid.getSelectionModel().getSelected()).id;
+                    customerDetailForm.getForm().load({
+                        url:'/foundation/customer/detailJSON?id='+id,
+                        success:function(form,action){},
+                        failure:function(){
+                            Ext.Msg.alert('信息','服务器出现错误，稍后再试!');
+                        }
+                    });
+
+                    customerDetailWin.show();
+                }
             },
             '->',
             {
@@ -157,7 +264,7 @@
                     store: store,
                     displayInfo: true,
                     displayMsg: '显示第{0}条到第{1}条记录, 共{2}条',
-                    emptyMsg: "没有记录"
+                    emptyMsg: '没有记录'
                 })
             });
 
@@ -167,8 +274,8 @@
     <body>
         <div id="toolbar"></div>
         <div id="grid"></div>
-        <div id="customerWin">
-            <div id="grid"></div>
-        </div>
+        <div id="customerCreateWin"></div>
+        <div id="customerUpdateWin"></div>
+        <div id="customerDetailWin"></div>
     </body>
 </html>

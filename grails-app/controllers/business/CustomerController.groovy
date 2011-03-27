@@ -5,6 +5,7 @@ package business
 
 
 
+
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def cgClass=grailsApplication.getArtefact("Domain","business.Customer")
@@ -51,6 +52,27 @@ package business
         render output
     }
 
+    def detailJSON = {
+
+        def customerInstance = Customer.get(params.id)
+
+        println("AJAX: Detailing "+customerInstance?.toString())
+
+        if (customerInstance) {
+            try {
+                def json=customerInstance as grails.converters.JSON
+
+                render "{success:true, data:"+json+"}";
+            }
+            catch (org.springframework.dao.DataIntegrityViolationException e) {
+                render "{success:false,msg:'记录不存在！'}";
+            }
+        }
+        else {
+            render "{success:false,msg:'记录不存在！'}";
+        }
+    }
+
     def createJSON = {
         println("AJAX: Creating "+params.toString())
 
@@ -62,10 +84,29 @@ package business
         customer.identityCardNum=params.identityCardNum
         customer.level=params.level
         customer.balance=params.balance
-        //customer.id=null
+        customer.id=null
         customer.save()
 
         render "{success:true,msg:'记录已创建'}";
+
+    }
+
+    //TODO: 版本判断
+    def updateJSON = {
+        println("AJAX: Updating "+params.toString())
+        def customerInstance = Customer.get(params.id)
+        def customer=Customer.get(params.id)
+
+            
+        customer.name=params.name
+        customer.mobile=params.mobile
+        customer.identityCardNum=params.identityCardNum
+        customer.level=params.level
+        customer.balance=params.balance
+        
+        customer.save()
+
+        render "{success:true,msg:'记录已更新'}";
 
     }
 

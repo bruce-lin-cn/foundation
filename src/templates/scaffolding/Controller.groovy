@@ -2,6 +2,7 @@
 
 <% import grails.persistence.Event %>
 <% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %>
+<% boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate') %>
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -49,6 +50,27 @@
         render output
     }
 
+    def detailJSON = {
+
+        def ${propertyName} = ${className}.get(params.id)
+
+        println("AJAX: Detailing "+${propertyName}?.toString())
+
+        if (${propertyName}) {
+            try {
+                def json=${propertyName} as grails.converters.JSON
+
+                render "{success:true, data:"+json+"}";
+            }
+            catch (org.springframework.dao.DataIntegrityViolationException e) {
+                render "{success:false,msg:'记录不存在！'}";
+            }
+        }
+        else {
+            render "{success:false,msg:'记录不存在！'}";
+        }
+    }
+
     def createJSON = {
         println("AJAX: Creating "+params.toString())
 
@@ -59,7 +81,6 @@
                     props = domainClass.properties.findAll { persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) }
                     Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
                     display = true
-                    boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')
                     props.eachWithIndex { p, i ->
                                 if (!Collection.class.isAssignableFrom(p.type)) {
                                     if (hasHibernate) {
@@ -72,6 +93,32 @@
         ${domainClass.propertyName}.save()
 
         render "{success:true,msg:'记录已创建'}";
+
+    }
+
+    //TODO: 版本判断
+    def updateJSON = {
+        println("AJAX: Updating "+params.toString())
+        def ${propertyName} = ${className}.get(params.id)
+        def ${domainClass.propertyName}=${className}.get(params.id)
+
+            <%  excludedProps = Event.allEvents.toList() << 'version'<< 'dateCreated' << 'lastUpdated'
+                    persistentPropNames = domainClass.persistentProperties*.name
+                    props = domainClass.properties.findAll { persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) }
+                    Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
+                    display = true
+                    props.eachWithIndex { p, i ->
+                                if (!Collection.class.isAssignableFrom(p.type)) {
+                                    if (hasHibernate) {
+                                        cp = domainClass.constrainedProperties[p.name]
+                                        display = (cp ? cp.display : true)
+                                    }
+                                    if (display) { %>
+        ${domainClass.propertyName}.${p.name}=params.${p.name}<%  }   }   } %>
+        
+        ${domainClass.propertyName}.save()
+
+        render "{success:true,msg:'记录已更新'}";
 
     }
 
