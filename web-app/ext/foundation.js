@@ -23,7 +23,7 @@ Ext.foundation = function(){
             msgCt.alignTo(document, 't-t');
             var s = String.format.apply(String, Array.prototype.slice.call(arguments, 1));
             var m = Ext.DomHelper.append(msgCt, {html:createBox(title, s)}, true);
-            m.slideIn('t').pause(1).ghost("t", {remove:true});
+            m.slideIn('t').pause(3).ghost("t", {remove:true});
         },
 
         init : function(){

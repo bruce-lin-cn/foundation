@@ -118,7 +118,7 @@
       <file leaf-file-name="extList.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/customer/extList.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="180" column="24" selection-start="7720" selection-end="8697" vertical-scroll-proportion="-3.4347825">
+            <state line="178" column="24" selection-start="7720" selection-end="8695" vertical-scroll-proportion="-3.4347825">
               <folding />
             </state>
           </provider>
@@ -647,7 +647,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/customer/extList.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="24" selection-start="7720" selection-end="8697" vertical-scroll-proportion="-3.4347825">
+        <state line="178" column="24" selection-start="7720" selection-end="8695" vertical-scroll-proportion="-3.4347825">
           <folding />
         </state>
       </provider>
