@@ -43,12 +43,13 @@
                     handler: function(){
                         customerCreateForm.getForm().submit({
                             success:function(customerCreateForm, action){
-                                Ext.Msg.alert('信息',action.result.msg);
+                                Ext.foundation.msg('信息', action.result.msg);
                                 customerCreateWin.hide();
                                 store.reload();
                                 },
                             failure:function(){
-                                Ext.Msg.alert('信息',"创建${entityName}失败!");}
+                                Ext.foundation.msg('错误', "创建${entityName}失败!");
+                            }
                         });
                     }
                 },{
@@ -89,12 +90,13 @@
                     handler: function(){
                         customerUpdateForm.getForm().submit({
                             success:function(customerUpdateForm, action){
-                                Ext.Msg.alert('信息',action.result.msg);
+                                Ext.foundation.msg('信息', action.result.msg);
                                 customerUpdateWin.hide();
                                 store.reload();
                                 },
                             failure:function(){
-                                Ext.Msg.alert('信息',"更新${entityName}失败!");}
+                                Ext.foundation.msg('错误', "更新${entityName}失败!");
+                            }
                         });
                     }
                 },{
@@ -158,7 +160,7 @@
                         url:'/foundation/customer/detailJSON?id='+id,
                         success:function(form,action){},
                         failure:function(){
-                            Ext.Msg.alert('信息','服务器出现错误，稍后再试!');
+                            Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
                         }
                     });
 
@@ -174,11 +176,11 @@
                             url: '/foundation/customer/deleteJSON?id='+id,
                             success: function(result){
                                 var json_str = Ext.util.JSON.decode(result.responseText);
-                                Ext.Msg.alert('信息',json_str.msg);
-                                    store.reload();
+                                Ext.foundation.msg('信息', json_str.msg);
+                                store.reload();
                             },
                             failure:function(){
-                                Ext.Msg.alert('信息','服务器出现错误，稍后再试!');
+                                Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
                             }
                         });
                     }
@@ -192,7 +194,7 @@
                         url:'/foundation/customer/detailJSON?id='+id,
                         success:function(form,action){},
                         failure:function(){
-                            Ext.Msg.alert('信息','服务器出现错误，稍后再试!');
+                            Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
                         }
                     });
 
@@ -271,9 +273,6 @@
 
             store.load({params:{start:0,limit:10}});
         });
-
-
-
     </script>
     <body>
         <div id="toolbar"></div>

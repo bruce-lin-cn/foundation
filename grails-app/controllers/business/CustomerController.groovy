@@ -25,57 +25,27 @@ class CustomerController {
 
     def listJSON = {
 
-        if (params.search == null) {
-            def total = Customer.count()
-            def max = 10
-            def start = params.int('start')
+        def total=Customer.count()
+        def max=10
+        def start=params.int('start')
 
-            if (start == null) {
-                start = 0
-            }
-            def lists = []
-            def end = start + max - 1
-            if (end >= total) {
-                end = total - 1
-            }
-
-            lists = Customer.findAll()[start..end]
-
-            def json = lists as grails.converters.JSON
-            def output = "{total:" + total + ",root:" + json + "}"
-
-            render output
-        }else{
-
-            println params.search
-
-            def lists=Customer.findAllByNameLike("%"+params.search+"%")
-            def start = params.int('start')
-
-            if (start == null) {
-                start = 0
-            }
-            println "lists:"+lists
-
-            def total=lists.size()
-
-            println "total:"+total
-            def max=0
-            if(params.firstSearch==null)
-            {
-                start=0
-            }
-            def end = start + max - 1
-            if (end >= total) {
-                end = total - 1
-            }
-            lists = lists[start..end]
-
-            def json = lists as grails.converters.JSON
-            def output = "{total:" + total + ",root:" + json + "}"
-
-            render output
+        if(start==null)
+        {
+            start=0
         }
+        def lists=[]
+        def end=start+max-1
+        if(end>=total)
+        {
+            end=total-1
+        }
+
+        lists=Customer.findAll()[start..end]
+
+        def json=lists as grails.converters.JSON
+        def output="{total:"+total+",root:"+json+ "}"
+
+        render output
     }
 
     def detailJSON = {
@@ -267,6 +237,8 @@ class CustomerController {
             redirect(action: "list")
         }
     }
+
+
 
     def init(){
         cgDomainProperties.cgChinese=Customer.cgDomain.chinese

@@ -50,12 +50,13 @@
                     handler: function(){
                         ${domainClass.propertyName}CreateForm.getForm().submit({
                             success:function(${domainClass.propertyName}CreateForm, action){
-                                Ext.Msg.alert('信息',action.result.msg);
+                                Ext.foundation.msg('信息', action.result.msg);
                                 ${domainClass.propertyName}CreateWin.hide();
                                 store.reload();
                                 },
                             failure:function(){
-                                Ext.Msg.alert('信息',"创建\${entityName}失败!");}
+                                Ext.foundation.msg('错误', "创建\${entityName}失败!");
+                            }
                         });
                     }
                 },{
@@ -103,12 +104,13 @@
                     handler: function(){
                         ${domainClass.propertyName}UpdateForm.getForm().submit({
                             success:function(${domainClass.propertyName}UpdateForm, action){
-                                Ext.Msg.alert('信息',action.result.msg);
+                                Ext.foundation.msg('信息', action.result.msg);
                                 ${domainClass.propertyName}UpdateWin.hide();
                                 store.reload();
                                 },
                             failure:function(){
-                                Ext.Msg.alert('信息',"更新\${entityName}失败!");}
+                                Ext.foundation.msg('错误', "更新\${entityName}失败!");
+                            }
                         });
                     }
                 },{
@@ -177,7 +179,7 @@
                         url:'/foundation/${domainClass.propertyName}/detailJSON?id='+id,
                         success:function(form,action){},
                         failure:function(){
-                            Ext.Msg.alert('信息','服务器出现错误，稍后再试!');
+                            Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
                         }
                     });
 
@@ -193,11 +195,11 @@
                             url: '/foundation/${domainClass.propertyName}/deleteJSON?id='+id,
                             success: function(result){
                                 var json_str = Ext.util.JSON.decode(result.responseText);
-                                Ext.Msg.alert('信息',json_str.msg);
-                                    store.reload();
+                                Ext.foundation.msg('信息', json_str.msg);
+                                store.reload();
                             },
                             failure:function(){
-                                Ext.Msg.alert('信息','服务器出现错误，稍后再试!');
+                                Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
                             }
                         });
                     }
@@ -211,7 +213,7 @@
                         url:'/foundation/${domainClass.propertyName}/detailJSON?id='+id,
                         success:function(form,action){},
                         failure:function(){
-                            Ext.Msg.alert('信息','服务器出现错误，稍后再试!');
+                            Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
                         }
                     });
 
