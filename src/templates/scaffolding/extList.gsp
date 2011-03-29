@@ -10,8 +10,8 @@
     </head>
 
     <script>
-        Ext.QuickTips.init();
         Ext.onReady(function(){
+            Ext.QuickTips.init();
 
             var ${domainClass.propertyName}CreateForm = new Ext.form.FormPanel({
                 labelAlign: 'right',
@@ -189,23 +189,35 @@
                 text: '删除',
                 icon: '/foundation/images/skin/database_delete.png',
                 handler: function(){
-                    var id = (grid.getSelectionModel().getSelected()).id;
-                    if (id){
-                        Ext.MessageBox.confirm('信息', '您确定删除'+id+'记录?', function(btn){
-                            if(btn=='yes'){
+                    var count=sm.getCount();
+                    if(count==0)
+                    {
+                        Ext.foundation.msg('注意', "请选择要删除的记录");
+                    }else {
+                        var records = sm.getSelections();
+                        var id=[];
+                        for(var i=0;i<count;i++)
+                        {
+                            id.push(records[i].id);
+                        }
+                        
+                        Ext.MessageBox.confirm('信息', '您确定删除' + id + '记录?', function(btn) {
+                            if (btn == 'yes') {
                                 Ext.Ajax.request({
-                                    url: '/foundation/${domainClass.propertyName}/deleteJSON?id='+id,
-                                    success: function(result){
+                                    url: '/foundation/${domainClass.propertyName}/deleteJSON',
+                                    params: {id:id},
+                                    success: function(result) {
                                         var json_str = Ext.util.JSON.decode(result.responseText);
                                         Ext.foundation.msg('信息', json_str.msg);
                                         store.reload();
                                     },
-                                    failure:function(){
+                                    failure:function() {
                                         Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
                                     }
                                 });
                             }
                         });
+
                     }
                 }
             },{
@@ -239,9 +251,9 @@
 
             tb.doLayout();
 
-            var cbsm= new Ext.grid.CheckboxSelectionModel({singleSelect:false})
+            var sm= new Ext.grid.CheckboxSelectionModel()
             var cm = new Ext.grid.ColumnModel([
-            cbsm,<%  excludedProps = Event.allEvents.toList() << 'version'
+            sm,<%  excludedProps = Event.allEvents.toList() << 'version'
             allowedNames = domainClass.persistentProperties*.name << 'id' << 'dateCreated' << 'lastUpdated'
             props = domainClass.properties.findAll { allowedNames.contains(it.name) && !excludedProps.contains(it.name) && !Collection.isAssignableFrom(it.type) }
             Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
@@ -272,7 +284,7 @@
                 stripeRows:true,
                 loadMask:true,
                 cm: cm,
-                sm: new Ext.grid.RowSelectionModel({singleSelect:false}),
+                sm: sm,
                 height: 270,
 
                 viewConfig: {

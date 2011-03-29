@@ -107,23 +107,20 @@ class CustomerController {
     }
 
     def deleteJSON = {
-        def customerInstance = Customer.get(params.id)
+        try{
+            def idList=[]
+            idList=params.id
 
-        println("AJAX: Deleting "+customerInstance?.toString())
+            for(int i=0;i<idList.size();i++)
+            {
+                def tmp=Customer.get(idList[i])
 
-        if (customerInstance) {
-            try {
-                def record= customerInstance.toString()
-                customerInstance.delete()
-
-                render "{success:true,msg:'"+record+"记录已删除'}";
+                tmp?.delete()
             }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
+
+            render "{success:true,msg:'"+idList.size()+"条记录已删除'}";
+        }catch (org.springframework.dao.DataIntegrityViolationException e) {
                 render "{success:false,msg:'记录删除失败'}";
-            }
-        }
-        else {
-            render "{success:false,msg:'记录不存在！'}";
         }
     }
 

@@ -119,23 +119,20 @@
     }
 
     def deleteJSON = {
-        def ${propertyName} = ${className}.get(params.id)
+        try{
+            def idList=[]
+            idList=params.id
 
-        println("AJAX: Deleting "+${propertyName}?.toString())
+            for(int i=0;i<idList.size();i++)
+            {
+                def tmp=${className}.get(idList[i])
 
-        if (${propertyName}) {
-            try {
-                def record= ${propertyName}.toString()
-                ${propertyName}.delete()
-
-                render "{success:true,msg:'"+record+"记录已删除'}";
+                tmp?.delete()
             }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
+
+            render "{success:true,msg:'"+idList.size()+"条记录已删除'}";
+        }catch (org.springframework.dao.DataIntegrityViolationException e) {
                 render "{success:false,msg:'记录删除失败'}";
-            }
-        }
-        else {
-            render "{success:false,msg:'记录不存在！'}";
         }
     }
 
