@@ -280,13 +280,14 @@
                 renderTo: 'grid',
                 store: store,
                 enableColumnMove:false,
-                enableColumnResize:false,
+                enableColumnResize:true,
                 stripeRows:true,
+                enableHdMenu: false,
+                trackMouseOver: true,
                 loadMask:true,
                 cm: cm,
                 sm: sm,
                 height: 270,
-
                 viewConfig: {
                     forceFit:true
                 },
