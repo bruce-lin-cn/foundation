@@ -4,9 +4,9 @@ import business.Customer
 class BootStrap {
 
     def init = { servletContext ->
-        //new User(name:"林禹",mobile:"18906057051",identityCardNum: "350105197901182331").save();
-        //new User(name:"周良",mobile:"18906057052",identityCardNum: "350105197901182332").save();
-        //new User(name:"孟丽珠",mobile:"18906057053",identityCardNum: "350105197901182333").save();
+        new User(name:"林禹",mobile:"18906057051",identityCardNum: "350105197901182331").save();
+        new User(name:"周良",mobile:"18906057052",identityCardNum: "350105197901182332").save();
+        new User(name:"孟丽珠",mobile:"18906057053",identityCardNum: "350105197901182333").save();
 
         for( int i=0;i<100;i++)
         {

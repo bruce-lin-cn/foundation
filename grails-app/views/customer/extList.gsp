@@ -6,9 +6,7 @@
         <g:extjs />
         <g:set var="entityName" value="${cgDomainProperties.cgChinese}" />
         <title><g:message code="${entityName}管理" /></title>
-    
     </head>
-
     <script>
         Ext.onReady(function(){
             Ext.QuickTips.init();
@@ -21,8 +19,8 @@
                 defaultType: 'textfield',
                 items: [
                     {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-                    {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield'},
-                    {fieldLabel: '${cgDomainProperties.mobile.chinese}',name: 'mobile',xtype: 'textfield'},
+                    {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '${cgDomainProperties.name.chinese}为必填项', maxLength: 32, maxLengthText: '${cgDomainProperties.name.chinese}至多包含32个字符', minLength: 1, minLengthText: '${cgDomainProperties.name.chinese}至少包含1个字符'},
+                    {fieldLabel: '${cgDomainProperties.mobile.chinese}',name: 'mobile',xtype: 'textfield', allowBlank: false, blankText: '${cgDomainProperties.mobile.chinese}为必填项', maxLength: 11, maxLengthText: '${cgDomainProperties.mobile.chinese}至多包含11个字符', minLength: 5, minLengthText: '${cgDomainProperties.mobile.chinese}至少包含5个字符'},
                     {fieldLabel: '${cgDomainProperties.identityCardNum.chinese}',name: 'identityCardNum',xtype: 'textfield'},
                     {fieldLabel: '${cgDomainProperties.level.chinese}',name: 'level',xtype: 'textfield'},
                     {fieldLabel: '${cgDomainProperties.balance.chinese}',name: 'balance',xtype: 'textfield'}
@@ -181,7 +179,6 @@
                         {
                             id.push(records[i].id);
                         }
-                        
                         Ext.MessageBox.confirm('信息', '您确定删除' + id + '记录?', function(btn) {
                             if (btn == 'yes') {
                                 Ext.Ajax.request({
@@ -213,7 +210,6 @@
                             Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
                         }
                     });
-
                     customerDetailWin.show();
                 }
             },'->',
@@ -225,7 +221,6 @@
                 text: '搜索',
                 icon: '/foundation/images/skin/database_search.png',
                 handler: function(){
-
                 }
             }
             );

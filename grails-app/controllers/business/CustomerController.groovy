@@ -26,26 +26,30 @@ class CustomerController {
     def listJSON = {
 
         def total=Customer.count()
-        def max=10
-        def start=params.int('start')
 
-        if(start==null)
+        if(total==0)
         {
-            start=0
+            render "{total:"+total+",root:[]}"
+        } else {
+            def max = 10
+            def start = params.int('start')
+
+            if (start == null) {
+                start = 0
+            }
+            def lists = []
+            def end = start + max - 1
+            if (end >= total) {
+                end = total - 1
+            }
+
+            lists = Customer.findAll()[start..end]
+
+            def json = lists as grails.converters.JSON
+            def output = "{total:" + total + ",root:" + json + "}"
+
+            render output
         }
-        def lists=[]
-        def end=start+max-1
-        if(end>=total)
-        {
-            end=total-1
-        }
-
-        lists=Customer.findAll()[start..end]
-
-        def json=lists as grails.converters.JSON
-        def output="{total:"+total+",root:"+json+ "}"
-
-        render output
     }
 
     def detailJSON = {

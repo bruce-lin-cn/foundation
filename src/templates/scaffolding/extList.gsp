@@ -1,14 +1,30 @@
 <% import grails.persistence.Event %><% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %><%=packageName%>
-<% boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate') %>
+<% boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate') %><%
+    def output(p,cp)
+    {
+        if (p.type == String.class) {
+            out << ",xtype: 'textfield'"
+            if (cp.blank == false) {
+                out << ", allowBlank: false, blankText: '\${cgDomainProperties.${p.name}.chinese}为必填项'" //,msgTarget: 'side'"
+            }
+            if (cp.maxSize != null) {
+                out << ", maxLength: ${cp.maxSize}, maxLengthText: '\${cgDomainProperties.${p.name}.chinese}至多包含${cp.maxSize}个字符'"
+            }
+            if (cp.minSize != null) {
+                out << ", minLength: ${cp.minSize}, minLengthText: '\${cgDomainProperties.${p.name}.chinese}至少包含${cp.minSize}个字符'"
+            }
+        } else if (p.type == Date.class) {
+            out << "'datefield',format:'Y-m-d'"
+        }
+    }
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <g:extjs />
         <g:set var="entityName" value="\${cgDomainProperties.cgChinese}" />
         <title><g:message code="\${entityName}管理" /></title>
-    
     </head>
-
     <script>
         Ext.onReady(function(){
             Ext.QuickTips.init();
@@ -32,7 +48,9 @@
                                         display = (cp ? cp.display : true)
                                     }
                                     if (display) { %>
-                    {fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype: <% if(p.type==String.class){ out << "'textfield'"} else if(p.type==Date.class){ out << "'datefield',format:'Y-m-d'"}%>}<% if(props.size()>i+1){out<<","} %><%  }   }   } %>
+                    {fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}'<%
+                    output(p,cp)
+                    %>}<% if(props.size()>i+1){out<<","} %><%  }   }   } %>
                 ]
             });
 
@@ -200,7 +218,6 @@
                         {
                             id.push(records[i].id);
                         }
-                        
                         Ext.MessageBox.confirm('信息', '您确定删除' + id + '记录?', function(btn) {
                             if (btn == 'yes') {
                                 Ext.Ajax.request({
@@ -232,7 +249,6 @@
                             Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
                         }
                     });
-
                     customerDetailWin.show();
                 }
             },'->',
@@ -244,7 +260,6 @@
                 text: '搜索',
                 icon: '/foundation/images/skin/database_search.png',
                 handler: function(){
-
                 }
             }
             );
