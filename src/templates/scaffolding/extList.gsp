@@ -158,7 +158,7 @@
                                         display = (cp ? cp.display : true)
                                     }
                                     if (display) { %>
-                    {fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',readOnly: true, xtype: <% if(p.type==String.class){ out << "'textfield'"} else if(p.type==Date.class){ out << "'datefield',format:'Y-m-d'"}%>}<% if(props.size()>i+1){out<<","} %><%  }   }   } %>
+                    {fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',readOnly: true, xtype: <% if(p.type==String.class){ out << "'textfield'"} else if(p.type==Date.class){ out << "'datefield',format:'c',renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')"}%>}<% if(props.size()>i+1){out<<","} %><%  }   }   } %>
                 ]
             });
 
@@ -275,7 +275,7 @@
             props.eachWithIndex { p, i ->
                 if (i < 10) {
                     if (p.isAssociation()) { %><%      } else { %>
-                {header:'\${cgDomainProperties.${p.name}.chinese}',dataIndex:'${p.name}'} <% if(props.size()>i+1){out<<","} %><%  }   }   } %>
+                {header:'\${cgDomainProperties.${p.name}.chinese}',dataIndex:'${p.name}'<% if(p.type==Date.class){out<<", type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')"} %>} <% if(props.size()>i+1){out<<","} %><%  }   }   } %>
             ]);
 
             var store= new Ext.data.Store({
@@ -287,7 +287,7 @@
                 },[<%  props.eachWithIndex { p, i ->
                                 if (i < 10) {
                                     if (p.isAssociation()) { %><%      } else { %>
-                    {name:'${p.name}'}<% if(props.size()>i+1){out<<","} %><%  }   }   } %>
+                    {name:'${p.name}' <% if(p.type==Date.class){out<<", type:'date', dateFormat:'c'"} %> } <% if(props.size()>i+1){out<<","} %><%  }   }   } %>
                 ])
             });
 
@@ -325,6 +325,5 @@
         <div id="${domainClass.propertyName}CreateWin"></div>
         <div id="${domainClass.propertyName}UpdateWin"></div>
         <div id="${domainClass.propertyName}DetailWin"></div>
-        <div id="last"></div>
     </body>
 </html>

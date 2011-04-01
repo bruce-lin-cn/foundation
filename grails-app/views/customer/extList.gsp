@@ -118,8 +118,8 @@
                     {fieldLabel: '${cgDomainProperties.identityCardNum.chinese}',name: 'identityCardNum',readOnly: true, xtype: 'textfield'},
                     {fieldLabel: '${cgDomainProperties.level.chinese}',name: 'level',readOnly: true, xtype: 'textfield'},
                     {fieldLabel: '${cgDomainProperties.balance.chinese}',name: 'balance',readOnly: true, xtype: 'textfield'},
-                    {fieldLabel: '${cgDomainProperties.dateCreated.chinese}',name: 'dateCreated',readOnly: true, xtype: 'datefield',format:'Y-m-d'},
-                    {fieldLabel: '${cgDomainProperties.lastUpdated.chinese}',name: 'lastUpdated',readOnly: true, xtype: 'datefield',format:'Y-m-d'}
+                    {fieldLabel: '${cgDomainProperties.dateCreated.chinese}',name: 'dateCreated',readOnly: true, xtype: 'datefield',format:'c',renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')},
+                    {fieldLabel: '${cgDomainProperties.lastUpdated.chinese}',name: 'lastUpdated',readOnly: true, xtype: 'datefield',format:'c',renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')}
                 ]
             });
 
@@ -236,8 +236,8 @@
                 {header:'${cgDomainProperties.identityCardNum.chinese}',dataIndex:'identityCardNum'} ,
                 {header:'${cgDomainProperties.level.chinese}',dataIndex:'level'} ,
                 {header:'${cgDomainProperties.balance.chinese}',dataIndex:'balance'} ,
-                {header:'${cgDomainProperties.dateCreated.chinese}',dataIndex:'dateCreated'} ,
-                {header:'${cgDomainProperties.lastUpdated.chinese}',dataIndex:'lastUpdated'} 
+                {header:'${cgDomainProperties.dateCreated.chinese}',dataIndex:'dateCreated', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')} ,
+                {header:'${cgDomainProperties.lastUpdated.chinese}',dataIndex:'lastUpdated', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')} 
             ]);
 
             var store= new Ext.data.Store({
@@ -247,14 +247,14 @@
                     totalProperty:'total',
                     root:'root'
                 },[
-                    {name:'id'},
-                    {name:'name'},
-                    {name:'mobile'},
-                    {name:'identityCardNum'},
-                    {name:'level'},
-                    {name:'balance'},
-                    {name:'dateCreated'},
-                    {name:'lastUpdated'}
+                    {name:'id'  } ,
+                    {name:'name'  } ,
+                    {name:'mobile'  } ,
+                    {name:'identityCardNum'  } ,
+                    {name:'level'  } ,
+                    {name:'balance'  } ,
+                    {name:'dateCreated' , type:'date', dateFormat:'c' } ,
+                    {name:'lastUpdated' , type:'date', dateFormat:'c' } 
                 ])
             });
 
@@ -292,6 +292,5 @@
         <div id="customerCreateWin"></div>
         <div id="customerUpdateWin"></div>
         <div id="customerDetailWin"></div>
-        <div id="last"></div>
     </body>
 </html>
