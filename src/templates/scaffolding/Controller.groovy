@@ -126,7 +126,7 @@
         try{
             def idList=[]
             idList=params.id
-
+            
             for(int i=0;i<idList.size();i++)
             {
                 def tmp=${className}.get(idList[i])

@@ -18,12 +18,12 @@ Ext.foundation = function(){
     return {
         msg : function(title, format){
             if(!msgCt){
-                msgCt = Ext.DomHelper.insertFirst(document.body, {id:'msg-div'}, true);
+                msgCt = Ext.DomHelper.insertAfter(Ext.get("last"), {id:'msg-div'}, true);
             }
-            msgCt.alignTo(document, 't-t');
+            msgCt.alignTo(document, 'tr-tr');
             var s = String.format.apply(String, Array.prototype.slice.call(arguments, 1));
             var m = Ext.DomHelper.append(msgCt, {html:createBox(title, s)}, true);
-            m.slideIn('t').pause(3).ghost("t", {remove:true});
+            m.slideIn('t').pause(2).ghost("t", {remove:true});
         },
 
         init : function(){

@@ -292,5 +292,6 @@
         <div id="customerCreateWin"></div>
         <div id="customerUpdateWin"></div>
         <div id="customerDetailWin"></div>
+        <div id="last"></div>
     </body>
 </html>

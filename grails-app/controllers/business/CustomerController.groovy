@@ -114,7 +114,7 @@ class CustomerController {
         try{
             def idList=[]
             idList=params.id
-
+            println idList
             for(int i=0;i<idList.size();i++)
             {
                 def tmp=Customer.get(idList[i])
