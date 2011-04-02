@@ -28,11 +28,11 @@ class Customer {
     Date lastUpdated
 
     static constraints = {
-	    name(attributes:[chinese:"姓名"],blank:false, nullable:false,unique:false, size: 1..32)
-        mobile(attributes:[chinese:"手机"],nullable:false,unique:false, blank:false, size: 5..11)
-        identityCardNum(attributes:[chinese:"身份证号"],nullable:false,unique:false)
-        level(attributes:[chinese:"等级", inList:["高级","中级","低级"]],nullable:false,unique:false)
-        balance(attributes:[chinese:"余额"],nullable:false,unique:false)
+	    name(attributes:[chinese:"姓名"])
+        mobile(attributes:[chinese:"手机"])
+        identityCardNum(attributes:[chinese:"身份证号"])
+        level(attributes:[chinese:"等级"],inList:["普通","高级","VIP"]) //inList:["高级","中级","低级"]]
+        balance(attributes:[chinese:"余额"])
     }
 
     String toString()

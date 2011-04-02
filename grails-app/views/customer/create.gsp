@@ -33,7 +33,7 @@
                                     <label for="name">${cgDomainProperties.name.chinese}</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: customerInstance, field: 'name', 'errors')}">
-                                    <g:textField name="name" maxlength="32" value="${customerInstance?.name}" />
+                                    <g:textField name="name" value="${customerInstance?.name}" />
                                 </td>
                             </tr>
                         
@@ -42,7 +42,7 @@
                                     <label for="mobile">${cgDomainProperties.mobile.chinese}</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: customerInstance, field: 'mobile', 'errors')}">
-                                    <g:textField name="mobile" maxlength="11" value="${customerInstance?.mobile}" />
+                                    <g:textField name="mobile" value="${customerInstance?.mobile}" />
                                 </td>
                             </tr>
                         
@@ -60,7 +60,7 @@
                                     <label for="level">${cgDomainProperties.level.chinese}</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: customerInstance, field: 'level', 'errors')}">
-                                    <g:textField name="level" value="${customerInstance?.level}" />
+                                    <g:select name="level" from="${customerInstance.constraints.level.inList}" value="${customerInstance?.level}" valueMessagePrefix="customer.level"  />
                                 </td>
                             </tr>
                         
