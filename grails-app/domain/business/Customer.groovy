@@ -19,20 +19,24 @@ class Customer {
     static cgLayout=[:]
 
     String name
+    String gender
     String mobile
     String identityCardNum
     String level
     String balance
+    Date birthday
 
     Date dateCreated
     Date lastUpdated
 
     static constraints = {
-	    name(attributes:[chinese:"姓名"])
-        mobile(attributes:[chinese:"手机"])
-        identityCardNum(attributes:[chinese:"身份证号"])
-        level(attributes:[chinese:"等级"],inList:["普通","高级","VIP"]) //inList:["高级","中级","低级"]]
+	    name(attributes:[chinese:"姓名"],blank:false, size: 2..32)
+        gender(attributes: [chinese: "性别"], inList: ["男", "女"], blank: false)
+        mobile(attributes:[chinese:"手机"],blank:false, size: 11..11)
+        identityCardNum(attributes:[chinese:"身份证号"], size:18..18)
+        level(attributes:[chinese:"等级"],inList:["普通","高级","VIP"],blank:false)
         balance(attributes:[chinese:"余额"])
+        birthday(attributes: [chinese: "生日"])
     }
 
     String toString()

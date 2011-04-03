@@ -11,46 +11,73 @@
 Ext.onReady(function(){
     Ext.QuickTips.init();
 
-  var levelValues=[['普通'],['高级'],['VIP']];
-
-    var levelStore = new Ext.data.SimpleStore
-    ({
-        fields:["levelValues"],
-        data:levelValues
-    });
-    var level = new Ext.form.ComboBox
-    ({
-        id:"level",
-        editable:true,
-        store:levelStore,
-        emptyText:'请选择${cgDomainProperties.level.chinese}',
-        mode: 'local',
-        typeAhead: true,
-        triggerAction: 'all',
-        valueField:'levelValues',
-        displayField:'levelValues',
-        selectOnFocus:true,
-        width:126,
-        frame:true,
-        resizable:false
+    var customerCreateForm = new Ext.form.FormPanel({
+        labelAlign: 'right',
+        labelWidth: 80,
+        frame: true,
+        url: '/foundation/customer/createJSON',
+        defaults:{ width:250},
+        items: [
+            {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
+            {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '${cgDomainProperties.name.chinese}为必填项', maxLength: 32, maxLengthText: '${cgDomainProperties.name.chinese}至多包含32个字符', minLength: 2, minLengthText: '${cgDomainProperties.name.chinese}至少包含2个字符'},
+            {fieldLabel: '${cgDomainProperties.gender.chinese}',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), emptyText:'请选择${cgDomainProperties.gender.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
+            {fieldLabel: '${cgDomainProperties.mobile.chinese}',name: 'mobile',xtype: 'textfield', allowBlank: false, blankText: '${cgDomainProperties.mobile.chinese}为必填项', maxLength: 11, maxLengthText: '${cgDomainProperties.mobile.chinese}至多包含11个字符', minLength: 11, minLengthText: '${cgDomainProperties.mobile.chinese}至少包含11个字符'},
+            {fieldLabel: '${cgDomainProperties.identityCardNum.chinese}',name: 'identityCardNum',xtype: 'textfield', maxLength: 18, maxLengthText: '${cgDomainProperties.identityCardNum.chinese}至多包含18个字符', minLength: 18, minLengthText: '${cgDomainProperties.identityCardNum.chinese}至少包含18个字符'},
+            {fieldLabel: '${cgDomainProperties.level.chinese}',name: 'level',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['普通'],['高级'],['VIP']]}), emptyText:'请选择${cgDomainProperties.level.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
+            {fieldLabel: '${cgDomainProperties.balance.chinese}',name: 'balance',xtype: 'textfield'},
+            {fieldLabel: '${cgDomainProperties.birthday.chinese}',name: 'birthday',xtype:'datefield',format:'Y-m-d'}
+        ]
     });
 
-
-
+    var customerCreateWin = new Ext.Window({
+        el: 'customerCreateWin',
+        closable:false,
+        layout: 'fit',
+        width: 400,
+        title: '创建${entityName}',
+        height: 300,
+        closeAction: 'hide',
+        items: [customerCreateForm],
+        buttons: [
+            {
+                text:'创建',
+                handler: function() {
+                    customerCreateForm.getForm().submit({
+                        success:function(customerCreateForm, action) {
+                            Ext.foundation.msg('信息', action.result.msg);
+                            customerCreateWin.hide();
+                            store.reload();
+                        },
+                        failure:function() {
+                            Ext.foundation.msg('错误', "创建${entityName}失败!");
+                        }
+                    });
+                }
+            },
+            {
+                text: '取 消',
+                handler: function() {
+                    customerCreateWin.hide();
+                }
+            }
+        ]
+    });
 
     var customerUpdateForm = new Ext.form.FormPanel({
         labelAlign: 'right',
         labelWidth: 80,
         frame: true,
         url: '/foundation/customer/updateJSON',
-        defaultType: 'textfield',
+        defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-{fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield'},
-            {fieldLabel: '${cgDomainProperties.mobile.chinese}',name: 'mobile',xtype: 'textfield'},
-            {fieldLabel: '${cgDomainProperties.identityCardNum.chinese}',name: 'identityCardNum',xtype: 'textfield'},
-            level,
-            {fieldLabel: '${cgDomainProperties.balance.chinese}',name: 'balance',xtype: 'textfield'}
+            {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '${cgDomainProperties.name.chinese}为必填项', maxLength: 32, maxLengthText: '${cgDomainProperties.name.chinese}至多包含32个字符', minLength: 2, minLengthText: '${cgDomainProperties.name.chinese}至少包含2个字符'},
+            {fieldLabel: '${cgDomainProperties.gender.chinese}',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), emptyText:'请选择${cgDomainProperties.gender.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
+            {fieldLabel: '${cgDomainProperties.mobile.chinese}',name: 'mobile',xtype: 'textfield', allowBlank: false, blankText: '${cgDomainProperties.mobile.chinese}为必填项', maxLength: 11, maxLengthText: '${cgDomainProperties.mobile.chinese}至多包含11个字符', minLength: 11, minLengthText: '${cgDomainProperties.mobile.chinese}至少包含11个字符'},
+            {fieldLabel: '${cgDomainProperties.identityCardNum.chinese}',name: 'identityCardNum',xtype: 'textfield', maxLength: 18, maxLengthText: '${cgDomainProperties.identityCardNum.chinese}至多包含18个字符', minLength: 18, minLengthText: '${cgDomainProperties.identityCardNum.chinese}至少包含18个字符'},
+            {fieldLabel: '${cgDomainProperties.level.chinese}',name: 'level',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['普通'],['高级'],['VIP']]}), emptyText:'请选择${cgDomainProperties.level.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
+            {fieldLabel: '${cgDomainProperties.balance.chinese}',name: 'balance',xtype: 'textfield'},
+            {fieldLabel: '${cgDomainProperties.birthday.chinese}',name: 'birthday',xtype:'datefield',format:'Y-m-d'}
         ]
     });
 
@@ -88,72 +115,24 @@ Ext.onReady(function(){
         ]
     });
 
-    var customerCreateForm = new Ext.form.FormPanel({
-        labelAlign: 'right',
-        labelWidth: 80,
-        frame: true,
-        url: '/foundation/customer/createJSON',
-        defaultType: 'textfield',
-        items: [
-            {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-            {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield'},
-            {fieldLabel: '${cgDomainProperties.mobile.chinese}',name: 'mobile',xtype: 'textfield'},
-            {fieldLabel: '${cgDomainProperties.identityCardNum.chinese}',name: 'identityCardNum',xtype: 'textfield'},
-            level,
-            {fieldLabel: '${cgDomainProperties.balance.chinese}',name: 'balance',xtype: 'textfield'}
-        ]
-    });
-
-    var customerCreateWin = new Ext.Window({
-        el: 'customerCreateWin',
-        closable:false,
-        layout: 'fit',
-        width: 400,
-        title: '创建${entityName}',
-        height: 300,
-        closeAction: 'hide',
-        items: [customerCreateForm],
-        buttons: [
-            {
-                text:'创建',
-                handler: function() {
-                    customerCreateForm.getForm().submit({
-                        success:function(customerCreateForm, action) {
-                            Ext.foundation.msg('信息', action.result.msg);
-                            customerCreateWin.hide();
-                            store.reload();
-                        },
-                        failure:function() {
-                            Ext.foundation.msg('错误', "创建${entityName}失败!");
-                        }
-                    });
-                }
-            },
-            {
-                text: '取 消',
-                handler: function() {
-                    customerCreateWin.hide();
-                }
-            }
-        ]
-    });
-    
     var customerDetailForm = new Ext.form.FormPanel({
         labelAlign: 'right',
         labelWidth: 80,
         frame: true,
         url: '/foundation/customer/detailJSON',
-        defaultType: 'textfield',
+        defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-
+            
             {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',readOnly: true, xtype: 'textfield'},
+            {fieldLabel: '${cgDomainProperties.gender.chinese}',name: 'gender',readOnly: true, xtype: 'textfield'},
             {fieldLabel: '${cgDomainProperties.mobile.chinese}',name: 'mobile',readOnly: true, xtype: 'textfield'},
             {fieldLabel: '${cgDomainProperties.identityCardNum.chinese}',name: 'identityCardNum',readOnly: true, xtype: 'textfield'},
             {fieldLabel: '${cgDomainProperties.level.chinese}',name: 'level',readOnly: true, xtype: 'textfield'},
             {fieldLabel: '${cgDomainProperties.balance.chinese}',name: 'balance',readOnly: true, xtype: 'textfield'},
-            {fieldLabel: '${cgDomainProperties.dateCreated.chinese}',name: 'dateCreated',readOnly: true, xtype: 'datefield',format:'c',renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')},
-            {fieldLabel: '${cgDomainProperties.lastUpdated.chinese}',name: 'lastUpdated',readOnly: true, xtype: 'datefield',format:'c',renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')}
+            {fieldLabel: '${cgDomainProperties.birthday.chinese}',name: 'birthday',readOnly: true, xtype: 'datefield',format:'c',renderer: Ext.util.Format.dateRenderer('Y年m月d H:i:s')},
+            {fieldLabel: '${cgDomainProperties.dateCreated.chinese}',name: 'dateCreated',readOnly: true, xtype: 'datefield',format:'c',renderer: Ext.util.Format.dateRenderer('Y年m月d H:i:s')},
+            {fieldLabel: '${cgDomainProperties.lastUpdated.chinese}',name: 'lastUpdated',readOnly: true, xtype: 'datefield',format:'c',renderer: Ext.util.Format.dateRenderer('Y年m月d H:i:s')}
         ]
     });
 
@@ -268,12 +247,14 @@ Ext.onReady(function(){
         sm,
         {header:'${cgDomainProperties.id.chinese}',dataIndex:'id'} ,
         {header:'${cgDomainProperties.name.chinese}',dataIndex:'name'} ,
+        {header:'${cgDomainProperties.gender.chinese}',dataIndex:'gender'} ,
         {header:'${cgDomainProperties.mobile.chinese}',dataIndex:'mobile'} ,
         {header:'${cgDomainProperties.identityCardNum.chinese}',dataIndex:'identityCardNum'} ,
         {header:'${cgDomainProperties.level.chinese}',dataIndex:'level'} ,
         {header:'${cgDomainProperties.balance.chinese}',dataIndex:'balance'} ,
+        {header:'${cgDomainProperties.birthday.chinese}',dataIndex:'birthday', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')} ,
         {header:'${cgDomainProperties.dateCreated.chinese}',dataIndex:'dateCreated', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')} ,
-        {header:'${cgDomainProperties.lastUpdated.chinese}',dataIndex:'lastUpdated', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')}
+        {header:'${cgDomainProperties.lastUpdated.chinese}',dataIndex:'lastUpdated', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')} 
     ]);
 
     var store = new Ext.data.Store({
@@ -283,15 +264,17 @@ Ext.onReady(function(){
             totalProperty:'total',
             root:'root'
         }, [
-
+            
             {name:'id'  } ,
             {name:'name'  } ,
+            {name:'gender'  } ,
             {name:'mobile'  } ,
             {name:'identityCardNum'  } ,
             {name:'level'  } ,
             {name:'balance'  } ,
+            {name:'birthday' , type:'date', dateFormat:'c' } ,
             {name:'dateCreated' , type:'date', dateFormat:'c' } ,
-            {name:'lastUpdated' , type:'date', dateFormat:'c' }
+            {name:'lastUpdated' , type:'date', dateFormat:'c' } 
         ])
     });
 

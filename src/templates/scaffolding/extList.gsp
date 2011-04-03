@@ -8,7 +8,16 @@
             out << "            "
         }
         if (cp.inList != null) {
-            out << "${p.name}"
+            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:["
+            for(int j=0;j<cp.inList.size();j++)
+            {
+                out << "['${cp.inList[j]}']"
+                if(j< cp.inList.size()-1)
+                {
+                    out << ","
+                }
+            }
+            out <<"]}), emptyText:'请选择\${cgDomainProperties.${p.name}.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'}"
         } else if (p.type == String.class) {
             out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype: 'textfield'"
             if (cp.blank == false) {
@@ -23,48 +32,13 @@
 
             out << "}"
         } else if (p.type == Date.class) {
-            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}','datefield',format:'Y-m-d'}"
+            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'datefield',format:'Y-m-d'}"
         }
 
         if (props.size() > i + 1) {
             out << ","
             println ""
         }
-    }
-
-    def buildCombo(p,cp)
-    {
-        out<<"    var ${p.name}Values=["
-        cp.inList.eachWithIndex {value,i->
-            out<<"['${value}']"
-            if(i<cp.inList.size()-1)
-            {
-                out<<","
-            }
-        }
-        println "];"
-        println ""
-        println "    var ${p.name}Store = new Ext.data.SimpleStore"
-        println "    ({"
-        println "        fields:[\"${p.name}Values\"],"
-        println "        data:${p.name}Values"
-        println "    });"
-        println "    var ${p.name} = new Ext.form.ComboBox"
-        println "    ({"
-        println "        id:\"${p.name}\","
-        println "        editable:true,"
-        println "        store:${p.name}Store,"
-        println "        emptyText:'请选择\${cgDomainProperties.${p.name}.chinese}',"
-        println "        mode: 'local',"
-        println "        typeAhead: true,"
-        println "        triggerAction: 'all',"
-        println "        valueField:'${p.name}Values',"
-        println "        displayField:'${p.name}Values',"
-        println "        selectOnFocus:true,"
-        println "        width:126,"
-        println "        frame:true,"
-        println "        resizable:false"
-        println "    });"
     }
 %>
 <html>
@@ -78,33 +52,15 @@
 Ext.onReady(function(){
     Ext.QuickTips.init();
 
-<%  excludedProps = Event.allEvents.toList() << 'version' << 'id' << 'dateCreated' << 'lastUpdated'
-                    persistentPropNames = domainClass.persistentProperties*.name
-                    props = domainClass.properties.findAll { persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) }
-                    Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
-                    display = true
-                    props.eachWithIndex { p, i ->
-                        if (!Collection.class.isAssignableFrom(p.type)) {
-                            if (hasHibernate) {
-                                cp = domainClass.constrainedProperties[p.name]
-                                display = (cp ? cp.display : true)
-                            }
-                            if (display && cp.inList!=null) {
-                                buildCombo(p,cp)
-                            }
-                        }
-                    }
-            %>
-
     var ${domainClass.propertyName}CreateForm = new Ext.form.FormPanel({
         labelAlign: 'right',
         labelWidth: 80,
         frame: true,
         url: '/foundation/${domainClass.propertyName}/createJSON',
-        defaultType: 'textfield',
+        defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-<%  excludedProps = Event.allEvents.toList() << 'version' << 'id' << 'dateCreated' << 'lastUpdated'
+            <%  excludedProps = Event.allEvents.toList() << 'version' << 'id' << 'dateCreated' << 'lastUpdated'
                     persistentPropNames = domainClass.persistentProperties*.name
                     props = domainClass.properties.findAll { persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) }
                     Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
@@ -163,10 +119,10 @@ Ext.onReady(function(){
         labelWidth: 80,
         frame: true,
         url: '/foundation/${domainClass.propertyName}/updateJSON',
-        defaultType: 'textfield',
+        defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-<%  excludedProps = Event.allEvents.toList() << 'version' << 'id' << 'dateCreated' << 'lastUpdated'
+            <%  excludedProps = Event.allEvents.toList() << 'version' << 'id' << 'dateCreated' << 'lastUpdated'
                persistentPropNames = domainClass.persistentProperties*.name
                props = domainClass.properties.findAll { persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) }
                Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
@@ -225,7 +181,7 @@ Ext.onReady(function(){
         labelWidth: 80,
         frame: true,
         url: '/foundation/${domainClass.propertyName}/detailJSON',
-        defaultType: 'textfield',
+        defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
             <%  excludedProps = Event.allEvents.toList() << 'version' << 'id'
@@ -240,7 +196,7 @@ Ext.onReady(function(){
                                    display = (cp ? cp.display : true)
                                }
                                if (display) { %>
-            {fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',readOnly: true, xtype: <% if(p.type==String.class){ out << "'textfield'"} else if(p.type==Date.class){ out << "'datefield',format:'c',renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')"}%>}<% if(props.size()>i+1){out<<","} %><%  }   }   } %>
+            {fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',readOnly: true, xtype: <% if(p.type==String.class){ out << "'textfield'"} else if(p.type==Date.class){ out << "'datefield',format:'c',renderer: Ext.util.Format.dateRenderer('Y年m月d H:i:s')"}%>}<% if(props.size()>i+1){out<<","} %><%  }   }   } %>
         ]
     });
 

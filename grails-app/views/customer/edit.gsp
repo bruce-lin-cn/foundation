@@ -36,7 +36,16 @@
                                   <label for="name">${cgDomainProperties.name.chinese}</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: customerInstance, field: 'name', 'errors')}">
-                                    <g:textField name="name" value="${customerInstance?.name}" />
+                                    <g:textField name="name" maxlength="32" value="${customerInstance?.name}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="gender">${cgDomainProperties.gender.chinese}</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: customerInstance, field: 'gender', 'errors')}">
+                                    <g:select name="gender" from="${customerInstance.constraints.gender.inList}" value="${customerInstance?.gender}" valueMessagePrefix="customer.gender"  />
                                 </td>
                             </tr>
                         
@@ -45,7 +54,7 @@
                                   <label for="mobile">${cgDomainProperties.mobile.chinese}</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: customerInstance, field: 'mobile', 'errors')}">
-                                    <g:textField name="mobile" value="${customerInstance?.mobile}" />
+                                    <g:textField name="mobile" maxlength="11" value="${customerInstance?.mobile}" />
                                 </td>
                             </tr>
                         
@@ -54,7 +63,7 @@
                                   <label for="identityCardNum">${cgDomainProperties.identityCardNum.chinese}</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: customerInstance, field: 'identityCardNum', 'errors')}">
-                                    <g:textField name="identityCardNum" value="${customerInstance?.identityCardNum}" />
+                                    <g:textField name="identityCardNum" maxlength="18" value="${customerInstance?.identityCardNum}" />
                                 </td>
                             </tr>
                         
@@ -73,6 +82,15 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: customerInstance, field: 'balance', 'errors')}">
                                     <g:textField name="balance" value="${customerInstance?.balance}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="birthday">${cgDomainProperties.birthday.chinese}</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: customerInstance, field: 'birthday', 'errors')}">
+                                    <g:datePicker name="birthday" chinese="生日" precision="day" value="${customerInstance?.birthday}"  />
                                 </td>
                             </tr>
                         

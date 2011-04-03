@@ -26,13 +26,13 @@
                         
                             <g:sortableColumn property="name" title="${cgDomainProperties.name.chinese}" />
                         
+                            <g:sortableColumn property="gender" title="${cgDomainProperties.gender.chinese}" />
+                        
                             <g:sortableColumn property="mobile" title="${cgDomainProperties.mobile.chinese}" />
                         
                             <g:sortableColumn property="identityCardNum" title="${cgDomainProperties.identityCardNum.chinese}" />
                         
                             <g:sortableColumn property="level" title="${cgDomainProperties.level.chinese}" />
-                        
-                            <g:sortableColumn property="balance" title="${cgDomainProperties.balance.chinese}" />
                         
                         </tr>
                     </thead>
@@ -44,13 +44,13 @@
                         
                             <td>${fieldValue(bean: customerInstance, field: "name")}</td>
                         
+                            <td>${fieldValue(bean: customerInstance, field: "gender")}</td>
+                        
                             <td>${fieldValue(bean: customerInstance, field: "mobile")}</td>
                         
                             <td>${fieldValue(bean: customerInstance, field: "identityCardNum")}</td>
                         
                             <td>${fieldValue(bean: customerInstance, field: "level")}</td>
-                        
-                            <td>${fieldValue(bean: customerInstance, field: "balance")}</td>
                         
                         </tr>
                     </g:each>

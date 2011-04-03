@@ -37,6 +37,13 @@
                         </tr>
                     
                         <tr class="prop">
+                            <td valign="top" class="name">${cgDomainProperties.gender.chinese}</td>
+                            
+                            <td valign="center" class="value">${fieldValue(bean: customerInstance, field: "gender")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
                             <td valign="top" class="name">${cgDomainProperties.mobile.chinese}</td>
                             
                             <td valign="center" class="value">${fieldValue(bean: customerInstance, field: "mobile")}</td>
@@ -61,6 +68,13 @@
                             <td valign="top" class="name">${cgDomainProperties.balance.chinese}</td>
                             
                             <td valign="center" class="value">${fieldValue(bean: customerInstance, field: "balance")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name">${cgDomainProperties.birthday.chinese}</td>
+                            
+                            <td valign="center" class="value"><g:formatDate date="${customerInstance?.birthday}" /></td>
                             
                         </tr>
                     

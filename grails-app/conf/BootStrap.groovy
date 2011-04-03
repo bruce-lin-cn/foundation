@@ -10,7 +10,7 @@ class BootStrap {
 
         for( int i=0;i<3;i++)
         {
-            new Customer(name:"姓名"+i,mobile:"189060570"+i,identityCardNum: "35010519790118000"+i,level:"高级",balance:"100").save()
+            new Customer(name:"姓名"+i,mobile:"1890605705"+i,identityCardNum: "35010519790118000"+i,level:"高级",balance:"100").save()
         }
     }
     def destroy = {

@@ -80,10 +80,12 @@ class CustomerController {
 
             
         customer.name=params.name
+        customer.gender=params.gender
         customer.mobile=params.mobile
         customer.identityCardNum=params.identityCardNum
         customer.level=params.level
         customer.balance=params.balance
+        customer.birthday=params.birthday
         customer.id=null
         customer.save()
 
@@ -99,10 +101,12 @@ class CustomerController {
 
             
         customer.name=params.name
+        customer.gender=params.gender
         customer.mobile=params.mobile
         customer.identityCardNum=params.identityCardNum
         customer.level=params.level
         customer.balance=params.balance
+        customer.birthday=params.birthday
         
         customer.save()
 
