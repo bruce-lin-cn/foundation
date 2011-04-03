@@ -24,7 +24,7 @@ class Customer {
     String identityCardNum
     String level
     String balance
-    Date birthday
+    String birthday
 
     Date dateCreated
     Date lastUpdated
@@ -35,8 +35,8 @@ class Customer {
         mobile(attributes:[chinese:"手机"],blank:false, size: 11..11)
         identityCardNum(attributes:[chinese:"身份证号"], size:18..18)
         level(attributes:[chinese:"等级"],inList:["普通","高级","VIP"],blank:false)
-        balance(attributes:[chinese:"余额"])
-        birthday(attributes: [chinese: "生日"])
+        balance(attributes:[chinese:"余额",type:"Integer"])
+        birthday(attributes: [chinese: "生日", type:"Date", format: "yyyy-MM-dd"])
     }
 
     String toString()

@@ -64,55 +64,16 @@
       <file leaf-file-name="CustomerController.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/CustomerController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="8" selection-start="2256" selection-end="2256" vertical-scroll-proportion="-22.52174">
+            <state line="254" column="0" selection-start="7964" selection-end="7964" vertical-scroll-proportion="-12.173913">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extList.gsp" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/extList.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="121" selection-start="1793" selection-end="1793" vertical-scroll-proportion="-11.623457">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Controller.groovy" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Controller.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="9" selection-start="3515" selection-end="3515" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="extList.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/customer/extList.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="101" selection-start="2345" selection-end="2345" vertical-scroll-proportion="-2.7391305">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BootStrap.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="94" selection-start="519" selection-end="522" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Customer.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/business/Customer.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="77" selection-start="761" selection-end="761" vertical-scroll-proportion="-8.046512">
+            <state line="95" column="60" selection-start="3655" selection-end="3655" vertical-scroll-proportion="3.5752687">
               <folding />
             </state>
           </provider>
@@ -121,7 +82,46 @@
       <file leaf-file-name="Config.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="2" selection-start="2497" selection-end="2497" vertical-scroll-proportion="0.0">
+            <state line="92" column="0" selection-start="3768" selection-end="3809" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BookController.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/BookController.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="105" column="19" selection-start="2814" selection-end="2814" vertical-scroll-proportion="-11.130435">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="extList.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/extList.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="326" column="173" selection-start="13575" selection-end="13575" vertical-scroll-proportion="-53.958332">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Book.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/business/Book.groovy">
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="5" selection-start="882" selection-end="882" vertical-scroll-proportion="-4.6976743">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="extList.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/book/extList.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="255" column="0" selection-start="10172" selection-end="10172" vertical-scroll-proportion="-61.347828">
               <folding />
             </state>
           </provider>
@@ -141,22 +141,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grails-app/views/user/extjs.gsp" />
-        <option value="$PROJECT_DIR$/src/templates/scaffolding/list.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/user/ext.gsp" />
-        <option value="$PROJECT_DIR$/src/templates/scaffolding/ext.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/platform/UserController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/user/extList.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/platform/_extjs.gsp" />
         <option value="$PROJECT_DIR$/web-app/ext/foundation.css" />
         <option value="$PROJECT_DIR$/web-app/ext/foundation.js" />
         <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/customer/extList.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/business/Customer.groovy" />
-        <option value="$PROJECT_DIR$/src/templates/scaffolding/extList.gsp" />
-        <option value="$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/customer/extList.gsp" />
+        <option value="$PROJECT_DIR$/src/templates/artifacts/DomainClass.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/business/CustomerController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/book/extList.gsp" />
+        <option value="$PROJECT_DIR$/src/templates/scaffolding/extList.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/domain/business/Book.groovy" />
+        <option value="$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/business/BookController.groovy" />
       </list>
     </option>
   </component>
@@ -295,6 +295,28 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="artifacts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -355,6 +377,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="customer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="book" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -581,7 +625,7 @@
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="editor.preferences.appearance" />
+    <property name="options.lastSelected" value="editor.preferences.smartKeys" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -706,6 +750,19 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy Script">
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="D:\g.GRAILS\foundation" />
+      <setting name="debug" value="false" />
+      <method>
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="ScalaTestRunConfiguration" factoryName="ScalaTest">
       <module name="" />
       <setting name="path" value="" />
@@ -774,7 +831,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1288" height="778" extended-state="7" />
+    <frame x="-4" y="-4" width="1288" height="778" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -832,26 +889,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/views/platform/_onReadyEnd.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/platform/_onReadyBegin.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/error.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/index.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/index2.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -887,54 +924,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/business/Customer.groovy">
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="94" selection-start="519" selection-end="522" vertical-scroll-proportion="0.0">
+        <state line="39" column="5" selection-start="1120" selection-end="1120" vertical-scroll-proportion="0.79444444">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="2" selection-start="2497" selection-end="2497" vertical-scroll-proportion="0.0">
+        <state line="8" column="16" selection-start="307" selection-end="307" vertical-scroll-proportion="0.2871795">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/customer/extList.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="101" selection-start="2345" selection-end="2345" vertical-scroll-proportion="-2.7391305">
+        <state line="14" column="28" selection-start="449" selection-end="449" vertical-scroll-proportion="0.41860464">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/business/Customer.groovy">
+    <entry file="file://$PROJECT_DIR$/src/templates/artifacts/DomainClass.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="45" selection-start="941" selection-end="941" vertical-scroll-proportion="0.9358974">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/business/Book.groovy">
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="77" selection-start="761" selection-end="761" vertical-scroll-proportion="-8.046512">
+        <state line="35" column="5" selection-start="882" selection-end="882" vertical-scroll-proportion="-4.6976743">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/book/extList.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="9" selection-start="3515" selection-end="3515" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/CustomerController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="8" selection-start="2256" selection-end="2256" vertical-scroll-proportion="-22.52174">
+        <state line="255" column="0" selection-start="10172" selection-end="10172" vertical-scroll-proportion="-61.347828">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/extList.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="121" selection-start="1793" selection-end="1793" vertical-scroll-proportion="-11.623457">
+        <state line="326" column="173" selection-start="13575" selection-end="13575" vertical-scroll-proportion="-53.958332">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/BookController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="105" column="19" selection-start="2814" selection-end="2814" vertical-scroll-proportion="-11.130435">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="0" selection-start="3768" selection-end="3809" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/CustomerController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="254" column="0" selection-start="7964" selection-end="7964" vertical-scroll-proportion="-12.173913">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="60" selection-start="3655" selection-end="3655" vertical-scroll-proportion="3.5752687">
           <folding />
         </state>
       </provider>

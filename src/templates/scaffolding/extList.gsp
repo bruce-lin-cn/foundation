@@ -196,7 +196,7 @@ Ext.onReady(function(){
                                    display = (cp ? cp.display : true)
                                }
                                if (display) { %>
-            {fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',readOnly: true, xtype: <% if(p.type==String.class){ out << "'textfield'"} else if(p.type==Date.class){ out << "'datefield',format:'c',renderer: Ext.util.Format.dateRenderer('Y年m月d H:i:s')"}%>}<% if(props.size()>i+1){out<<","} %><%  }   }   } %>
+            {fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',readOnly: true, xtype: <% if(p.type==String.class){ out << "'textfield'"} else if(p.type==Date.class){ out << "'datefield',format:'Y-m-d'"}%>}<% if(props.size()>i+1){out<<","} %><%  }   }   } %>
         ]
     });
 
@@ -233,16 +233,21 @@ Ext.onReady(function(){
         icon: '/foundation/images/skin/database_edit.png',
         handler: function() {
             var id = (grid.getSelectionModel().getSelected()).id;
-            ${domainClass.propertyName}UpdateForm.getForm().load({
-                url:'/foundation/${domainClass.propertyName}/detailJSON?id=' + id,
-                success:function(form, action) {
-                },
-                failure:function() {
-                    Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
-                }
-            });
+            if(id==null)
+            {
+                Ext.foundation.msg('注意', "请选择要修改的记录");
+            } else {
+                ${domainClass.propertyName}UpdateForm.getForm().load({
+                    url:'/foundation/${domainClass.propertyName}/detailJSON?id=' + id,
+                    success:function(form, action) {
+                    },
+                    failure:function() {
+                        Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
+                    }
+                });
 
-            customerUpdateWin.show();
+                ${domainClass.propertyName}UpdateWin.show();
+            }
         }
     }, {
         text: '删除',
@@ -257,7 +262,7 @@ Ext.onReady(function(){
                 for (var i = 0; i < count; i++) {
                     id.push(records[i].id);
                 }
-                Ext.MessageBox.confirm('信息', '您确定删除' + id + '记录?', function(btn) {
+                Ext.MessageBox.confirm('信息', '您确定删除编号为' + id + '的记录吗?', function(btn) {
                     if (btn == 'yes') {
                         Ext.Ajax.request({
                             url: '/foundation/${domainClass.propertyName}/deleteJSON',
@@ -281,15 +286,19 @@ Ext.onReady(function(){
         icon: '/foundation/images/skin/database_save.png',
         handler: function() {
             var id = (grid.getSelectionModel().getSelected()).id;
-            ${domainClass.propertyName}DetailForm.getForm().load({
-                url:'/foundation/${domainClass.propertyName}/detailJSON?id=' + id,
-                success:function(form, action) {
-                },
-                failure:function() {
-                    Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
-                }
-            });
-            customerDetailWin.show();
+            if (id == null) {
+                Ext.foundation.msg('注意', "请选择要显示的记录");
+            }else{
+                ${domainClass.propertyName}DetailForm.getForm().load({
+                    url:'/foundation/${domainClass.propertyName}/detailJSON?id=' + id,
+                    success:function(form, action) {
+                    },
+                    failure:function() {
+                        Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
+                    }
+                });
+                ${domainClass.propertyName}DetailWin.show();
+            }
         }
     }, '->',
     {
@@ -315,7 +324,7 @@ Ext.onReady(function(){
        props.eachWithIndex { p, i ->
            if (i < 10) {
                if (p.isAssociation()) { %><%      } else { %>
-        {header:'\${cgDomainProperties.${p.name}.chinese}',dataIndex:'${p.name}'<% if(p.type==Date.class){out<<", type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')"} %>} <% if(props.size()>i+1){out<<","} %><%  }   }   } %>
+        {header:'\${cgDomainProperties.${p.name}.chinese}',dataIndex:'${p.name}'<% if(p.type==Date.class){out<<", type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')"} %>} <% if(props.size()>i+1){out<<","} %><%  }   }   } %>
     ]);
 
     var store = new Ext.data.Store({

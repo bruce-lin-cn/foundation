@@ -78,21 +78,21 @@ class CustomerController {
 
         def customer=new Customer()
 
-            
+
         customer.name=params.name
-        
+
         customer.gender=params.gender
-        
+
         customer.mobile=params.mobile
-        
+
         customer.identityCardNum=params.identityCardNum
-        
+
         customer.level=params.level
-        
+
         customer.balance=params.balance
-        
+
         customer.birthday=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.birthday)
-        
+
 
         customer.id=null
         customer.save()
@@ -107,7 +107,7 @@ class CustomerController {
         def customerInstance = Customer.get(params.id)
         def customer=Customer.get(params.id)
 
-            
+
         customer.name=params.name
         customer.gender=params.gender
         customer.mobile=params.mobile
@@ -211,7 +211,7 @@ class CustomerController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (customerInstance.version > version) {
-                    
+
                     customerInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'customer.label', default: 'Customer')] as Object[], "Another user has updated this Customer while you were editing")
                     render(view: "edit", model: [customerInstance: customerInstance,cgDomainProperties:cgDomainProperties])
                     return
@@ -273,6 +273,10 @@ class CustomerController {
                 cgDomainProperties[namePropertiy]=[chinese:'更新']
             }else if(it.isPersistent()==true && cgConstraints[namePropertiy]!=null && namePropertiy!='version'){
                 cgDomainProperties[namePropertiy]=[chinese:cgConstraints[namePropertiy].attributes.chinese?:namePropertiy]
+                if(cgConstraints[namePropertiy].attributes.format!=null)
+                {
+                    cgDomainProperties[namePropertiy].format= cgConstraints[namePropertiy].attributes.format
+                }
             }else{
                 println ">>>>>> Unhandled propertiy:"+namePropertiy
             }

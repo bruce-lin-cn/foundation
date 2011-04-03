@@ -76,7 +76,7 @@
 
         def ${domainClass.propertyName}=new ${className}()
 
-            <%  excludedProps = Event.allEvents.toList() << 'version'<< 'dateCreated' << 'lastUpdated'
+<%  excludedProps = Event.allEvents.toList() << 'version'<< 'dateCreated' << 'lastUpdated'
                     persistentPropNames = domainClass.persistentProperties*.name
                     props = domainClass.properties.findAll { persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) }
                     Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
@@ -87,18 +87,20 @@
                                         cp = domainClass.constrainedProperties[p.name]
                                         display = (cp ? cp.display : true)
                                     }
-                                    if (display) { %>
-        <%
-        if(p.type==Date.class)
-        {
-            out << "${domainClass.propertyName}.${p.name}=(new java.text.SimpleDateFormat(\"yyyy-MM-dd\")).parse(params.${p.name})"
-        }else{
-            out << "${domainClass.propertyName}.${p.name}=params.${p.name}"
-        }
-        %>
-        <%  }   }   } %>
+                                    if (display) {
+                                        if(p.type==Date.class)
+                                        {
+                                            out << "        ${domainClass.propertyName}.${p.name}=(new java.text.SimpleDateFormat(\"yyyy-MM-dd\")).parse(params.${p.name})"
+                                            println ""
+                                        }else{
+                                            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
+                                            println ""
+                                        }
+                                    }
+                                }
+                    }
+%>
 
-        ${domainClass.propertyName}.id=null
         ${domainClass.propertyName}.save()
 
         render "{success:true,msg:'记录已创建'}";
@@ -111,7 +113,7 @@
         def ${propertyName} = ${className}.get(params.id)
         def ${domainClass.propertyName}=${className}.get(params.id)
 
-            <%  excludedProps = Event.allEvents.toList() << 'version'<< 'dateCreated' << 'lastUpdated'
+<%  excludedProps = Event.allEvents.toList() << 'version'<< 'dateCreated' << 'lastUpdated'
                     persistentPropNames = domainClass.persistentProperties*.name
                     props = domainClass.properties.findAll { persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) }
                     Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
@@ -122,9 +124,19 @@
                                         cp = domainClass.constrainedProperties[p.name]
                                         display = (cp ? cp.display : true)
                                     }
-                                    if (display) { %>
-        ${domainClass.propertyName}.${p.name}=params.${p.name}<%  }   }   } %>
-
+                                    if (display) {
+                                        if(p.type!=Date.class) {
+                                            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
+                                            println ""
+                                        }
+                                        else {
+                                            out << "        ${domainClass.propertyName}.${p.name}= new java.text.SimpleDateFormat(\"yyyy-MM-dd\").parse(params.${p.name})"
+                                            println ""
+                                        }
+                                    }
+                                }
+                    }
+%>
         ${domainClass.propertyName}.save()
 
         render "{success:true,msg:'记录已更新'}";
@@ -282,6 +294,9 @@
                 cgDomainProperties[namePropertiy]=[chinese:'更新']
             }else if(it.isPersistent()==true && cgConstraints[namePropertiy]!=null && namePropertiy!='version'){
                 cgDomainProperties[namePropertiy]=[chinese:cgConstraints[namePropertiy].attributes.chinese?:namePropertiy]
+                if(cgConstraints[namePropertiy].attributes.format != null) {
+                    cgDomainProperties[namePropertiy].format = cgConstraints[namePropertiy].attributes.format
+                }
             }else{
                 println ">>>>>> Unhandled propertiy:"+namePropertiy
             }
