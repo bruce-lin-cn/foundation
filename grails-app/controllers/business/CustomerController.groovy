@@ -80,12 +80,20 @@ class CustomerController {
 
             
         customer.name=params.name
+        
         customer.gender=params.gender
+        
         customer.mobile=params.mobile
+        
         customer.identityCardNum=params.identityCardNum
+        
         customer.level=params.level
+        
         customer.balance=params.balance
-        customer.birthday=params.birthday
+        
+        customer.birthday=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.birthday)
+        
+
         customer.id=null
         customer.save()
 
@@ -107,7 +115,7 @@ class CustomerController {
         customer.level=params.level
         customer.balance=params.balance
         customer.birthday=params.birthday
-        
+
         customer.save()
 
         render "{success:true,msg:'记录已更新'}";
@@ -118,7 +126,7 @@ class CustomerController {
         try{
             def idList=[]
             idList=params.id
-            
+
             for(int i=0;i<idList.size();i++)
             {
                 def tmp=Customer.get(idList[i])
@@ -170,7 +178,7 @@ class CustomerController {
         {
             init()
         }
-        
+
         def customerInstance = Customer.get(params.id)
         if (!customerInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'customer.label', default: 'Customer'), params.id])}"
@@ -186,7 +194,7 @@ class CustomerController {
         {
             init()
         }
-        
+
         def customerInstance = Customer.get(params.id)
         if (!customerInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'customer.label', default: 'Customer'), params.id])}"

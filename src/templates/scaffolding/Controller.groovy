@@ -88,7 +88,16 @@
                                         display = (cp ? cp.display : true)
                                     }
                                     if (display) { %>
-        ${domainClass.propertyName}.${p.name}=params.${p.name}<%  }   }   } %>
+        <%
+        if(p.type==Date.class)
+        {
+            out << "${domainClass.propertyName}.${p.name}=(new java.text.SimpleDateFormat(\"yyyy-MM-dd\")).parse(params.${p.name})"
+        }else{
+            out << "${domainClass.propertyName}.${p.name}=params.${p.name}"
+        }
+        %>
+        <%  }   }   } %>
+
         ${domainClass.propertyName}.id=null
         ${domainClass.propertyName}.save()
 
@@ -115,7 +124,7 @@
                                     }
                                     if (display) { %>
         ${domainClass.propertyName}.${p.name}=params.${p.name}<%  }   }   } %>
-        
+
         ${domainClass.propertyName}.save()
 
         render "{success:true,msg:'记录已更新'}";
@@ -126,7 +135,7 @@
         try{
             def idList=[]
             idList=params.id
-            
+
             for(int i=0;i<idList.size();i++)
             {
                 def tmp=${className}.get(idList[i])
@@ -178,7 +187,7 @@
         {
             init()
         }
-        
+
         def ${propertyName} = ${className}.get(params.id)
         if (!${propertyName}) {
             flash.message = "\${message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])}"
@@ -194,7 +203,7 @@
         {
             init()
         }
-        
+
         def ${propertyName} = ${className}.get(params.id)
         if (!${propertyName}) {
             flash.message = "\${message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])}"
