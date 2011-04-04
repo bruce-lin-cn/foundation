@@ -48,6 +48,8 @@
             out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'numberfield'}"
         }else if (p.type == float) {
             out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'numberfield',allowDecimals:true}"
+        }else if (p.type == boolean){
+            out << "{boxLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'checkbox'}"
         }
 
         if (props.size() > i + 1) {

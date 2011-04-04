@@ -83,6 +83,7 @@ class BookController {
         book.date1=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.date1)
         book.ingeger1=params.ingeger1.toInteger()
         book.float1=params.float1.toFloat()
+        book.boolean1=params.boolean1
 
 
         book.save()
@@ -102,6 +103,7 @@ class BookController {
         book.date1=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.date1)
         book.ingeger1=params.ingeger1.toInteger()
         book.float1=params.float1.toFloat()
+        book.boolean1=params.boolean1
 
         book.save()
 

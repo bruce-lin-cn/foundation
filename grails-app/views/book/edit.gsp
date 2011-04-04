@@ -76,6 +76,15 @@
                                 </td>
                             </tr>
                         
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="boolean1">${cgDomainProperties.boolean1.chinese}</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: bookInstance, field: 'boolean1', 'errors')}">
+                                    <g:checkBox name="boolean1" chinese="真假" value="${bookInstance?.boolean1}" />
+                                </td>
+                            </tr>
+                        
                         </tbody>
                     </table>
                 </div>

@@ -1,6 +1,6 @@
 <%=packageName ? "package ${packageName}\n\n" : ''%>class ${className}Controller {<% import grails.persistence.Event %><% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %><% boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate') %>
 <%
-    def output(p)
+    def ViewToModelConverter(p)
     {
         if (p.type == Date.class) {
             out << "        ${domainClass.propertyName}.${p.name}=(new java.text.SimpleDateFormat(\"yyyy-MM-dd\")).parse(params.${p.name})"
@@ -10,6 +10,9 @@
             println ""
         } else if (p.type == float) {
             out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}.toFloat()"
+            println ""
+        } else if (p.type == boolean ) {
+            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
             println ""
         } else {
             out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
@@ -105,7 +108,7 @@
                                         display = (cp ? cp.display : true)
                                     }
                                     if (display) {
-                                        output(p)
+                                        ViewToModelConverter(p)
                                     }
                                 }
                     }
@@ -135,7 +138,7 @@
                                         display = (cp ? cp.display : true)
                                     }
                                     if (display) {
-                                        output(p)
+                                        ViewToModelConverter(p)
                                     }
                                 }
                     }

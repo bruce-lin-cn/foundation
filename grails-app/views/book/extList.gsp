@@ -23,7 +23,8 @@ Ext.onReady(function(){
             {fieldLabel: '${cgDomainProperties.string2.chinese}',name: 'string2',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['选择1'],['选择2'],['选择3']]}), emptyText:'请选择${cgDomainProperties.string2.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '${cgDomainProperties.date1.chinese}',name: 'date1',xtype:'datefield',format:'Y-m-d'},
             {fieldLabel: '${cgDomainProperties.ingeger1.chinese}',name: 'ingeger1',xtype:'numberfield'},
-            {fieldLabel: '${cgDomainProperties.float1.chinese}',name: 'float1',xtype:'numberfield',allowDecimals:true}
+            {fieldLabel: '${cgDomainProperties.float1.chinese}',name: 'float1',xtype:'numberfield',allowDecimals:true},
+            {boxLabel: '${cgDomainProperties.boolean1.chinese}',name: 'boolean1',xtype:'checkbox'}
         ]
     });
 
@@ -73,7 +74,8 @@ Ext.onReady(function(){
             {fieldLabel: '${cgDomainProperties.string2.chinese}',name: 'string2',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['选择1'],['选择2'],['选择3']]}), emptyText:'请选择${cgDomainProperties.string2.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '${cgDomainProperties.date1.chinese}',name: 'date1',xtype:'datefield',format:'Y-m-d'},
             {fieldLabel: '${cgDomainProperties.ingeger1.chinese}',name: 'ingeger1',xtype:'numberfield'},
-            {fieldLabel: '${cgDomainProperties.float1.chinese}',name: 'float1',xtype:'numberfield',allowDecimals:true}
+            {fieldLabel: '${cgDomainProperties.float1.chinese}',name: 'float1',xtype:'numberfield',allowDecimals:true},
+            {boxLabel: '${cgDomainProperties.boolean1.chinese}',name: 'boolean1',xtype:'checkbox'}
         ]
     });
 
@@ -123,7 +125,8 @@ Ext.onReady(function(){
             {fieldLabel: '${cgDomainProperties.string2.chinese}',name: 'string2',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['选择1'],['选择2'],['选择3']]}), readOnly:true, emptyText:'请选择${cgDomainProperties.string2.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '${cgDomainProperties.date1.chinese}',name: 'date1',xtype:'datefield',format:'Y-m-d'},
             {fieldLabel: '${cgDomainProperties.ingeger1.chinese}',name: 'ingeger1',xtype:'numberfield'},
-            {fieldLabel: '${cgDomainProperties.float1.chinese}',name: 'float1',xtype:'numberfield',allowDecimals:true}
+            {fieldLabel: '${cgDomainProperties.float1.chinese}',name: 'float1',xtype:'numberfield',allowDecimals:true},
+            {boxLabel: '${cgDomainProperties.boolean1.chinese}',name: 'boolean1',xtype:'checkbox'}
         ]
     });
 
@@ -262,7 +265,8 @@ Ext.onReady(function(){
         {header:'${cgDomainProperties.string2.chinese}',dataIndex:'string2'} ,
         {header:'${cgDomainProperties.date1.chinese}',dataIndex:'date1', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} ,
         {header:'${cgDomainProperties.ingeger1.chinese}',dataIndex:'ingeger1'} ,
-        {header:'${cgDomainProperties.float1.chinese}',dataIndex:'float1'} 
+        {header:'${cgDomainProperties.float1.chinese}',dataIndex:'float1'} ,
+        {header:'${cgDomainProperties.boolean1.chinese}',dataIndex:'boolean1'} 
     ]);
 
     var store = new Ext.data.Store({
@@ -278,7 +282,8 @@ Ext.onReady(function(){
             {name:'string2'  } ,
             {name:'date1' , type:'date', dateFormat:'c' } ,
             {name:'ingeger1'  } ,
-            {name:'float1'  } 
+            {name:'float1'  } ,
+            {name:'boolean1'  } 
         ])
     });
 

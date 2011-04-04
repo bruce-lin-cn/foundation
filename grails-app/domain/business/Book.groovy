@@ -25,6 +25,7 @@ class Book {
 
     int ingeger1
     float float1
+    boolean boolean1=false
 
     static constraints = {
 	    string1(attributes:[chinese:"字符串1"], size: 4..32)
@@ -32,6 +33,7 @@ class Book {
         date1(attributes: [chinese: "日期1", format: "Date"], blank:false)
         ingeger1(attributes:[chinese:"整数1"])
         float1(attributes:[chinese:"浮点1"])
+        boolean1(attributes:[chinese:"真假"])
     }
 
     String toString()

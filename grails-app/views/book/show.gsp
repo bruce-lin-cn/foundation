@@ -64,6 +64,13 @@
                             
                         </tr>
                     
+                        <tr class="prop">
+                            <td valign="top" class="name">${cgDomainProperties.boolean1.chinese}</td>
+                            
+                            <td valign="center" class="value"><g:formatBoolean boolean="${bookInstance?.boolean1}" /></td>
+                            
+                        </tr>
+                    
                     </tbody>
                 </table>
             </div>
