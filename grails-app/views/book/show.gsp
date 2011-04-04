@@ -57,6 +57,13 @@
                             
                         </tr>
                     
+                        <tr class="prop">
+                            <td valign="top" class="name">${cgDomainProperties.float1.chinese}</td>
+                            
+                            <td valign="center" class="value">${fieldValue(bean: bookInstance, field: "float1")}</td>
+                            
+                        </tr>
+                    
                     </tbody>
                 </table>
             </div>

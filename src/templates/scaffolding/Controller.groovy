@@ -1,5 +1,22 @@
 <%=packageName ? "package ${packageName}\n\n" : ''%>class ${className}Controller {<% import grails.persistence.Event %><% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %><% boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate') %>
-
+<%
+    def output(p)
+    {
+        if (p.type == Date.class) {
+            out << "        ${domainClass.propertyName}.${p.name}=(new java.text.SimpleDateFormat(\"yyyy-MM-dd\")).parse(params.${p.name})"
+            println ""
+        } else if (p.type == int) {
+            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}.toInteger()"
+            println ""
+        } else if (p.type == float) {
+            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}.toFloat()"
+            println ""
+        } else {
+            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
+            println ""
+        }
+    }
+%>
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def cgClass=grailsApplication.getArtefact("Domain","${packageName}.${className}")
@@ -88,18 +105,7 @@
                                         display = (cp ? cp.display : true)
                                     }
                                     if (display) {
-                                        if(p.type==Date.class)
-                                        {
-                                            out << "        ${domainClass.propertyName}.${p.name}=(new java.text.SimpleDateFormat(\"yyyy-MM-dd\")).parse(params.${p.name})"
-                                            println ""
-                                        }else if(p.type==int)
-                                        {
-                                            out << "        ${domainClass.propertyName}.${p.name}=Integer.parseInt(params.${p.name})"
-                                            println ""
-                                        }else{
-                                            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
-                                            println ""
-                                        }
+                                        output(p)
                                     }
                                 }
                     }
@@ -129,18 +135,7 @@
                                         display = (cp ? cp.display : true)
                                     }
                                     if (display) {
-                                        if(p.type==Date.class)
-                                        {
-                                            out << "        ${domainClass.propertyName}.${p.name}=(new java.text.SimpleDateFormat(\"yyyy-MM-dd\")).parse(params.${p.name})"
-                                            println ""
-                                        }else if(p.type==int)
-                                        {
-                                            out << "        ${domainClass.propertyName}.${p.name}=Integer.parseInt(params.${p.name})"
-                                            println ""
-                                        }else{
-                                            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
-                                            println ""
-                                        }
+                                        output(p)
                                     }
                                 }
                     }

@@ -22,7 +22,8 @@ Ext.onReady(function(){
             {fieldLabel: '${cgDomainProperties.string1.chinese}',name: 'string1',xtype: 'textfield', maxLength: 32, maxLengthText: '${cgDomainProperties.string1.chinese}至多包含32个字符', minLength: 4, minLengthText: '${cgDomainProperties.string1.chinese}至少包含4个字符'},
             {fieldLabel: '${cgDomainProperties.string2.chinese}',name: 'string2',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['选择1'],['选择2'],['选择3']]}), emptyText:'请选择${cgDomainProperties.string2.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '${cgDomainProperties.date1.chinese}',name: 'date1',xtype:'datefield',format:'Y-m-d'},
-            {fieldLabel: '${cgDomainProperties.ingeger1.chinese}',name: 'ingeger1',xtype:'numberfield'}
+            {fieldLabel: '${cgDomainProperties.ingeger1.chinese}',name: 'ingeger1',xtype:'numberfield'},
+            {fieldLabel: '${cgDomainProperties.float1.chinese}',name: 'float1',xtype:'numberfield',allowDecimals:true}
         ]
     });
 
@@ -71,7 +72,8 @@ Ext.onReady(function(){
             {fieldLabel: '${cgDomainProperties.string1.chinese}',name: 'string1',xtype: 'textfield', maxLength: 32, maxLengthText: '${cgDomainProperties.string1.chinese}至多包含32个字符', minLength: 4, minLengthText: '${cgDomainProperties.string1.chinese}至少包含4个字符'},
             {fieldLabel: '${cgDomainProperties.string2.chinese}',name: 'string2',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['选择1'],['选择2'],['选择3']]}), emptyText:'请选择${cgDomainProperties.string2.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '${cgDomainProperties.date1.chinese}',name: 'date1',xtype:'datefield',format:'Y-m-d'},
-            {fieldLabel: '${cgDomainProperties.ingeger1.chinese}',name: 'ingeger1',xtype:'numberfield'}
+            {fieldLabel: '${cgDomainProperties.ingeger1.chinese}',name: 'ingeger1',xtype:'numberfield'},
+            {fieldLabel: '${cgDomainProperties.float1.chinese}',name: 'float1',xtype:'numberfield',allowDecimals:true}
         ]
     });
 
@@ -120,7 +122,8 @@ Ext.onReady(function(){
             {fieldLabel: '${cgDomainProperties.string1.chinese}',name: 'string1',xtype: 'textfield', readOnly:true},
             {fieldLabel: '${cgDomainProperties.string2.chinese}',name: 'string2',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['选择1'],['选择2'],['选择3']]}), readOnly:true, emptyText:'请选择${cgDomainProperties.string2.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '${cgDomainProperties.date1.chinese}',name: 'date1',xtype:'datefield',format:'Y-m-d'},
-            {fieldLabel: '${cgDomainProperties.ingeger1.chinese}',name: 'ingeger1',xtype:'numberfield'}
+            {fieldLabel: '${cgDomainProperties.ingeger1.chinese}',name: 'ingeger1',xtype:'numberfield'},
+            {fieldLabel: '${cgDomainProperties.float1.chinese}',name: 'float1',xtype:'numberfield',allowDecimals:true}
         ]
     });
 
@@ -258,7 +261,8 @@ Ext.onReady(function(){
         {header:'${cgDomainProperties.string1.chinese}',dataIndex:'string1'} ,
         {header:'${cgDomainProperties.string2.chinese}',dataIndex:'string2'} ,
         {header:'${cgDomainProperties.date1.chinese}',dataIndex:'date1', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} ,
-        {header:'${cgDomainProperties.ingeger1.chinese}',dataIndex:'ingeger1'} 
+        {header:'${cgDomainProperties.ingeger1.chinese}',dataIndex:'ingeger1'} ,
+        {header:'${cgDomainProperties.float1.chinese}',dataIndex:'float1'} 
     ]);
 
     var store = new Ext.data.Store({
@@ -273,7 +277,8 @@ Ext.onReady(function(){
             {name:'string1'  } ,
             {name:'string2'  } ,
             {name:'date1' , type:'date', dateFormat:'c' } ,
-            {name:'ingeger1'  } 
+            {name:'ingeger1'  } ,
+            {name:'float1'  } 
         ])
     });
 

@@ -81,7 +81,8 @@ class BookController {
         book.string1=params.string1
         book.string2=params.string2
         book.date1=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.date1)
-        book.ingeger1=Integer.parseInt(params.ingeger1)
+        book.ingeger1=params.ingeger1.toInteger()
+        book.float1=params.float1.toFloat()
 
 
         book.save()
@@ -99,7 +100,8 @@ class BookController {
         book.string1=params.string1
         book.string2=params.string2
         book.date1=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.date1)
-        book.ingeger1=Integer.parseInt(params.ingeger1)
+        book.ingeger1=params.ingeger1.toInteger()
+        book.float1=params.float1.toFloat()
 
         book.save()
 

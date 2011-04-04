@@ -46,6 +46,8 @@
             out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'datefield',format:'Y-m-d'}"
         }else if (p.type == int) {
             out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'numberfield'}"
+        }else if (p.type == float) {
+            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'numberfield',allowDecimals:true}"
         }
 
         if (props.size() > i + 1) {

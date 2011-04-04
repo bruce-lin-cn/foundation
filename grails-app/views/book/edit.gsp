@@ -67,6 +67,15 @@
                                 </td>
                             </tr>
                         
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="float1">${cgDomainProperties.float1.chinese}</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: bookInstance, field: 'float1', 'errors')}">
+                                    <g:textField name="float1" value="${fieldValue(bean: bookInstance, field: 'float1')}" />
+                                </td>
+                            </tr>
+                        
                         </tbody>
                     </table>
                 </div>

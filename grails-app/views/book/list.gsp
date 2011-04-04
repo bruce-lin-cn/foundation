@@ -32,6 +32,8 @@
                         
                             <g:sortableColumn property="ingeger1" title="${cgDomainProperties.ingeger1.chinese}" />
                         
+                            <g:sortableColumn property="float1" title="${cgDomainProperties.float1.chinese}" />
+                        
                         </tr>
                     </thead>
                     <tbody>
@@ -47,6 +49,8 @@
                             <td><g:formatDate date="${bookInstance.date1}" /></td>
                         
                             <td>${fieldValue(bean: bookInstance, field: "ingeger1")}</td>
+                        
+                            <td>${fieldValue(bean: bookInstance, field: "float1")}</td>
                         
                         </tr>
                     </g:each>
