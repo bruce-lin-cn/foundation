@@ -45,16 +45,7 @@
                                   <label for="string2">${cgDomainProperties.string2.chinese}</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: bookInstance, field: 'string2', 'errors')}">
-                                    <g:textField name="string2" value="${bookInstance?.string2}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="string3">${cgDomainProperties.string3.chinese}</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: bookInstance, field: 'string3', 'errors')}">
-                                    <g:select name="string3" from="${bookInstance.constraints.string3.inList}" value="${bookInstance?.string3}" valueMessagePrefix="book.string3"  />
+                                    <g:select name="string2" from="${bookInstance.constraints.string2.inList}" value="${bookInstance?.string2}" valueMessagePrefix="book.string2"  />
                                 </td>
                             </tr>
                         
@@ -69,10 +60,10 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="date2">${cgDomainProperties.date2.chinese}</label>
+                                  <label for="ingeger1">${cgDomainProperties.ingeger1.chinese}</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: bookInstance, field: 'date2', 'errors')}">
-                                    <g:datePicker name="date2" chinese="日期2" format="Date" precision="day" value="${bookInstance?.date2}"  />
+                                <td valign="top" class="value ${hasErrors(bean: bookInstance, field: 'ingeger1', 'errors')}">
+                                    <g:textField name="ingeger1" value="${fieldValue(bean: bookInstance, field: 'ingeger1')}" />
                                 </td>
                             </tr>
                         

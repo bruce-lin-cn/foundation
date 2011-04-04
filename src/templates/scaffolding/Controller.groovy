@@ -92,6 +92,10 @@
                                         {
                                             out << "        ${domainClass.propertyName}.${p.name}=(new java.text.SimpleDateFormat(\"yyyy-MM-dd\")).parse(params.${p.name})"
                                             println ""
+                                        }else if(p.type==int)
+                                        {
+                                            out << "        ${domainClass.propertyName}.${p.name}=Integer.parseInt(params.${p.name})"
+                                            println ""
                                         }else{
                                             out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
                                             println ""
@@ -125,12 +129,16 @@
                                         display = (cp ? cp.display : true)
                                     }
                                     if (display) {
-                                        if(p.type!=Date.class) {
-                                            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
+                                        if(p.type==Date.class)
+                                        {
+                                            out << "        ${domainClass.propertyName}.${p.name}=(new java.text.SimpleDateFormat(\"yyyy-MM-dd\")).parse(params.${p.name})"
                                             println ""
-                                        }
-                                        else {
-                                            out << "        ${domainClass.propertyName}.${p.name}= new java.text.SimpleDateFormat(\"yyyy-MM-dd\").parse(params.${p.name})"
+                                        }else if(p.type==int)
+                                        {
+                                            out << "        ${domainClass.propertyName}.${p.name}=Integer.parseInt(params.${p.name})"
+                                            println ""
+                                        }else{
+                                            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
                                             println ""
                                         }
                                     }

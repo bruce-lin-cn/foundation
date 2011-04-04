@@ -28,11 +28,9 @@
                         
                             <g:sortableColumn property="string2" title="${cgDomainProperties.string2.chinese}" />
                         
-                            <g:sortableColumn property="string3" title="${cgDomainProperties.string3.chinese}" />
-                        
                             <g:sortableColumn property="date1" title="${cgDomainProperties.date1.chinese}" />
                         
-                            <g:sortableColumn property="date2" title="${cgDomainProperties.date2.chinese}" />
+                            <g:sortableColumn property="ingeger1" title="${cgDomainProperties.ingeger1.chinese}" />
                         
                         </tr>
                     </thead>
@@ -46,11 +44,9 @@
                         
                             <td>${fieldValue(bean: bookInstance, field: "string2")}</td>
                         
-                            <td>${fieldValue(bean: bookInstance, field: "string3")}</td>
-                        
                             <td><g:formatDate date="${bookInstance.date1}" /></td>
                         
-                            <td><g:formatDate date="${bookInstance.date2}" /></td>
+                            <td>${fieldValue(bean: bookInstance, field: "ingeger1")}</td>
                         
                         </tr>
                     </g:each>

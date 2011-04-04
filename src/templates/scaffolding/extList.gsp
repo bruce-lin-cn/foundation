@@ -1,6 +1,6 @@
 <% import grails.persistence.Event %><% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %><%=packageName%>
 <% boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate') %><%
-    def output(p,cp,i)
+    def output(p,cp,i, mode)
     {
         //对齐
         if(i!=0)
@@ -17,22 +17,35 @@
                     out << ","
                 }
             }
-            out <<"]}), emptyText:'请选择\${cgDomainProperties.${p.name}.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'}"
+            out <<"]})"
+            if("detail".compareTo(mode)==0)
+            {
+                out << ", readOnly:true"
+            }
+            out <<", emptyText:'请选择\${cgDomainProperties.${p.name}.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'}"
         } else if (p.type == String.class) {
             out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype: 'textfield'"
-            if (cp.blank == false) {
-                out << ", allowBlank: false, blankText: '\${cgDomainProperties.${p.name}.chinese}为必填项'"
-            }
-            if (cp.maxSize != null) {
-                out << ", maxLength: ${cp.maxSize}, maxLengthText: '\${cgDomainProperties.${p.name}.chinese}至多包含${cp.maxSize}个字符'"
-            }
-            if (cp.minSize != null) {
-                out << ", minLength: ${cp.minSize}, minLengthText: '\${cgDomainProperties.${p.name}.chinese}至少包含${cp.minSize}个字符'"
+
+            if("detail".compareTo(mode)==0)
+            {
+                out << ", readOnly:true"
+            }else {
+                if (cp.blank == false) {
+                    out << ", allowBlank: false, blankText: '\${cgDomainProperties.${p.name}.chinese}为必填项'"
+                }
+                if (cp.maxSize != null) {
+                    out << ", maxLength: ${cp.maxSize}, maxLengthText: '\${cgDomainProperties.${p.name}.chinese}至多包含${cp.maxSize}个字符'"
+                }
+                if (cp.minSize != null) {
+                    out << ", minLength: ${cp.minSize}, minLengthText: '\${cgDomainProperties.${p.name}.chinese}至少包含${cp.minSize}个字符'"
+                }
             }
 
             out << "}"
         } else if (p.type == Date.class) {
             out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'datefield',format:'Y-m-d'}"
+        }else if (p.type == int) {
+            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'numberfield'}"
         }
 
         if (props.size() > i + 1) {
@@ -72,7 +85,7 @@ Ext.onReady(function(){
                                 display = (cp ? cp.display : true)
                             }
                             if (display) {
-                                output(p,cp,i)
+                                output(p,cp,i,"create")
                             }
                         }
                     }
@@ -134,7 +147,7 @@ Ext.onReady(function(){
                                    display = (cp ? cp.display : true)
                                }
                                if (display) {
-                                output(p,cp,i)
+                                output(p,cp,i,"update")
                             }
                         }
                     }
@@ -195,8 +208,12 @@ Ext.onReady(function(){
                                    cp = domainClass.constrainedProperties[p.name]
                                    display = (cp ? cp.display : true)
                                }
-                               if (display) { %>
-            {fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',readOnly: true, xtype: <% if(p.type==String.class){ out << "'textfield'"} else if(p.type==Date.class){ out << "'datefield',format:'Y-m-d'"}%>}<% if(props.size()>i+1){out<<","} %><%  }   }   } %>
+                               if (display) {
+                                output(p,cp,i,"detail")
+                            }
+                        }
+                    }
+%>
         ]
     });
 

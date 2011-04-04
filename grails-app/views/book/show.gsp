@@ -44,13 +44,6 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name">${cgDomainProperties.string3.chinese}</td>
-                            
-                            <td valign="center" class="value">${fieldValue(bean: bookInstance, field: "string3")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
                             <td valign="top" class="name">${cgDomainProperties.date1.chinese}</td>
                             
                             <td valign="center" class="value"><g:formatDate date="${bookInstance?.date1}" /></td>
@@ -58,9 +51,9 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name">${cgDomainProperties.date2.chinese}</td>
+                            <td valign="top" class="name">${cgDomainProperties.ingeger1.chinese}</td>
                             
-                            <td valign="center" class="value"><g:formatDate date="${bookInstance?.date2}" /></td>
+                            <td valign="center" class="value">${fieldValue(bean: bookInstance, field: "ingeger1")}</td>
                             
                         </tr>
                     
