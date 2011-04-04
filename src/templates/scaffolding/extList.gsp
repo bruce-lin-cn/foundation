@@ -300,6 +300,18 @@ Ext.onReady(function(){
                 ${domainClass.propertyName}DetailWin.show();
             }
         }
+    },{
+        text: '导入',
+        icon: '/foundation/images/skin/database_add.png',
+        handler:function() {
+
+        }
+    },{
+        text: '更多',
+        icon: '/foundation/images/skin/database_add.png',
+        handler:function() {
+
+        }
     }, '->',
     {
         xtype: 'textfield',
