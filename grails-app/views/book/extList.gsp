@@ -266,7 +266,7 @@ Ext.onReady(function(){
         {header:'${cgDomainProperties.date1.chinese}',dataIndex:'date1', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} ,
         {header:'${cgDomainProperties.ingeger1.chinese}',dataIndex:'ingeger1'} ,
         {header:'${cgDomainProperties.float1.chinese}',dataIndex:'float1'} ,
-        {header:'${cgDomainProperties.boolean1.chinese}',dataIndex:'boolean1'} 
+        {header:'${cgDomainProperties.boolean1.chinese}',dataIndex:'boolean1', renderer:function(value){if(value==true)return '是'; else return '否';}}
     ]);
 
     var store = new Ext.data.Store({
@@ -276,14 +276,14 @@ Ext.onReady(function(){
             totalProperty:'total',
             root:'root'
         }, [
-            
+
             {name:'id'  } ,
             {name:'string1'  } ,
             {name:'string2'  } ,
             {name:'date1' , type:'date', dateFormat:'c' } ,
             {name:'ingeger1'  } ,
             {name:'float1'  } ,
-            {name:'boolean1'  } 
+            {name:'boolean1'  }
         ])
     });
 
