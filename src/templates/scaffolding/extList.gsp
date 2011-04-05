@@ -43,13 +43,33 @@
 
             out << "}"
         } else if (p.type == Date.class) {
-            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'datefield',format:'Y-m-d'}"
+            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'datefield',format:'Y-m-d'"
+            if("detail".compareTo(mode)==0)
+            {
+                out << ", readOnly:true"
+            }
+            out << "}"
         }else if (p.type == int) {
-            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'numberfield'}"
+            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'numberfield'"
+            if("detail".compareTo(mode)==0)
+            {
+                out << ", readOnly:true"
+            }
+            out << "}"
         }else if (p.type == float) {
-            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'numberfield',allowDecimals:true}"
+            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'numberfield',allowDecimals:true"
+            if("detail".compareTo(mode)==0)
+            {
+                out << ", readOnly:true"
+            }
+            out << "}"
         }else if (p.type == boolean){
-            out << "{boxLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'checkbox'}"
+            out << "{boxLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'checkbox'"
+            if("detail".compareTo(mode)==0)
+            {
+                out << ", readOnly:true"
+            }
+            out << "}"
         }
 
         if (props.size() > i + 1) {
@@ -357,7 +377,12 @@ Ext.onReady(function(){
        props.eachWithIndex { p, i ->
            if (i < 10) {
                if (p.isAssociation()) { %><%      } else { %>
-        {header:'\${cgDomainProperties.${p.name}.chinese}',dataIndex:'${p.name}'<% if(p.type==Date.class){out<<", type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')"} %>} <% if(props.size()>i+1){out<<","} %><%  }   }   } %>
+        {header:'\${cgDomainProperties.${p.name}.chinese}',dataIndex:'${p.name}'<%
+            if(p.type==boolean){
+                out << ", renderer: function(value){if(value==true)return '是'; else return '否';}"
+            }else if(p.type==Date.class){
+                out<<", type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')"
+            } %>} <% if(props.size()>i+1){out<<","} %><%  }   }   } %>
     ]);
 
     var store = new Ext.data.Store({

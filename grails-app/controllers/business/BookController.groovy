@@ -200,7 +200,7 @@ class BookController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (bookInstance.version > version) {
-
+                    
                     bookInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'book.label', default: 'Book')] as Object[], "Another user has updated this Book while you were editing")
                     render(view: "edit", model: [bookInstance: bookInstance,cgDomainProperties:cgDomainProperties])
                     return

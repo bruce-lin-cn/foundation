@@ -12,7 +12,7 @@
             out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}.toFloat()"
             println ""
         } else if (p.type == boolean ) {
-            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
+            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}?true:false"
             println ""
         } else {
             out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
