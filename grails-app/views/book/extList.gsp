@@ -162,22 +162,7 @@ Ext.onReady(function(){
         text: '修改',
         icon: '/foundation/images/skin/database_edit.png',
         handler: function() {
-            var id = (grid.getSelectionModel().getSelected()).id;
-            if(id==null)
-            {
-                Ext.foundation.msg('注意', "请选择要修改的记录");
-            } else {
-                bookUpdateForm.getForm().load({
-                    url:'/foundation/book/detailJSON?id=' + id,
-                    success:function(form, action) {
-                    },
-                    failure:function() {
-                        Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
-                    }
-                });
-
-                bookUpdateWin.show();
-            }
+           updateBook();
         }
     }, {
         text: '删除',
@@ -313,6 +298,29 @@ Ext.onReady(function(){
     });
 
     store.load({params:{start:0,limit:10}});
+    grid.on('dblclick', function(e) {
+        updateBook();
+    });
+
+    function updateBook()
+    {
+        var id = (grid.getSelectionModel().getSelected()).id;
+        if (id == null) {
+            Ext.foundation.msg('注意', "请选择要修改的记录");
+        } else {
+            bookUpdateForm.getForm().load({
+                url:'/foundation/book/detailJSON?id=' + id,
+                success:function(form, action) {
+                },
+                failure:function() {
+                    Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
+                }
+            });
+
+            bookUpdateWin.show();
+        }
+    }
+
 });
     </script>
     <body>

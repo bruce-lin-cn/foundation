@@ -4,16 +4,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${cgDomainProperties.cgChinese}" />
-        <title><g:message code="${entityName}管理" /></title>
+        <g:set var="entityName" value="${message(code: 'book.label', default: 'Book')}" />
+        <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">首页</a></span>
-            <span class="menuButton"><g:link class="create" action="create">新建${entityName}</g:link></span>
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
+            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
-            <h1>${entityName}列表</h1>
+            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -22,17 +22,17 @@
                     <thead>
                         <tr>
                         
-                            <g:sortableColumn property="id" title="${cgDomainProperties.id.chinese}" />
+                            <g:sortableColumn property="id" title="${message(code: 'book.id.label', default: 'Id')}" />
                         
-                            <g:sortableColumn property="string1" title="${cgDomainProperties.string1.chinese}" />
+                            <g:sortableColumn property="string1" title="${message(code: 'book.string1.label', default: 'String1')}" />
                         
-                            <g:sortableColumn property="string2" title="${cgDomainProperties.string2.chinese}" />
+                            <g:sortableColumn property="string2" title="${message(code: 'book.string2.label', default: 'String2')}" />
                         
-                            <g:sortableColumn property="date1" title="${cgDomainProperties.date1.chinese}" />
+                            <g:sortableColumn property="date1" title="${message(code: 'book.date1.label', default: 'Date1')}" />
                         
-                            <g:sortableColumn property="ingeger1" title="${cgDomainProperties.ingeger1.chinese}" />
+                            <g:sortableColumn property="ingeger1" title="${message(code: 'book.ingeger1.label', default: 'Ingeger1')}" />
                         
-                            <g:sortableColumn property="float1" title="${cgDomainProperties.float1.chinese}" />
+                            <g:sortableColumn property="float1" title="${message(code: 'book.float1.label', default: 'Float1')}" />
                         
                         </tr>
                     </thead>

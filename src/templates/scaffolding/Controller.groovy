@@ -14,10 +14,17 @@
         } else if (p.type == boolean ) {
             out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}?true:false"
             println ""
-        } else {
+        } else if (p.type == String.class ) {
             out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
             println ""
-        }
+        } else if (p.isAssociation() && p.oneToOne ) {
+            println ""
+            out << "        ${domainClass.propertyName}.${p.name}=${p.name.capitalize()}.get(params.${p.name})"
+            println ""
+        } /*else {
+            out << "        ${p}"
+            out << "cgClass: ${cgClass}"
+        }*/
     }
 %>
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -27,18 +34,52 @@
     def cgDomainProperties=[:]
     def initialized=false
 
-    def index = {
-        redirect(action: "extList", params: params)
-    }
+    def afterInterceptor = { model ->
+		model.cgDomainProperties=cgDomainProperties
+	}
 
-    def extList = {
+    def index = {
         if(initialized==false)
         {
             init()
         }
 
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [${propertyName}List: ${className}.list(params), ${propertyName}Total: ${className}.count(),cgDomainProperties:cgDomainProperties]
+        []
+    }
+
+    def associationListJSON = {
+
+        def total=${className}.count()
+
+        if(total==0)
+        {
+            render "{total:"+total+",root:[]}"
+        } else {
+            def max = 10
+            def start = params.int('start')
+
+            if (start == null) {
+                start = 0
+            }
+            def lists = []
+            def end = start + max - 1
+            if (end >= total) {
+                end = total - 1
+            }
+
+
+            lists = ${className}.findAll()[start..end]
+
+            def associationList=[]
+            lists.each{item ->
+                associationList.add(new HashMap(id:item.id, ${domainClass.propertyName}:item.toString()))
+            }
+
+            def json = associationList as grails.converters.JSON
+            def output = "{total:" + total + ",root:" + json + "}"
+
+            render output
+        }
     }
 
     def listJSON = {
@@ -62,8 +103,35 @@
             }
 
             lists = ${className}.findAll()[start..end]
-
-            def json = lists as grails.converters.JSON
+            def renderList=[]
+            lists.each{item ->
+                renderList.add(new HashMap(<%  excludedProps = Event.allEvents.toList() << 'version'
+                    allowedNames = domainClass.persistentProperties*.name << 'id' << 'dateCreated' << 'lastUpdated'
+                    props = domainClass.properties.findAll { allowedNames.contains(it.name) && !excludedProps.contains(it.name) && !Collection.isAssignableFrom(it.type) }
+                    Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
+                    props.eachWithIndex { p, i ->
+                                if (!Collection.class.isAssignableFrom(p.type)) {
+                                    if (hasHibernate) {
+                                        cp = domainClass.constrainedProperties[p.name]
+                                        display = (cp ? cp.display : true)
+                                    }
+                                    if (display) {
+                                        out << "${p.name}:"
+                                        if(p.isAssociation())
+                                        {
+                                            out << " item.${p.name}.toString()"
+                                        }else{
+                                            out << " item.${p.name}"
+                                        }
+                                        if(i<props.size()-1)
+                                        {
+                                            out << ","
+                                        }
+                                    }
+                                }
+                    } %>))
+            }
+            def json = renderList as grails.converters.JSON
             def output = "{total:" + total + ",root:" + json + "}"
 
             render output
@@ -78,7 +146,34 @@
 
         if (${propertyName}) {
             try {
-                def json=${propertyName} as grails.converters.JSON
+
+                def map=new HashMap(<%  excludedProps = Event.allEvents.toList() << 'version'
+                    allowedNames = domainClass.persistentProperties*.name << 'id' << 'dateCreated' << 'lastUpdated'
+                    props = domainClass.properties.findAll { allowedNames.contains(it.name) && !excludedProps.contains(it.name) && !Collection.isAssignableFrom(it.type) }
+                    Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
+                    props.eachWithIndex { p, i ->
+                                if (!Collection.class.isAssignableFrom(p.type)) {
+                                    if (hasHibernate) {
+                                        cp = domainClass.constrainedProperties[p.name]
+                                        display = (cp ? cp.display : true)
+                                    }
+                                    if (display) {
+                                        out << "${p.name}:"
+                                        if(p.isAssociation())
+                                        {
+                                            out << " ${propertyName}.${p.name}.toString()"
+                                        }else{
+                                            out << " ${propertyName}.${p.name}"
+                                        }
+                                        if(i<props.size()-1)
+                                        {
+                                            out << ","
+                                        }
+                                    }
+                                }
+                    } %>)
+
+                def json=map as grails.converters.JSON
 
                 render "{success:true, data:"+json+"}";
             }
@@ -113,7 +208,6 @@
                                 }
                     }
 %>
-
         ${domainClass.propertyName}.save()
 
         render "{success:true,msg:'记录已创建'}";
@@ -167,122 +261,30 @@
         }
     }
 
-    def list = {
-        if(initialized==false)
-        {
-            init()
-        }
-
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [${propertyName}List: ${className}.list(params), ${propertyName}Total: ${className}.count(),cgDomainProperties:cgDomainProperties]
-    }
-
-
-    def create = {
-        if(initialized==false)
-        {
-            init()
-        }
-
-        def ${propertyName} = new ${className}()
-        ${propertyName}.properties = params
-        return [${propertyName}: ${propertyName},cgDomainProperties:cgDomainProperties]
-    }
-
-    def save = {
-        def ${propertyName} = new ${className}(params)
-        if (${propertyName}.save(flush: true)) {
-            flash.message = "\${message(code: 'default.created.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), ${propertyName}.id])}"
-            redirect(action: "show", id: ${propertyName}.id)
-        }
-        else {
-            render(view: "create", model: [${propertyName}: ${propertyName},cgDomainProperties:cgDomainProperties])
-        }
-    }
-
-    def show = {
-        if(initialized==false)
-        {
-            init()
-        }
-
-        def ${propertyName} = ${className}.get(params.id)
-        if (!${propertyName}) {
-            flash.message = "\${message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])}"
-            redirect(action: "list")
-        }
-        else {
-            [${propertyName}: ${propertyName},cgDomainProperties:cgDomainProperties]
-        }
-    }
-
-    def edit = {
-        if(initialized==false)
-        {
-            init()
-        }
-
-        def ${propertyName} = ${className}.get(params.id)
-        if (!${propertyName}) {
-            flash.message = "\${message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])}"
-            redirect(action: "list")
-        }
-        else {
-            return [${propertyName}: ${propertyName},cgDomainProperties:cgDomainProperties]
-        }
-    }
-
-    def update = {
-        def ${propertyName} = ${className}.get(params.id)
-        if (${propertyName}) {
-            if (params.version) {
-                def version = params.version.toLong()
-                if (${propertyName}.version > version) {
-                    <% def lowerCaseName = grails.util.GrailsNameUtils.getPropertyName(className) %>
-                    ${propertyName}.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: '${domainClass.propertyName}.label', default: '${className}')] as Object[], "Another user has updated this ${className} while you were editing")
-                    render(view: "edit", model: [${propertyName}: ${propertyName},cgDomainProperties:cgDomainProperties])
-                    return
-                }
-            }
-            ${propertyName}.properties = params
-            if (!${propertyName}.hasErrors() && ${propertyName}.save(flush: true)) {
-                flash.message = "\${message(code: 'default.updated.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), ${propertyName}.id])}"
-                redirect(action: "show", id: ${propertyName}.id,cgDomainProperties:cgDomainProperties)
-            }
-            else {
-                render(view: "edit", model: [${propertyName}: ${propertyName},cgDomainProperties:cgDomainProperties])
-            }
-        }
-        else {
-            flash.message = "\${message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])}"
-            redirect(action: "list")
-        }
-    }
-
-    def delete = {
-        def ${propertyName} = ${className}.get(params.id)
-        if (${propertyName}) {
-            try {
-                ${propertyName}.delete(flush: true)
-                flash.message = "\${message(code: 'default.deleted.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])}"
-                redirect(action: "list")
-            }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
-                flash.message = "\${message(code: 'default.not.deleted.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])}"
-                redirect(action: "show", id: params.id)
-            }
-        }
-        else {
-            flash.message = "\${message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])}"
-            redirect(action: "list")
-        }
-    }
-
-
-
     def init(){
         cgDomainProperties.cgChinese=${className}.cgDomain.chinese
-
+<%
+persistentPropNames = domainClass.persistentProperties*.name
+props = domainClass.properties.findAll {persistentPropNames.contains(it.name)}
+Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
+display = true
+props.each { p ->
+    if (!Collection.class.isAssignableFrom(p.type)) {
+        if (hasHibernate) {
+            cp = domainClass.constrainedProperties[p.name]
+            display = (cp ? cp.display : true)
+        }
+        if (display) {
+            if(p.isAssociation())
+            {
+                name=p.name.capitalize()
+                out << "        cgDomainProperties.cg${name}=${name}.cgDomain.chinese"
+                println ""
+            }
+        }
+    }
+}
+%>
         cgClass.getProperties().each{
             def namePropertiy=it.getName()
 
