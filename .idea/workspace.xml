@@ -65,7 +65,7 @@
       <file leaf-file-name="Controller.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="24" selection-start="1625" selection-end="1625" vertical-scroll-proportion="-17.0">
+            <state line="11" column="31" selection-start="860" selection-end="860" vertical-scroll-proportion="-7.48">
               <folding />
             </state>
           </provider>
@@ -80,19 +80,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.gsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/index.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="419" column="111" selection-start="17000" selection-end="17000" vertical-scroll-proportion="-4.0">
+            <state line="139" column="19" selection-start="5865" selection-end="5865" vertical-scroll-proportion="0.19373219">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.gsp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/employee/index.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="263" column="12" selection-start="10961" selection-end="10961" vertical-scroll-proportion="7.582317">
+            <state line="6" column="20" selection-start="176" selection-end="186" vertical-scroll-proportion="-1.0405406">
               <folding />
             </state>
           </provider>
@@ -173,11 +173,11 @@
         <option value="$PROJECT_DIR$/grails-app/domain/business/Company.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/business/CompanyController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
-        <option value="$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy" />
-        <option value="$PROJECT_DIR$/src/templates/scaffolding/index.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/employee/index.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/business/EmployeeController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/business/Employee.groovy" />
+        <option value="$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy" />
+        <option value="$PROJECT_DIR$/src/templates/scaffolding/index.gsp" />
       </list>
     </option>
   </component>
@@ -832,20 +832,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="24" selection-start="1625" selection-end="1625" vertical-scroll-proportion="-17.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/index.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="419" column="111" selection-start="17000" selection-end="17000" vertical-scroll-proportion="-4.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/EmployeeController.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="155" column="8" selection-start="4087" selection-end="4087" vertical-scroll-proportion="-13.9375">
@@ -863,9 +849,23 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="31" selection-start="860" selection-end="860" vertical-scroll-proportion="-7.48">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/employee/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="263" column="12" selection-start="10961" selection-end="10961" vertical-scroll-proportion="7.582317">
+        <state line="6" column="20" selection-start="176" selection-end="186" vertical-scroll-proportion="-1.0405406">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/index.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="139" column="19" selection-start="5865" selection-end="5865" vertical-scroll-proportion="0.19373219">
           <folding />
         </state>
       </provider>

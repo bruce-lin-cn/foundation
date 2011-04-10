@@ -138,7 +138,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <g:extjs />
-        <g:set var="entityName" value="${cgDomainProperties.cgDomain.chinese}" />
         <title><g:message code="${cgDomainProperties.cgDomain.chinese}管理" /></title>
     </head>
     <script>

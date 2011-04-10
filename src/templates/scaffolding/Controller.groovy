@@ -1,70 +1,76 @@
 <%=packageName ? "package ${packageName}\n\n" : ''%>class ${className}Controller {<% import grails.persistence.Event %><% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %><% boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate') %>
 <%
-def cgConstraints=domainClass.getConstrainedProperties()
-def cgDomainProperties=[:]
+    cgConstraints=domainClass.getConstrainedProperties()
+    cgDomainProperties=[:]
+    boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')
 
-cgDomainProperties.cgDomain=domainClass.clazz.cgDomain
+    cgDomainProperties.cgDomain=domainClass.clazz.cgDomain
 
-persistentPropNames = domainClass.persistentProperties*.name
-props = domainClass.properties.findAll {persistentPropNames.contains(it.name)}
-Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
+    excludedProps = Event.allEvents.toList() << 'version'
+    allowedNames = domainClass.persistentProperties*.name << 'id' << 'dateCreated' << 'lastUpdated'
+    props = domainClass.properties.findAll { allowedNames.contains(it.name) && !excludedProps.contains(it.name) && !Collection.isAssignableFrom(it.type) }
+    Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
 
-props.each { p ->
-    if (!Collection.class.isAssignableFrom(p.type)) {
-        if (hasHibernate) {
-            cp = domainClass.constrainedProperties[p.name]
-        }
-        if (p.name!='version') {
-            def map=[:]
-            if(p.isAssociation())
-            {
-                map.chinese=p.getReferencedDomainClass().clazz.cgDomain.chinese
-                map.association=true
-                cgDomainProperties[p.name]=map
-            }else if(p.name=='id'){
-                map.chinese='编号'
-                map.association=false
-            }else if(p.name=='dateCreated'){
-                map.chinese='创建时间'
-                map.association=false
-            }else if(p.name=='lastUpdated'){
-                map.chinese='最近更新'
-                map.association=false
-            }else{
-                map.chinese=domainClass.getConstrainedProperties()[p.name].attributes.chinese
-                map.association=false
+    props.each { p ->
+        if (!Collection.class.isAssignableFrom(p.type)) {
+            if (hasHibernate) {
+                cp = domainClass.constrainedProperties[p.name]
             }
+            if (p.name!='version') {
+                def map=[:]
+                if(p.isAssociation())
+                {
+                    map.chinese=p.getReferencedDomainClass().clazz.cgDomain.chinese
+                    map.association=true
+                    cgDomainProperties[p.name]=map
+                }else if(p.name=='id'){
+                    map.chinese='编号'
+                    map.association=false
+                    cgDomainProperties[p.name]=map
+                }else if(p.name=='dateCreated'){
+                    map.chinese='创建时间'
+                    map.association=false
+                    cgDomainProperties[p.name]=map
+                }else if(p.name=='lastUpdated'){
+                    map.chinese='最近更新'
+                    map.association=false
+                    cgDomainProperties[p.name]=map
+                }else{
+                    map.chinese=domainClass.getConstrainedProperties()[p.name].attributes.chinese
+                    map.association=false
+                    cgDomainProperties[p.name]=map
+                }
 
-            cgDomainProperties[p.name]=map
+                cgDomainProperties[p.name]=map
+            }
         }
     }
-}
 
-def ViewToModelConverter(p) {
-    if (p.type == Date.class) {
-        out << "        ${domainClass.propertyName}.${p.name}=(new java.text.SimpleDateFormat(\"yyyy-MM-dd\")).parse(params.${p.name})"
-        println ""
-    } else if (p.type == int) {
-        out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}.toInteger()"
-        println ""
-    } else if (p.type == float) {
-        out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}.toFloat()"
-        println ""
-    } else if (p.type == boolean) {
-        out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}?true:false"
-        println ""
-    } else if (p.type == String.class) {
-        out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
-        println ""
-    } else if (p.isAssociation() && p.oneToOne) {
-        println ""
-        out << "        ${domainClass.propertyName}.${p.name}=${p.name.capitalize()}.get(params.${p.name})"
-        println ""
-    } else {
-            out << "        ${p}"
-            out << "class: ${domainClass}"
+    def ViewToModelConverter(p) {
+        if (p.type == Date.class) {
+            out << "        ${domainClass.propertyName}.${p.name}=(new java.text.SimpleDateFormat(\"yyyy-MM-dd\")).parse(params.${p.name})"
+            println ""
+        } else if (p.type == int) {
+            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}.toInteger()"
+            println ""
+        } else if (p.type == float) {
+            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}.toFloat()"
+            println ""
+        } else if (p.type == boolean) {
+            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}?true:false"
+            println ""
+        } else if (p.type == String.class) {
+            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
+            println ""
+        } else if (p.isAssociation() && p.oneToOne) {
+            println ""
+            out << "        ${domainClass.propertyName}.${p.name}=${p.name.capitalize()}.get(params.${p.name})"
+            println ""
+        } else {
+                out << "        ${p}"
+                out << "class: ${domainClass}"
+        }
     }
-}
 
 %>
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
