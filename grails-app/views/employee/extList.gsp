@@ -4,8 +4,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <g:extjs />
-        <g:set var="entityName" value="员工" />
-        <title><g:message code="员工管理" /></title>
+        <g:set var="entityName" value="${cgDomainProperties.cgChinese}" />
+        <title><g:message code="${entityName}管理" /></title>
     </head>
     <script>
 Ext.onReady(function(){
@@ -19,11 +19,12 @@ Ext.onReady(function(){
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-            {fieldLabel: '姓名',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '姓名为必填项', maxLength: 32, maxLengthText: '姓名至多包含32个字符', minLength: 2, minLengthText: '姓名至少包含2个字符'},
-            {fieldLabel: '性别',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), emptyText:'请选择性别',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
-            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d'},
-            {fieldLabel: '书籍',hiddenName: 'book',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'book',emptyText:'请选择书籍', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/book/associationListJSON', fields:['id', 'book'],  root: 'root', totalProperty: 'total'})},
-            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'})}        ]
+            {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '${cgDomainProperties.name.chinese}为必填项', maxLength: 32, maxLengthText: '${cgDomainProperties.name.chinese}至多包含32个字符', minLength: 2, minLengthText: '${cgDomainProperties.name.chinese}至少包含2个字符'},
+            {fieldLabel: '${cgDomainProperties.gender.chinese}',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), emptyText:'请选择${cgDomainProperties.gender.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
+            {fieldLabel: '${cgDomainProperties.birthday.chinese}',name: 'birthday',xtype:'datefield',format:'Y-m-d'},
+            ,
+            
+        ]
     });
 
     var employeeCreateWin = new Ext.Window({
@@ -31,7 +32,7 @@ Ext.onReady(function(){
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '创建员工',
+        title: '创建${entityName}',
         height: 300,
         closeAction: 'hide',
         items: [employeeCreateForm],
@@ -46,7 +47,7 @@ Ext.onReady(function(){
                             store.reload();
                         },
                         failure:function() {
-                            Ext.foundation.msg('错误', "创建员工失败!");
+                            Ext.foundation.msg('错误', "创建${entityName}失败!");
                         }
                     });
                 }
@@ -68,11 +69,11 @@ Ext.onReady(function(){
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-            {fieldLabel: '姓名',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '姓名为必填项', maxLength: 32, maxLengthText: '姓名至多包含32个字符', minLength: 2, minLengthText: '姓名至少包含2个字符'},
-            {fieldLabel: '性别',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), emptyText:'请选择性别',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
-            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d'},
-            {fieldLabel: '书籍',hiddenName: 'book',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'book',emptyText:'请选择书籍', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/book/associationListJSON', fields:['id', 'book'],  root: 'root', totalProperty: 'total'})},
-            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'})}
+            {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '${cgDomainProperties.name.chinese}为必填项', maxLength: 32, maxLengthText: '${cgDomainProperties.name.chinese}至多包含32个字符', minLength: 2, minLengthText: '${cgDomainProperties.name.chinese}至少包含2个字符'},
+            {fieldLabel: '${cgDomainProperties.gender.chinese}',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), emptyText:'请选择${cgDomainProperties.gender.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
+            {fieldLabel: '${cgDomainProperties.birthday.chinese}',name: 'birthday',xtype:'datefield',format:'Y-m-d'},
+            ,
+            
         ]
     });
 
@@ -81,7 +82,7 @@ Ext.onReady(function(){
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '修改员工',
+        title: '修改${entityName}',
         height: 300,
         closeAction: 'hide',
         items: [employeeUpdateForm],
@@ -96,7 +97,7 @@ Ext.onReady(function(){
                             store.reload();
                         },
                         failure:function() {
-                            Ext.foundation.msg('错误', "更新员工失败!");
+                            Ext.foundation.msg('错误', "更新${entityName}失败!");
                         }
                     });
                 }
@@ -118,11 +119,11 @@ Ext.onReady(function(){
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-            {fieldLabel: '姓名',name: 'name',xtype: 'textfield', readOnly:true},
-            {fieldLabel: '性别',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), readOnly:true, emptyText:'请选择性别',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
-            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d', readOnly:true},
-            {fieldLabel: '书籍',hiddenName: 'book',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'book',emptyText:'请选择书籍', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/book/associationListJSON', fields:['id', 'book'],  root: 'root', totalProperty: 'total'}), readOnly:true},
-            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'}), readOnly:true}
+            {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield', readOnly:true},
+            {fieldLabel: '${cgDomainProperties.gender.chinese}',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), readOnly:true, emptyText:'请选择${cgDomainProperties.gender.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
+            {fieldLabel: '${cgDomainProperties.birthday.chinese}',name: 'birthday',xtype:'datefield',format:'Y-m-d', readOnly:true},
+            ,
+            
         ]
     });
 
@@ -131,7 +132,7 @@ Ext.onReady(function(){
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '员工明细',
+        title: '${entityName}明细',
         height: 300,
         closeAction: 'hide',
         items: [employeeDetailForm],
@@ -158,7 +159,22 @@ Ext.onReady(function(){
         text: '修改',
         icon: '/foundation/images/skin/database_edit.png',
         handler: function() {
-           updateEmployee();
+            var id = (grid.getSelectionModel().getSelected()).id;
+            if(id==null)
+            {
+                Ext.foundation.msg('注意', "请选择要修改的记录");
+            } else {
+                employeeUpdateForm.getForm().load({
+                    url:'/foundation/employee/detailJSON?id=' + id,
+                    success:function(form, action) {
+                    },
+                    failure:function() {
+                        Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
+                    }
+                });
+
+                employeeUpdateWin.show();
+            }
         }
     }, {
         text: '删除',
@@ -241,12 +257,10 @@ Ext.onReady(function(){
     var sm = new Ext.grid.CheckboxSelectionModel()
     var cm = new Ext.grid.ColumnModel([
         sm,
-        {header:'编号',dataIndex:'id'} ,
-        {header:'姓名',dataIndex:'name'} ,
-        {header:'性别',dataIndex:'gender'} ,
-        {header:'生日',dataIndex:'birthday', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} ,
-        {header:'书籍',dataIndex:'book'},
-        {header:'公司',dataIndex:'company'}
+        {header:'${cgDomainProperties.id.chinese}',dataIndex:'id'} ,
+        {header:'${cgDomainProperties.name.chinese}',dataIndex:'name'} ,
+        {header:'${cgDomainProperties.gender.chinese}',dataIndex:'gender'} ,
+        {header:'${cgDomainProperties.birthday.chinese}',dataIndex:'birthday', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} ,
     ]);
 
     var store = new Ext.data.Store({
@@ -256,14 +270,11 @@ Ext.onReady(function(){
             totalProperty:'total',
             root:'root'
         }, [
+            
             {name:'id'  } ,
             {name:'name'  } ,
             {name:'gender'  } ,
             {name:'birthday' , type:'date', dateFormat:'c' } ,
-            {name:'book'},
-            
-            {name:'company'}
-            
         ])
     });
 
@@ -293,29 +304,6 @@ Ext.onReady(function(){
     });
 
     store.load({params:{start:0,limit:10}});
-    grid.on('dblclick', function(e) {
-        updateEmployee();
-    });
-
-    function updateEmployee()
-    {
-        var id = (grid.getSelectionModel().getSelected()).id;
-        if (id == null) {
-            Ext.foundation.msg('注意', "请选择要修改的记录");
-        } else {
-            employeeUpdateForm.getForm().load({
-                url:'/foundation/employee/detailJSON?id=' + id,
-                success:function(form, action) {
-                },
-                failure:function() {
-                    Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
-                }
-            });
-
-            employeeUpdateWin.show();
-        }
-    }
-
 });
     </script>
     <body>

@@ -4,22 +4,13 @@ class EmployeeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def cgClass=grailsApplication.getArtefact("Domain","business.Employee")
-    def cgConstraints=cgClass.getConstrainedProperties()
-    def cgDomainProperties=[:]
-    def initialized=false
-
     def afterInterceptor = { model ->
-		model.cgDomainProperties=cgDomainProperties
+        println "tracing action uri:"+actionUri
+        println "model:"+model
 	}
 
     def index = {
-        if(initialized==false)
-        {
-            init()
-        }
-
-        []
+        [:]
     }
 
     def associationListJSON = {
@@ -80,7 +71,7 @@ class EmployeeController {
             lists = Employee.findAll()[start..end]
             def renderList=[]
             lists.each{item ->
-                renderList.add(new HashMap(id: item.id,name: item.name,gender: item.gender,birthday: item.birthday,company: item.company.toString()))
+                renderList.add(new HashMap(id: item.id,name: item.name,gender: item.gender,birthday: item.birthday,book: item.book.toString(),company: item.company.toString()))
             }
             def json = renderList as grails.converters.JSON
             def output = "{total:" + total + ",root:" + json + "}"
@@ -98,7 +89,7 @@ class EmployeeController {
         if (employeeInstance) {
             try {
 
-                def map=new HashMap(id: employeeInstance.id,name: employeeInstance.name,gender: employeeInstance.gender,birthday: employeeInstance.birthday,company: employeeInstance.company.toString())
+                def map=new HashMap(id: employeeInstance.id,name: employeeInstance.name,gender: employeeInstance.gender,birthday: employeeInstance.birthday,book: employeeInstance.book.toString(),company: employeeInstance.company.toString())
 
                 def json=map as grails.converters.JSON
 
@@ -122,6 +113,8 @@ class EmployeeController {
         employee.gender=params.gender
         employee.birthday=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.birthday)
 
+        employee.book=Book.get(params.book)
+
         employee.company=Company.get(params.company)
 
         employee.save()
@@ -139,6 +132,8 @@ class EmployeeController {
         employee.name=params.name
         employee.gender=params.gender
         employee.birthday=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.birthday)
+
+        employee.book=Book.get(params.book)
 
         employee.company=Company.get(params.company)
 
@@ -164,37 +159,5 @@ class EmployeeController {
         }catch (org.springframework.dao.DataIntegrityViolationException e) {
                 render "{success:false,msg:'记录删除失败'}";
         }
-    }
-
-    def init(){
-        cgDomainProperties.cgChinese=Employee.cgDomain.chinese
-        cgDomainProperties.cgCompany=Company.cgDomain.chinese
-
-        cgClass.getProperties().each{
-            def namePropertiy=it.getName()
-
-            if(namePropertiy == 'id')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'编号']
-            }else if(namePropertiy=='version')
-	    {
-
-	    }else if(namePropertiy == 'dateCreated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'创建']
-            }else if(namePropertiy == 'lastUpdated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'更新']
-            }else if(it.isPersistent()==true && cgConstraints[namePropertiy]!=null && namePropertiy!='version'){
-                cgDomainProperties[namePropertiy]=[chinese:cgConstraints[namePropertiy].attributes.chinese?:namePropertiy]
-                if(cgConstraints[namePropertiy].attributes.format != null) {
-                    cgDomainProperties[namePropertiy].format = cgConstraints[namePropertiy].attributes.format
-                }
-            }else{
-                println ">>>>>> Unhandled propertiy:"+namePropertiy
-            }
-        }
-
-        initialized=true
     }
 }

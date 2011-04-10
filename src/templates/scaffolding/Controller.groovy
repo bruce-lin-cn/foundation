@@ -1,50 +1,81 @@
 <%=packageName ? "package ${packageName}\n\n" : ''%>class ${className}Controller {<% import grails.persistence.Event %><% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %><% boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate') %>
 <%
-    def ViewToModelConverter(p)
-    {
-        if (p.type == Date.class) {
-            out << "        ${domainClass.propertyName}.${p.name}=(new java.text.SimpleDateFormat(\"yyyy-MM-dd\")).parse(params.${p.name})"
-            println ""
-        } else if (p.type == int) {
-            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}.toInteger()"
-            println ""
-        } else if (p.type == float) {
-            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}.toFloat()"
-            println ""
-        } else if (p.type == boolean ) {
-            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}?true:false"
-            println ""
-        } else if (p.type == String.class ) {
-            out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
-            println ""
-        } else if (p.isAssociation() && p.oneToOne ) {
-            println ""
-            out << "        ${domainClass.propertyName}.${p.name}=${p.name.capitalize()}.get(params.${p.name})"
-            println ""
-        } /*else {
-            out << "        ${p}"
-            out << "cgClass: ${cgClass}"
-        }*/
+def cgConstraints=domainClass.getConstrainedProperties()
+def cgDomainProperties=[:]
+
+cgDomainProperties.cgDomain=domainClass.clazz.cgDomain
+
+persistentPropNames = domainClass.persistentProperties*.name
+props = domainClass.properties.findAll {persistentPropNames.contains(it.name)}
+Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
+
+props.each { p ->
+    if (!Collection.class.isAssignableFrom(p.type)) {
+        if (hasHibernate) {
+            cp = domainClass.constrainedProperties[p.name]
+        }
+        if (p.name!='version') {
+            def map=[:]
+            if(p.isAssociation())
+            {
+                map.chinese=p.getReferencedDomainClass().clazz.cgDomain.chinese
+                map.association=true
+                cgDomainProperties[p.name]=map
+            }else if(p.name=='id'){
+                map.chinese='编号'
+                map.association=false
+            }else if(p.name=='dateCreated'){
+                map.chinese='创建时间'
+                map.association=false
+            }else if(p.name=='lastUpdated'){
+                map.chinese='最近更新'
+                map.association=false
+            }else{
+                map.chinese=domainClass.getConstrainedProperties()[p.name].attributes.chinese
+                map.association=false
+            }
+
+            cgDomainProperties[p.name]=map
+        }
     }
+}
+
+def ViewToModelConverter(p) {
+    if (p.type == Date.class) {
+        out << "        ${domainClass.propertyName}.${p.name}=(new java.text.SimpleDateFormat(\"yyyy-MM-dd\")).parse(params.${p.name})"
+        println ""
+    } else if (p.type == int) {
+        out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}.toInteger()"
+        println ""
+    } else if (p.type == float) {
+        out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}.toFloat()"
+        println ""
+    } else if (p.type == boolean) {
+        out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}?true:false"
+        println ""
+    } else if (p.type == String.class) {
+        out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
+        println ""
+    } else if (p.isAssociation() && p.oneToOne) {
+        println ""
+        out << "        ${domainClass.propertyName}.${p.name}=${p.name.capitalize()}.get(params.${p.name})"
+        println ""
+    } else {
+            out << "        ${p}"
+            out << "class: ${domainClass}"
+    }
+}
+
 %>
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def cgClass=grailsApplication.getArtefact("Domain","${packageName}.${className}")
-    def cgConstraints=cgClass.getConstrainedProperties()
-    def cgDomainProperties=[:]
-    def initialized=false
-
     def afterInterceptor = { model ->
-		model.cgDomainProperties=cgDomainProperties
+        println "tracing action uri:"+actionUri
+        println "model:"+model
 	}
 
     def index = {
-        if(initialized==false)
-        {
-            init()
-        }
-
-        []
+        [:]
     }
 
     def associationListJSON = {
@@ -204,6 +235,7 @@
                                     }
                                     if (display) {
                                         ViewToModelConverter(p)
+
                                     }
                                 }
                     }
@@ -259,57 +291,5 @@
         }catch (org.springframework.dao.DataIntegrityViolationException e) {
                 render "{success:false,msg:'记录删除失败'}";
         }
-    }
-
-    def init(){
-        cgDomainProperties.cgChinese=${className}.cgDomain.chinese
-<%
-persistentPropNames = domainClass.persistentProperties*.name
-props = domainClass.properties.findAll {persistentPropNames.contains(it.name)}
-Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
-display = true
-props.each { p ->
-    if (!Collection.class.isAssignableFrom(p.type)) {
-        if (hasHibernate) {
-            cp = domainClass.constrainedProperties[p.name]
-            display = (cp ? cp.display : true)
-        }
-        if (display) {
-            if(p.isAssociation())
-            {
-                name=p.name.capitalize()
-                out << "        cgDomainProperties.cg${name}=${name}.cgDomain.chinese"
-                println ""
-            }
-        }
-    }
-}
-%>
-        cgClass.getProperties().each{
-            def namePropertiy=it.getName()
-
-            if(namePropertiy == 'id')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'编号']
-            }else if(namePropertiy=='version')
-	    {
-
-	    }else if(namePropertiy == 'dateCreated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'创建']
-            }else if(namePropertiy == 'lastUpdated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'更新']
-            }else if(it.isPersistent()==true && cgConstraints[namePropertiy]!=null && namePropertiy!='version'){
-                cgDomainProperties[namePropertiy]=[chinese:cgConstraints[namePropertiy].attributes.chinese?:namePropertiy]
-                if(cgConstraints[namePropertiy].attributes.format != null) {
-                    cgDomainProperties[namePropertiy].format = cgConstraints[namePropertiy].attributes.format
-                }
-            }else{
-                println ">>>>>> Unhandled propertiy:"+namePropertiy
-            }
-        }
-
-        initialized=true
     }
 }

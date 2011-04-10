@@ -51,6 +51,13 @@
                         </tr>
                     
                         <tr class="prop">
+                            <td valign="top" class="name">${cgDomainProperties.book.chinese}</td>
+                            
+                            <td valign="center" class="value"><g:link controller="book" action="show" id="${employeeInstance?.book?.id}">${employeeInstance?.book?.encodeAsHTML()}</g:link></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
                             <td valign="top" class="name">${cgDomainProperties.company.chinese}</td>
                             
                             <td valign="center" class="value"><g:link controller="company" action="show" id="${employeeInstance?.company?.id}">${employeeInstance?.company?.encodeAsHTML()}</g:link></td>

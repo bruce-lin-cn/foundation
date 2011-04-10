@@ -30,6 +30,8 @@
                         
                             <g:sortableColumn property="birthday" title="${cgDomainProperties.birthday.chinese}" />
                         
+                            <th><g:message code="employee.book.label" default="Book" /></th>
+                        
                             <th><g:message code="employee.company.label" default="Company" /></th>
                         
                         </tr>
@@ -45,6 +47,8 @@
                             <td>${fieldValue(bean: employeeInstance, field: "gender")}</td>
                         
                             <td><g:formatDate date="${employeeInstance.birthday}" /></td>
+                        
+                            <td>${fieldValue(bean: employeeInstance, field: "book")}</td>
                         
                             <td>${fieldValue(bean: employeeInstance, field: "company")}</td>
                         

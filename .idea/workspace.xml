@@ -65,7 +65,7 @@
       <file leaf-file-name="Controller.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="210" column="0" selection-start="8611" selection-end="8611" vertical-scroll-proportion="0.0">
+            <state line="37" column="24" selection-start="1625" selection-end="1625" vertical-scroll-proportion="-17.0">
               <folding />
             </state>
           </provider>
@@ -74,7 +74,7 @@
       <file leaf-file-name="EmployeeController.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/EmployeeController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="124" column="0" selection-start="3294" selection-end="3294" vertical-scroll-proportion="0.0">
+            <state line="155" column="8" selection-start="4087" selection-end="4087" vertical-scroll-proportion="-13.9375">
               <folding />
             </state>
           </provider>
@@ -83,16 +83,16 @@
       <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/index.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="370" column="36" selection-start="14389" selection-end="14838" vertical-scroll-proportion="0.0">
+            <state line="419" column="111" selection-start="17000" selection-end="17000" vertical-scroll-proportion="-4.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.gsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/views/employee/index.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="117" selection-start="3940" selection-end="3940" vertical-scroll-proportion="0.0">
+            <state line="263" column="12" selection-start="10961" selection-end="10961" vertical-scroll-proportion="7.582317">
               <folding />
             </state>
           </provider>
@@ -101,28 +101,30 @@
       <file leaf-file-name="BootStrap.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="40" selection-start="154" selection-end="154" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="13" column="11" selection-start="238" selection-end="343" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1302405312750" expanded="true" signature="292:343" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Employee.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/domain/business/Employee.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="55" selection-start="755" selection-end="755" vertical-scroll-proportion="-9.186047">
+            <state line="31" column="26" selection-start="796" selection-end="796" vertical-scroll-proportion="-12.255814">
               <folding />
             </state>
           </provider>
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
+          </provider>
         </entry>
       </file>
-      <file leaf-file-name="CompanyController.groovy" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CompanyController.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/CompanyController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="120" selection-end="120" vertical-scroll-proportion="0.096317284">
+            <state line="5" column="0" selection-start="120" selection-end="120" vertical-scroll-proportion="-3.6956522">
               <folding />
             </state>
           </provider>
@@ -130,13 +132,13 @@
       </file>
       <file leaf-file-name="Company.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/domain/business/Company.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state line="25" column="36" selection-start="530" selection-end="530" vertical-scroll-proportion="0.0">
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
@@ -169,13 +171,13 @@
         <option value="$PROJECT_DIR$/grails-app/domain/business/Department.groovy" />
         <option value="$PROJECT_DIR$/src/templates/artifacts/DomainClass.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/business/Company.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/employee/index.gsp" />
-        <option value="$PROJECT_DIR$/src/templates/scaffolding/index.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/business/EmployeeController.groovy" />
-        <option value="$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/domain/business/Employee.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/business/CompanyController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
+        <option value="$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy" />
+        <option value="$PROJECT_DIR$/src/templates/scaffolding/index.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/employee/index.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/business/EmployeeController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/domain/business/Employee.groovy" />
       </list>
     </option>
   </component>
@@ -209,6 +211,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Favorites" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -225,6 +229,64 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="business" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -259,6 +321,28 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scaffolding" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -275,28 +359,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="foundation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="foundation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grails-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="employee" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -329,10 +391,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="domain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="platform" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -373,10 +431,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="platform" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -422,8 +476,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Favorites" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -667,7 +719,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1288" height="778" extended-state="7" />
+    <frame x="-4" y="-4" width="1288" height="778" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -681,9 +733,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23987034" sideWeight="0.6834646" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32820097" sideWeight="0.68503934" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31653544" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31496063" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -744,11 +796,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/business/Book.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="6" selection-start="326" selection-end="326" vertical-scroll-proportion="-2.6511629" />
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/templates/artifacts/DomainClass.groovy">
@@ -756,62 +808,64 @@
         <state line="28" column="32" selection-start="632" selection-end="632" vertical-scroll-proportion="1.3969072" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/EmployeeController.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/business/Company.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="0" selection-start="3294" selection-end="3294" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="25" column="36" selection-start="530" selection-end="530" vertical-scroll-proportion="0.0" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/index.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="370" column="36" selection-start="14389" selection-end="14838" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/employee/index.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="117" selection-start="3940" selection-end="3940" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="40" selection-start="154" selection-end="154" vertical-scroll-proportion="0.0" />
+        <state line="13" column="11" selection-start="238" selection-end="343" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1302405312750" expanded="true" signature="292:343" placeholder="{...}" />
+          </folding>
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/business/Company.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/CompanyController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="36" selection-start="530" selection-end="530" vertical-scroll-proportion="0.0">
+        <state line="5" column="0" selection-start="120" selection-end="120" vertical-scroll-proportion="-3.6956522">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="210" column="0" selection-start="8611" selection-end="8611" vertical-scroll-proportion="0.0">
+        <state line="37" column="24" selection-start="1625" selection-end="1625" vertical-scroll-proportion="-17.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/index.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="419" column="111" selection-start="17000" selection-end="17000" vertical-scroll-proportion="-4.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/EmployeeController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="155" column="8" selection-start="4087" selection-end="4087" vertical-scroll-proportion="-13.9375">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/business/Employee.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="55" selection-start="755" selection-end="755" vertical-scroll-proportion="-9.186047">
+        <state line="31" column="26" selection-start="796" selection-end="796" vertical-scroll-proportion="-12.255814">
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/CompanyController.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/employee/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="120" selection-end="120" vertical-scroll-proportion="0.096317284">
+        <state line="263" column="12" selection-start="10961" selection-end="10961" vertical-scroll-proportion="7.582317">
           <folding />
         </state>
       </provider>

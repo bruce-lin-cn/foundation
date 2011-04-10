@@ -60,6 +60,15 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
+                                  <label for="book">${cgDomainProperties.book.chinese}</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'book', 'errors')}">
+                                    <g:select name="book.id" from="${business.Book.list()}" optionKey="id" value="${employeeInstance?.book?.id}"  />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
                                   <label for="company">${cgDomainProperties.company.chinese}</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'company', 'errors')}">

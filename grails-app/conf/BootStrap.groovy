@@ -8,6 +8,11 @@ class BootStrap {
 
         new Employee(name: "林禹.福州")
 
+        println servletContext.class
+        //grailsApplication.getArtefacts("Domain")*.clazz.each{domain ->
+        //    println domain
+        //}
+
     }
     def destroy = {
     }
