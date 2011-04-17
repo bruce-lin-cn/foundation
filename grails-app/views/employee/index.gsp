@@ -4,7 +4,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <g:extjs />
-        <g:set var="entityName" value="员工" />
         <title><g:message code="员工管理" /></title>
     </head>
     <script>
@@ -261,9 +260,7 @@ Ext.onReady(function(){
             {name:'gender'  } ,
             {name:'birthday' , type:'date', dateFormat:'c' } ,
             {name:'book'},
-            
             {name:'company'}
-            
         ])
     });
 

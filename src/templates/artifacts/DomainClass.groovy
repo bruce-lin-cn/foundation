@@ -13,7 +13,7 @@ Note:
 
 @artifact.package@class @artifact.name@ {
 
-    static cgDomain=[chinese:"模型", searchBar:true]
+    static cgDomain=[chinese:"模型", searchBar:true, navigation:[group:"管理",weight:1]]
     static cgLayout=[:]
 
     String name

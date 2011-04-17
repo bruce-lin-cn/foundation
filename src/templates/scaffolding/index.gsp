@@ -2,7 +2,7 @@
 <%
     cgConstraints=domainClass.getConstrainedProperties()
     cgDomainProperties=[:]
-    boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')
+    hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')
 
     cgDomainProperties.cgDomain=domainClass.clazz.cgDomain
 
@@ -402,8 +402,7 @@ Ext.onReady(function(){
         icon: '/foundation/images/skin/database_search.png',
         handler: function() {
         }
-    }
-            );
+    });
 
     tb.doLayout();
 
@@ -434,8 +433,7 @@ Ext.onReady(function(){
         }, [<%  props.eachWithIndex { p, i ->
                            if (i < 10) {
                                if (p.isAssociation()) { %>
-            {name:'${p.name}'}<% if(props.size()>i+1){out<<","} %>
-            <%      } else { %>
+            {name:'${p.name}'}<% if(props.size()>i+1){out<<","} %><%      } else { %>
             {name:'${p.name}' <% if(p.type==Date.class){out<<", type:'date', dateFormat:'c'"} %> } <% if(props.size()>i+1){out<<","} %><%  }   }   } %>
         ])
     });
@@ -479,13 +477,12 @@ Ext.onReady(function(){
             ${domainClass.propertyName}UpdateForm.getForm().load({
                 url:'/foundation/${domainClass.propertyName}/detailJSON?id=' + id,
                 success:function(form, action) {
+                    ${domainClass.propertyName}UpdateWin.show();
                 },
                 failure:function() {
                     Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
                 }
             });
-
-            ${domainClass.propertyName}UpdateWin.show();
         }
     }
 

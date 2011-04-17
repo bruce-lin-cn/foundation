@@ -5,16 +5,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${cgDomainProperties.cgChinese}" />
-        <title><g:message code="${entityName}创建" /></title>
+        <g:set var="entityName" value="${message(code: 'company.label', default: 'Company')}" />
+        <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">首页</a></span>
-            <span class="menuButton"><g:link class="list" action="list">${entityName}列表</g:link></span>
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
+            <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
-            <h1>创建${entityName}</h1>
+            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -30,7 +30,7 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="name">${cgDomainProperties.name.chinese}</label>
+                                    <label for="name"><g:message code="company.name.label" default="Name" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: companyInstance, field: 'name', 'errors')}">
                                     <g:textField name="name" maxlength="32" value="${companyInstance?.name}" />
@@ -41,7 +41,7 @@
                     </table>
                 </div>
                 <div class="buttons">
-                    <span class="button"><g:submitButton name="create" class="save" value="创建" /></span>
+                    <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" /></span>
                 </div>
             </g:form>
         </div>

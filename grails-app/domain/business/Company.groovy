@@ -15,7 +15,7 @@ package business
 
 class Company {
 
-    static cgDomain=[chinese:"公司", searchBar:true]
+    static cgDomain=[chinese:"公司", searchBar:true, navigation:[group:"战略管理",weight:2]]
     static cgLayout=[:]
 
     String name

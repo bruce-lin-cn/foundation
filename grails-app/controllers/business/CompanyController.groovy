@@ -4,22 +4,17 @@ class CompanyController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def cgClass=grailsApplication.getArtefact("Domain","business.Company")
-    def cgConstraints=cgClass.getConstrainedProperties()
-    def cgDomainProperties=[:]
-    def initialized=false
-
     def afterInterceptor = { model ->
-		model.cgDomainProperties=cgDomainProperties
+        println "tracing action uri:"+actionUri
+        println "model:"+model
 	}
 
     def index = {
-        if(initialized==false)
-        {
-            init()
-        }
+        [:]
+    }
 
-        []
+    def tab = {
+        [:]
     }
 
     def associationListJSON = {
@@ -156,36 +151,5 @@ class CompanyController {
         }catch (org.springframework.dao.DataIntegrityViolationException e) {
                 render "{success:false,msg:'记录删除失败'}";
         }
-    }
-
-    def init(){
-        cgDomainProperties.cgChinese=Company.cgDomain.chinese
-
-        cgClass.getProperties().each{
-            def namePropertiy=it.getName()
-
-            if(namePropertiy == 'id')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'编号']
-            }else if(namePropertiy=='version')
-	    {
-
-	    }else if(namePropertiy == 'dateCreated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'创建']
-            }else if(namePropertiy == 'lastUpdated')
-            {
-                cgDomainProperties[namePropertiy]=[chinese:'更新']
-            }else if(it.isPersistent()==true && cgConstraints[namePropertiy]!=null && namePropertiy!='version'){
-                cgDomainProperties[namePropertiy]=[chinese:cgConstraints[namePropertiy].attributes.chinese?:namePropertiy]
-                if(cgConstraints[namePropertiy].attributes.format != null) {
-                    cgDomainProperties[namePropertiy].format = cgConstraints[namePropertiy].attributes.format
-                }
-            }else{
-                println ">>>>>> Unhandled propertiy:"+namePropertiy
-            }
-        }
-
-        initialized=true
     }
 }

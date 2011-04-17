@@ -2,7 +2,7 @@
 <%
     cgConstraints=domainClass.getConstrainedProperties()
     cgDomainProperties=[:]
-    boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')
+    hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')
 
     cgDomainProperties.cgDomain=domainClass.clazz.cgDomain
 
@@ -81,6 +81,10 @@
 	}
 
     def index = {
+        [:]
+    }
+
+    def tab = {
         [:]
     }
 

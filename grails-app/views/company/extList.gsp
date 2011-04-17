@@ -4,7 +4,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <g:extjs />
-        <title><g:message code="公司管理" /></title>
+        <g:set var="entityName" value="${cgDomainProperties.cgChinese}" />
+        <title><g:message code="${entityName}管理" /></title>
     </head>
     <script>
 Ext.onReady(function(){
@@ -18,7 +19,8 @@ Ext.onReady(function(){
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-            {fieldLabel: '名称',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '名称为必填项', maxLength: 32, maxLengthText: '名称至多包含32个字符', minLength: 4, minLengthText: '名称至少包含4个字符'}        ]
+            {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '${cgDomainProperties.name.chinese}为必填项', maxLength: 32, maxLengthText: '${cgDomainProperties.name.chinese}至多包含32个字符', minLength: 4, minLengthText: '${cgDomainProperties.name.chinese}至少包含4个字符'}
+        ]
     });
 
     var companyCreateWin = new Ext.Window({
@@ -26,7 +28,7 @@ Ext.onReady(function(){
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '创建公司',
+        title: '创建${entityName}',
         height: 300,
         closeAction: 'hide',
         items: [companyCreateForm],
@@ -41,7 +43,7 @@ Ext.onReady(function(){
                             store.reload();
                         },
                         failure:function() {
-                            Ext.foundation.msg('错误', "创建公司失败!");
+                            Ext.foundation.msg('错误', "创建${entityName}失败!");
                         }
                     });
                 }
@@ -63,7 +65,7 @@ Ext.onReady(function(){
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-            {fieldLabel: '名称',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '名称为必填项', maxLength: 32, maxLengthText: '名称至多包含32个字符', minLength: 4, minLengthText: '名称至少包含4个字符'}
+            {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '${cgDomainProperties.name.chinese}为必填项', maxLength: 32, maxLengthText: '${cgDomainProperties.name.chinese}至多包含32个字符', minLength: 4, minLengthText: '${cgDomainProperties.name.chinese}至少包含4个字符'}
         ]
     });
 
@@ -72,7 +74,7 @@ Ext.onReady(function(){
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '修改公司',
+        title: '修改${entityName}',
         height: 300,
         closeAction: 'hide',
         items: [companyUpdateForm],
@@ -87,7 +89,7 @@ Ext.onReady(function(){
                             store.reload();
                         },
                         failure:function() {
-                            Ext.foundation.msg('错误', "更新公司失败!");
+                            Ext.foundation.msg('错误', "更新${entityName}失败!");
                         }
                     });
                 }
@@ -109,7 +111,7 @@ Ext.onReady(function(){
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-            {fieldLabel: '名称',name: 'name',xtype: 'textfield', readOnly:true}
+            {fieldLabel: '${cgDomainProperties.name.chinese}',name: 'name',xtype: 'textfield', readOnly:true}
         ]
     });
 
@@ -118,7 +120,7 @@ Ext.onReady(function(){
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '公司明细',
+        title: '${entityName}明细',
         height: 300,
         closeAction: 'hide',
         items: [companyDetailForm],
@@ -145,7 +147,22 @@ Ext.onReady(function(){
         text: '修改',
         icon: '/foundation/images/skin/database_edit.png',
         handler: function() {
-           updateCompany();
+            var id = (grid.getSelectionModel().getSelected()).id;
+            if(id==null)
+            {
+                Ext.foundation.msg('注意', "请选择要修改的记录");
+            } else {
+                companyUpdateForm.getForm().load({
+                    url:'/foundation/company/detailJSON?id=' + id,
+                    success:function(form, action) {
+                    },
+                    failure:function() {
+                        Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
+                    }
+                });
+
+                companyUpdateWin.show();
+            }
         }
     }, {
         text: '删除',
@@ -220,15 +237,16 @@ Ext.onReady(function(){
         icon: '/foundation/images/skin/database_search.png',
         handler: function() {
         }
-    });
+    }
+            );
 
     tb.doLayout();
 
     var sm = new Ext.grid.CheckboxSelectionModel()
     var cm = new Ext.grid.ColumnModel([
         sm,
-        {header:'编号',dataIndex:'id'} ,
-        {header:'名称',dataIndex:'name'} 
+        {header:'${cgDomainProperties.id.chinese}',dataIndex:'id'} ,
+        {header:'${cgDomainProperties.name.chinese}',dataIndex:'name'} 
     ]);
 
     var store = new Ext.data.Store({
@@ -238,6 +256,7 @@ Ext.onReady(function(){
             totalProperty:'total',
             root:'root'
         }, [
+            
             {name:'id'  } ,
             {name:'name'  } 
         ])
@@ -269,28 +288,6 @@ Ext.onReady(function(){
     });
 
     store.load({params:{start:0,limit:10}});
-    grid.on('dblclick', function(e) {
-        updateCompany();
-    });
-
-    function updateCompany()
-    {
-        var id = (grid.getSelectionModel().getSelected()).id;
-        if (id == null) {
-            Ext.foundation.msg('注意', "请选择要修改的记录");
-        } else {
-            companyUpdateForm.getForm().load({
-                url:'/foundation/company/detailJSON?id=' + id,
-                success:function(form, action) {
-                    companyUpdateWin.show();
-                },
-                failure:function() {
-                    Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
-                }
-            });
-        }
-    }
-
 });
     </script>
     <body>
