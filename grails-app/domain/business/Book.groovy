@@ -15,7 +15,7 @@ package business
 
 class Book {
 
-    static cgDomain=[chinese:"书籍", searchBar:true]
+    static cgDomain=[chinese:"书籍", searchBar:true, navigation:[group:"业务管理",weight:1]]
     static cgLayout=[:]
 
     String string1

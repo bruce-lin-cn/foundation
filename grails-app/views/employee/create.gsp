@@ -60,7 +60,7 @@
                                     <label for="book">${cgDomainProperties.book.chinese}</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'book', 'errors')}">
-                                    <g:select name="book.id" from="${business.Book.list()}" optionKey="id" value="${employeeInstance?.book?.id}"  />
+                                    <g:select name="book.id" from="${business.Book.list()}" optionKey="id" value="${employeeInstance?.book?.id}" noSelection="['null': '']" />
                                 </td>
                             </tr>
                         

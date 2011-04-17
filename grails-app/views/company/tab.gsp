@@ -3,7 +3,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <g:extjs />
         <title><g:message code="公司管理" /></title>
     </head>
     <script>
@@ -132,103 +131,12 @@ Ext.onReady(function(){
         ]
     });
 
-    var tb = new Ext.Toolbar();
-    tb.render('toolbar');
-
-    tb.add({
-        text: '新建',
-        icon: '/foundation/images/skin/database_add.png',
-        handler:function() {
-            companyCreateWin.show(this);
-        }
-    }, {
-        text: '修改',
-        icon: '/foundation/images/skin/database_edit.png',
-        handler: function() {
-           updateCompany();
-        }
-    }, {
-        text: '删除',
-        icon: '/foundation/images/skin/database_delete.png',
-        handler: function() {
-            var count = sm.getCount();
-            if (count == 0) {
-                Ext.foundation.msg('注意', "请选择要删除的记录");
-            } else {
-                var records = sm.getSelections();
-                var id = [];
-                for (var i = 0; i < count; i++) {
-                    id.push(records[i].id);
-                }
-                Ext.MessageBox.confirm('信息', '您确定删除编号为' + id + '的记录吗?', function(btn) {
-                    if (btn == 'yes') {
-                        Ext.Ajax.request({
-                            url: '/foundation/company/deleteJSON',
-                            params: {id:id},
-                            success: function(result) {
-                                var json_str = Ext.util.JSON.decode(result.responseText);
-                                Ext.foundation.msg('信息', json_str.msg);
-                                store.reload();
-                            },
-                            failure:function() {
-                                Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
-                            }
-                        });
-                    }
-                });
-
-            }
-        }
-    }, {
-        text: '详细',
-        icon: '/foundation/images/skin/database_save.png',
-        handler: function() {
-            var id = (grid.getSelectionModel().getSelected()).id;
-            if (id == null) {
-                Ext.foundation.msg('注意', "请选择要显示的记录");
-            }else{
-                companyDetailForm.getForm().load({
-                    url:'/foundation/company/detailJSON?id=' + id,
-                    success:function(form, action) {
-                    },
-                    failure:function() {
-                        Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
-                    }
-                });
-                companyDetailWin.show();
-            }
-        }
-    },{
-        text: '导入',
-        icon: '/foundation/images/skin/database_add.png',
-        handler:function() {
-
-        }
-    },{
-        text: '更多',
-        icon: '/foundation/images/skin/database_add.png',
-        handler:function() {
-
-        }
-    }, '->',
-    {
-        xtype: 'textfield',
-        name: 'searchBar',
-        emptyText: '请输入搜索条件'
-    }, {
-        text: '搜索',
-        icon: '/foundation/images/skin/database_search.png',
-        handler: function() {
-        }
-    });
-
-    tb.doLayout();
 
     var sm = new Ext.grid.CheckboxSelectionModel()
     var cm = new Ext.grid.ColumnModel([
         sm,
         {header:'编号',dataIndex:'id'} ,
-        {header:'名称',dataIndex:'name'} 
+        {header:'名称',dataIndex:'name'}
     ]);
 
     var store = new Ext.data.Store({
@@ -239,7 +147,7 @@ Ext.onReady(function(){
             root:'root'
         }, [
             {name:'id'  } ,
-            {name:'name'  } 
+            {name:'name'  }
         ])
     });
 
@@ -254,11 +162,10 @@ Ext.onReady(function(){
         loadMask:true,
         cm: cm,
         sm: sm,
-        height: 270,
         viewConfig: {
             forceFit:true
         },
-
+        height: 280,
         bbar: new Ext.PagingToolbar({
             pageSize: 10,
             store: store,
@@ -294,7 +201,6 @@ Ext.onReady(function(){
 });
     </script>
     <body>
-        <div id="toolbar"></div>
         <div id="grid"></div>
         <div id="companyCreateWin"></div>
         <div id="companyUpdateWin"></div>

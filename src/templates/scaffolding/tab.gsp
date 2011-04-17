@@ -1,5 +1,51 @@
 <% import grails.persistence.Event %><% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %><%=packageName%>
-<% boolean hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate') %><%
+<%
+    cgConstraints=domainClass.getConstrainedProperties()
+    cgDomainProperties=[:]
+    hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')
+
+    cgDomainProperties.cgDomain=domainClass.clazz.cgDomain
+
+    excludedProps = Event.allEvents.toList() << 'version'
+    allowedNames = domainClass.persistentProperties*.name << 'id' << 'dateCreated' << 'lastUpdated'
+    props = domainClass.properties.findAll { allowedNames.contains(it.name) && !excludedProps.contains(it.name) && !Collection.isAssignableFrom(it.type) }
+    Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
+
+    props.each { p ->
+        if (!Collection.class.isAssignableFrom(p.type)) {
+            if (hasHibernate) {
+                cp = domainClass.constrainedProperties[p.name]
+            }
+            if (p.name!='version') {
+                def map=[:]
+                if(p.isAssociation())
+                {
+                    map.chinese=p.getReferencedDomainClass().clazz.cgDomain.chinese
+                    map.association=true
+                    cgDomainProperties[p.name]=map
+                }else if(p.name=='id'){
+                    map.chinese='编号'
+                    map.association=false
+                    cgDomainProperties[p.name]=map
+                }else if(p.name=='dateCreated'){
+                    map.chinese='创建时间'
+                    map.association=false
+                    cgDomainProperties[p.name]=map
+                }else if(p.name=='lastUpdated'){
+                    map.chinese='最近更新'
+                    map.association=false
+                    cgDomainProperties[p.name]=map
+                }else{
+                    map.chinese=domainClass.getConstrainedProperties()[p.name].attributes.chinese
+                    map.association=false
+                    cgDomainProperties[p.name]=map
+                }
+
+                cgDomainProperties[p.name]=map
+            }
+        }
+    }
+
     def output(p,cp,i, mode)
     {
         //对齐
@@ -8,7 +54,7 @@
             out << "            "
         }
         if (cp.inList != null) {
-            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:["
+            out << "{fieldLabel: '${cgDomainProperties[p.name].chinese}',name: '${p.name}',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:["
             for(int j=0;j<cp.inList.size();j++)
             {
                 out << "['${cp.inList[j]}']"
@@ -22,56 +68,66 @@
             {
                 out << ", readOnly:true"
             }
-            out <<", emptyText:'请选择\${cgDomainProperties.${p.name}.chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'}"
+            out <<", emptyText:'请选择${cgDomainProperties[p.name].chinese}',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'}"
         } else if (p.type == String.class) {
-            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype: 'textfield'"
+            out << "{fieldLabel: '${cgDomainProperties[p.name].chinese}',name: '${p.name}',xtype: 'textfield'"
 
             if("detail".compareTo(mode)==0)
             {
                 out << ", readOnly:true"
             }else {
                 if (cp.blank == false) {
-                    out << ", allowBlank: false, blankText: '\${cgDomainProperties.${p.name}.chinese}为必填项'"
+                    out << ", allowBlank: false, blankText: '${cgDomainProperties[p.name].chinese}为必填项'"
                 }
                 if (cp.maxSize != null) {
-                    out << ", maxLength: ${cp.maxSize}, maxLengthText: '\${cgDomainProperties.${p.name}.chinese}至多包含${cp.maxSize}个字符'"
+                    out << ", maxLength: ${cp.maxSize}, maxLengthText: '${cgDomainProperties[p.name].chinese}至多包含${cp.maxSize}个字符'"
                 }
                 if (cp.minSize != null) {
-                    out << ", minLength: ${cp.minSize}, minLengthText: '\${cgDomainProperties.${p.name}.chinese}至少包含${cp.minSize}个字符'"
+                    out << ", minLength: ${cp.minSize}, minLengthText: '${cgDomainProperties[p.name].chinese}至少包含${cp.minSize}个字符'"
                 }
             }
 
             out << "}"
         } else if (p.type == Date.class) {
-            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'datefield',format:'Y-m-d'"
+            out << "{fieldLabel: '${cgDomainProperties[p.name].chinese}',name: '${p.name}',xtype:'datefield',format:'Y-m-d'"
             if("detail".compareTo(mode)==0)
             {
                 out << ", readOnly:true"
             }
             out << "}"
         }else if (p.type == int) {
-            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'numberfield'"
+            out << "{fieldLabel: '${cgDomainProperties[p.name].chinese}',name: '${p.name}',xtype:'numberfield'"
             if("detail".compareTo(mode)==0)
             {
                 out << ", readOnly:true"
             }
             out << "}"
         }else if (p.type == float) {
-            out << "{fieldLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'numberfield',allowDecimals:true"
+            out << "{fieldLabel: '${cgDomainProperties[p.name].chinese}',name: '${p.name}',xtype:'numberfield',allowDecimals:true"
             if("detail".compareTo(mode)==0)
             {
                 out << ", readOnly:true"
             }
             out << "}"
         }else if (p.type == boolean){
-            out << "{boxLabel: '\${cgDomainProperties.${p.name}.chinese}',name: '${p.name}',xtype:'checkbox'"
+            out << "{boxLabel: '${cgDomainProperties[p.name].chinese}',name: '${p.name}',xtype:'checkbox'"
             if("detail".compareTo(mode)==0)
             {
                 out << ", readOnly:true"
             }
             out << "}"
+        }else if(p.isAssociation() && p.oneToOne){
+            out << "{fieldLabel: '${cgDomainProperties[p.name].chinese}',hiddenName: '${p.name}',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: '${p.name}',emptyText:'请选择${cgDomainProperties[p.name].chinese}', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/${p.name}/associationListJSON', fields:['id', '${p.name}'],  root: 'root', totalProperty: 'total'})"
+            if("detail".compareTo(mode)==0)
+            {
+                out << ", readOnly:true"
+            }
+            out << "}"
+        } else{
+            // 未处理的
+            out << p
+            println ""
         }
-
         if (props.size() > i + 1) {
             out << ","
             println ""
@@ -81,9 +137,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <g:extjs />
-        <g:set var="entityName" value="\${cgDomainProperties.cgChinese}" />
-        <title><g:message code="\${entityName}管理" /></title>
+        <title><g:message code="${cgDomainProperties.cgDomain.chinese}管理" /></title>
     </head>
     <script>
 Ext.onReady(function(){
@@ -97,7 +151,7 @@ Ext.onReady(function(){
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-            <%  excludedProps = Event.allEvents.toList() << 'version' << 'id' << 'dateCreated' << 'lastUpdated'
+            <% excludedProps = Event.allEvents.toList() << 'version' << 'id' << 'dateCreated' << 'lastUpdated'
                     persistentPropNames = domainClass.persistentProperties*.name
                     props = domainClass.properties.findAll { persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) }
                     Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
@@ -108,13 +162,12 @@ Ext.onReady(function(){
                                 cp = domainClass.constrainedProperties[p.name]
                                 display = (cp ? cp.display : true)
                             }
-                            if (display) {
+                               if (display) {
                                 output(p,cp,i,"create")
-                            }
+                               }
                         }
                     }
-%>
-        ]
+%>        ]
     });
 
     var ${domainClass.propertyName}CreateWin = new Ext.Window({
@@ -122,7 +175,7 @@ Ext.onReady(function(){
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '创建\${entityName}',
+        title: '创建${cgDomainProperties.cgDomain.chinese}',
         height: 300,
         closeAction: 'hide',
         items: [${domainClass.propertyName}CreateForm],
@@ -137,7 +190,7 @@ Ext.onReady(function(){
                             store.reload();
                         },
                         failure:function() {
-                            Ext.foundation.msg('错误', "创建\${entityName}失败!");
+                            Ext.foundation.msg('错误', "创建${cgDomainProperties.cgDomain.chinese}失败!");
                         }
                     });
                 }
@@ -184,7 +237,7 @@ Ext.onReady(function(){
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '修改\${entityName}',
+        title: '修改${cgDomainProperties.cgDomain.chinese}',
         height: 300,
         closeAction: 'hide',
         items: [${domainClass.propertyName}UpdateForm],
@@ -199,7 +252,7 @@ Ext.onReady(function(){
                             store.reload();
                         },
                         failure:function() {
-                            Ext.foundation.msg('错误', "更新\${entityName}失败!");
+                            Ext.foundation.msg('错误', "更新${cgDomainProperties.cgDomain.chinese}失败!");
                         }
                     });
                 }
@@ -246,7 +299,7 @@ Ext.onReady(function(){
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '\${entityName}明细',
+        title: '${cgDomainProperties.cgDomain.chinese}明细',
         height: 300,
         closeAction: 'hide',
         items: [${domainClass.propertyName}DetailForm],
@@ -273,22 +326,7 @@ Ext.onReady(function(){
         text: '修改',
         icon: '/foundation/images/skin/database_edit.png',
         handler: function() {
-            var id = (grid.getSelectionModel().getSelected()).id;
-            if(id==null)
-            {
-                Ext.foundation.msg('注意', "请选择要修改的记录");
-            } else {
-                ${domainClass.propertyName}UpdateForm.getForm().load({
-                    url:'/foundation/${domainClass.propertyName}/detailJSON?id=' + id,
-                    success:function(form, action) {
-                    },
-                    failure:function() {
-                        Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
-                    }
-                });
-
-                ${domainClass.propertyName}UpdateWin.show();
-            }
+           update${className}();
         }
     }, {
         text: '删除',
@@ -363,8 +401,7 @@ Ext.onReady(function(){
         icon: '/foundation/images/skin/database_search.png',
         handler: function() {
         }
-    }
-            );
+    });
 
     tb.doLayout();
 
@@ -376,8 +413,9 @@ Ext.onReady(function(){
        Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
        props.eachWithIndex { p, i ->
            if (i < 10) {
-               if (p.isAssociation()) { %><%      } else { %>
-        {header:'\${cgDomainProperties.${p.name}.chinese}',dataIndex:'${p.name}'<%
+               if (p.isAssociation()) { %>
+        {header:'${cgDomainProperties[p.name].chinese}',dataIndex:'${p.name}'}<% if(props.size()>i+1){out<<","}} else { %>
+        {header:'${cgDomainProperties[p.name].chinese}',dataIndex:'${p.name}'<%
             if(p.type==boolean){
                 out << ", renderer: function(value){if(value==true)return '是'; else return '否';}"
             }else if(p.type==Date.class){
@@ -391,10 +429,10 @@ Ext.onReady(function(){
         reader: new Ext.data.JsonReader({
             totalProperty:'total',
             root:'root'
-        }, [
-            <%  props.eachWithIndex { p, i ->
+        }, [<%  props.eachWithIndex { p, i ->
                            if (i < 10) {
-                               if (p.isAssociation()) { %><%      } else { %>
+                               if (p.isAssociation()) { %>
+            {name:'${p.name}'}<% if(props.size()>i+1){out<<","} %><%      } else { %>
             {name:'${p.name}' <% if(p.type==Date.class){out<<", type:'date', dateFormat:'c'"} %> } <% if(props.size()>i+1){out<<","} %><%  }   }   } %>
         ])
     });
@@ -425,6 +463,28 @@ Ext.onReady(function(){
     });
 
     store.load({params:{start:0,limit:10}});
+    grid.on('dblclick', function(e) {
+        update${className}();
+    });
+
+    function update${className}()
+    {
+        var id = (grid.getSelectionModel().getSelected()).id;
+        if (id == null) {
+            Ext.foundation.msg('注意', "请选择要修改的记录");
+        } else {
+            ${domainClass.propertyName}UpdateForm.getForm().load({
+                url:'/foundation/${domainClass.propertyName}/detailJSON?id=' + id,
+                success:function(form, action) {
+                    ${domainClass.propertyName}UpdateWin.show();
+                },
+                failure:function() {
+                    Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
+                }
+            });
+        }
+    }
+
 });
     </script>
     <body>

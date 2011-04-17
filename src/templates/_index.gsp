@@ -53,7 +53,7 @@
             }, {
                 region: 'west',
                 id: 'west-panel', // see Ext.getCmp() below
-                title: '功能导航',
+                title: 'West',
                 split: true,
                 width: 200,
                 minSize: 175,
@@ -64,37 +64,7 @@
                     type: 'accordion',
                     animate: true
                 },
-                items: [
-<%
-    def groups=(grailsApplication.domainClasses*.clazz.cgDomain.navigation.group).unique()
-
-    groups.eachWithIndex {group,i->
-        if(group!=null)
-        {
-            out << "{title: '${group}', border:false, html: '"
-            grailsApplication.domainClasses.each{domain->
-                if(group==domain.clazz.cgDomain?.navigation?.group){
-                    domainName=domain.clazz.name.toString().tokenize('.')[-1].toLowerCase()
-                    domainChinese=domain.clazz.cgDomain.chinese
-                    domainUrl="/foundation/${domainName}/tab"
-                    out << "<a id=\"${domainName}\" href=\"#\"><center>${domainChinese}</center></a><br>"
-                }
-            }
-            out <<"',iconCls: 'settings'}"
-            if(i<(groups.size()-1)){
-                out << ","
-            }
-        }
-        //grailsApplication.domainClasses.each{domain->
-        //    println
-        //}<g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link>
-    }
-    //println grailsApplication.domainClasses*.clazz.cgDomain.navigation
-    //println grailsApplication.domainClasses*.clazz.name.toString()
-    //println grailsApplication.domainClasses*.clazz.name.toString().tokenize(".")
-%>
-
-                    ,{
+                items: [{
                     contentEl: 'west',
                     title: 'Navigation',
                     border: false,
@@ -127,30 +97,32 @@
             })]
         });
         // get a reference to the HTML element with id "hideit" and add a click listener to it
-        Ext.get("company").on('click', function(){addTab('company','公司');});
+        //Ext.get("hideit").on('click', function(){
         //    // get a reference to the Panel that was created with id = 'west-panel'
         //    var w = Ext.getCmp('west-panel');
         //    // expand or collapse that Panel based on its collapsed property state
         //    w.collapsed ? w.expand() : w.collapse();
         //});
+        Ext.get("hideit").on('click', function(){
+            addTab('companyIndex','/foundation/company/tab');
+        });
 
-        function addTab(domain, chinese) {
-            var mainTabPanel = Ext.getCmp('tabs');
-            //Ext.msg.alert(domain, chinese);
+    function addTab(myTitle, myUrl) {
+        var mainTabPanel = Ext.getCmp('tabs');
 
-            var tp = new Ext.TabPanel({
-                iconCls : 'tab',
-                id : domain,
-                enableTabScroll : true,
-                xtype : 'tabpanel',
-                closable : true,
-                title : chinese+"管理",
-                autoLoad : {
-                    url : "/foundation/"+domain+"/tab",
-                    scripts : true
-                }
-            });
-            mainTabPanel.add(tp).show();
+        var tp = new Ext.TabPanel({
+            iconCls : 'tab',
+            id : myTitle,
+            enableTabScroll : true,
+            xtype : 'tabpanel',
+            closable : true,
+            title : '公司管理',
+            autoLoad : {
+                url : myUrl,
+                scripts : true
+            }
+        });
+        mainTabPanel.add(tp).show();
         }
 
     });
