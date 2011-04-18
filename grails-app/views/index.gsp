@@ -85,13 +85,7 @@
                 out << ","
             }
         }
-        //grailsApplication.domainClasses.each{domain->
-        //    println
-        //}<g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link>
     }
-    //println grailsApplication.domainClasses*.clazz.cgDomain.navigation
-    //println grailsApplication.domainClasses*.clazz.name.toString()
-    //println grailsApplication.domainClasses*.clazz.name.toString().tokenize(".")
 %>
 
                     ,{
@@ -106,9 +100,7 @@
                     iconCls: 'settings'
                 }]
             },
-            // in this instance the TabPanel is not wrapped by another panel
-            // since no title is needed, this Panel is added directly
-            // as a Container
+
             new Ext.TabPanel({
                 id: 'tabs',
                 region: 'center', // a center region is ALWAYS required for border layout
@@ -158,14 +150,12 @@
             } else {
                 mainTabPanel.setActiveTab(domain);
             }
-            //mainTabPanel.add(tp).show();
         }
 
     });
     </script>
 </head>
 <body>
-    <!-- use class="x-hide-display" to prevent a brief flicker of the content -->
     <div id="west" class="x-hide-display">
         <p>Hi. I'm the west panel.</p>
     </div>
