@@ -13,6 +13,10 @@ class EmployeeController {
         [:]
     }
 
+    def tab = {
+        [:]
+    }
+
     def associationListJSON = {
 
         def total=Employee.count()

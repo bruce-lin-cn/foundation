@@ -4,16 +4,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${cgDomainProperties.cgChinese}" />
-        <title><g:message code="${entityName}管理" /></title>
+        <g:set var="entityName" value="${message(code: 'customer.label', default: 'Customer')}" />
+        <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">首页</a></span>
-            <span class="menuButton"><g:link class="create" action="create">新建${entityName}</g:link></span>
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
+            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
-            <h1>${entityName}列表</h1>
+            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -22,17 +22,17 @@
                     <thead>
                         <tr>
                         
-                            <g:sortableColumn property="id" title="${cgDomainProperties.id.chinese}" />
+                            <g:sortableColumn property="id" title="${message(code: 'customer.id.label', default: 'Id')}" />
                         
-                            <g:sortableColumn property="name" title="${cgDomainProperties.name.chinese}" />
+                            <g:sortableColumn property="name" title="${message(code: 'customer.name.label', default: 'Name')}" />
                         
-                            <g:sortableColumn property="gender" title="${cgDomainProperties.gender.chinese}" />
+                            <g:sortableColumn property="gender" title="${message(code: 'customer.gender.label', default: 'Gender')}" />
                         
-                            <g:sortableColumn property="mobile" title="${cgDomainProperties.mobile.chinese}" />
+                            <g:sortableColumn property="mobile" title="${message(code: 'customer.mobile.label', default: 'Mobile')}" />
                         
-                            <g:sortableColumn property="identityCardNum" title="${cgDomainProperties.identityCardNum.chinese}" />
+                            <g:sortableColumn property="identityCardNum" title="${message(code: 'customer.identityCardNum.label', default: 'Identity Card Num')}" />
                         
-                            <g:sortableColumn property="level" title="${cgDomainProperties.level.chinese}" />
+                            <g:sortableColumn property="level" title="${message(code: 'customer.level.label', default: 'Level')}" />
                         
                         </tr>
                     </thead>

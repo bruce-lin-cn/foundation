@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>叮当客户关怀管理系统</title>
+  <title>管理系统</title>
      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <g:extjs />
     <style type="text/css">
@@ -126,31 +126,39 @@
                 }]
             })]
         });
-        // get a reference to the HTML element with id "hideit" and add a click listener to it
-        Ext.get("company").on('click', function(){addTab('company','公司');});
-        //    // get a reference to the Panel that was created with id = 'west-panel'
-        //    var w = Ext.getCmp('west-panel');
-        //    // expand or collapse that Panel based on its collapsed property state
-        //    w.collapsed ? w.expand() : w.collapse();
-        //});
+<%
+    grailsApplication.domainClasses.each{domain->
+        if(domain.clazz.cgDomain?.navigation?.group!=null){
+            domainName=domain.clazz.name.toString().tokenize('.')[-1].toLowerCase()
+            domainChinese=domain.clazz.cgDomain.chinese
+            domainUrl="/foundation/${domainName}/tab"
 
+            println "        Ext.get('${domainName}').on('click', function(){addTab('${domainName}','${domainChinese}');});"
+
+        }
+    }
+%>
         function addTab(domain, chinese) {
             var mainTabPanel = Ext.getCmp('tabs');
-            //Ext.msg.alert(domain, chinese);
+            var tp = null;
 
-            var tp = new Ext.TabPanel({
-                iconCls : 'tab',
-                id : domain,
-                enableTabScroll : true,
-                xtype : 'tabpanel',
-                closable : true,
-                title : chinese+"管理",
-                autoLoad : {
-                    url : "/foundation/"+domain+"/tab",
-                    scripts : true
-                }
-            });
-            mainTabPanel.add(tp).show();
+            var url ="<iframe src='/foundation/"+domain+"/index' scrolling='auto' frameborder='0' style='width:100%; height:100%;overflow:hidden;'/>";
+            if (!mainTabPanel.getComponent(domain)) {
+                tp = new Ext.TabPanel({
+                    iconCls : 'tab',
+                    id : domain,
+                    enableTabScroll : true,
+                    xtype : 'tabpanel',
+                    closable : true,
+                    title : chinese+"管理",
+                    html: url
+                });
+                mainTabPanel.add(tp);
+                mainTabPanel.setActiveTab(domain);
+            } else {
+                mainTabPanel.setActiveTab(domain);
+            }
+            //mainTabPanel.add(tp).show();
         }
 
     });

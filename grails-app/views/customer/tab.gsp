@@ -1,51 +1,52 @@
-<%@ page import="business.Employee" %>
+<%@ page import="business.Customer" %>
 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <g:extjs />
-        <title><g:message code="员工管理" /></title>
+        <title><g:message code="客户管理" /></title>
     </head>
     <script>
 Ext.onReady(function(){
     Ext.QuickTips.init();
 
-    var employeeCreateForm = new Ext.form.FormPanel({
+    var customerCreateForm = new Ext.form.FormPanel({
         labelAlign: 'right',
         labelWidth: 80,
         frame: true,
-        url: '/foundation/employee/createJSON',
+        url: '/foundation/customer/createJSON',
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
             {fieldLabel: '姓名',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '姓名为必填项', maxLength: 32, maxLengthText: '姓名至多包含32个字符', minLength: 2, minLengthText: '姓名至少包含2个字符'},
             {fieldLabel: '性别',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), emptyText:'请选择性别',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
-            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d'},
-            {fieldLabel: '书籍',hiddenName: 'book',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'book',emptyText:'请选择书籍', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/book/associationListJSON', fields:['id', 'book'],  root: 'root', totalProperty: 'total'})},
-            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'})}        ]
+            {fieldLabel: '手机',name: 'mobile',xtype: 'textfield', allowBlank: false, blankText: '手机为必填项', maxLength: 11, maxLengthText: '手机至多包含11个字符', minLength: 11, minLengthText: '手机至少包含11个字符'},
+            {fieldLabel: '身份证号',name: 'identityCardNum',xtype: 'textfield', maxLength: 18, maxLengthText: '身份证号至多包含18个字符', minLength: 18, minLengthText: '身份证号至少包含18个字符'},
+            {fieldLabel: '等级',name: 'level',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['普通'],['高级'],['VIP']]}), emptyText:'请选择等级',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
+            {fieldLabel: '余额',name: 'balance',xtype: 'textfield'},
+            {fieldLabel: '生日',name: 'birthday',xtype: 'textfield'}        ]
     });
 
-    var employeeCreateWin = new Ext.Window({
-        el: 'employeeCreateWin',
+    var customerCreateWin = new Ext.Window({
+        el: 'customerCreateWin',
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '创建员工',
+        title: '创建客户',
         height: 300,
         closeAction: 'hide',
-        items: [employeeCreateForm],
+        items: [customerCreateForm],
         buttons: [
             {
                 text:'创建',
                 handler: function() {
-                    employeeCreateForm.getForm().submit({
-                        success:function(employeeCreateForm, action) {
+                    customerCreateForm.getForm().submit({
+                        success:function(customerCreateForm, action) {
                             Ext.foundation.msg('信息', action.result.msg);
-                            employeeCreateWin.hide();
+                            customerCreateWin.hide();
                             store.reload();
                         },
                         failure:function() {
-                            Ext.foundation.msg('错误', "创建员工失败!");
+                            Ext.foundation.msg('错误', "创建客户失败!");
                         }
                     });
                 }
@@ -53,49 +54,51 @@ Ext.onReady(function(){
             {
                 text: '取 消',
                 handler: function() {
-                    employeeCreateWin.hide();
+                    customerCreateWin.hide();
                 }
             }
         ]
     });
 
-    var employeeUpdateForm = new Ext.form.FormPanel({
+    var customerUpdateForm = new Ext.form.FormPanel({
         labelAlign: 'right',
         labelWidth: 80,
         frame: true,
-        url: '/foundation/employee/updateJSON',
+        url: '/foundation/customer/updateJSON',
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
             {fieldLabel: '姓名',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '姓名为必填项', maxLength: 32, maxLengthText: '姓名至多包含32个字符', minLength: 2, minLengthText: '姓名至少包含2个字符'},
             {fieldLabel: '性别',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), emptyText:'请选择性别',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
-            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d'},
-            {fieldLabel: '书籍',hiddenName: 'book',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'book',emptyText:'请选择书籍', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/book/associationListJSON', fields:['id', 'book'],  root: 'root', totalProperty: 'total'})},
-            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'})}
+            {fieldLabel: '手机',name: 'mobile',xtype: 'textfield', allowBlank: false, blankText: '手机为必填项', maxLength: 11, maxLengthText: '手机至多包含11个字符', minLength: 11, minLengthText: '手机至少包含11个字符'},
+            {fieldLabel: '身份证号',name: 'identityCardNum',xtype: 'textfield', maxLength: 18, maxLengthText: '身份证号至多包含18个字符', minLength: 18, minLengthText: '身份证号至少包含18个字符'},
+            {fieldLabel: '等级',name: 'level',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['普通'],['高级'],['VIP']]}), emptyText:'请选择等级',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
+            {fieldLabel: '余额',name: 'balance',xtype: 'textfield'},
+            {fieldLabel: '生日',name: 'birthday',xtype: 'textfield'}
         ]
     });
 
-    var employeeUpdateWin = new Ext.Window({
-        el: 'employeeUpdateWin',
+    var customerUpdateWin = new Ext.Window({
+        el: 'customerUpdateWin',
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '修改员工',
+        title: '修改客户',
         height: 300,
         closeAction: 'hide',
-        items: [employeeUpdateForm],
+        items: [customerUpdateForm],
         buttons: [
             {
                 text:'更新',
                 handler: function() {
-                    employeeUpdateForm.getForm().submit({
-                        success:function(employeeUpdateForm, action) {
+                    customerUpdateForm.getForm().submit({
+                        success:function(customerUpdateForm, action) {
                             Ext.foundation.msg('信息', action.result.msg);
-                            employeeUpdateWin.hide();
+                            customerUpdateWin.hide();
                             store.reload();
                         },
                         failure:function() {
-                            Ext.foundation.msg('错误', "更新员工失败!");
+                            Ext.foundation.msg('错误', "更新客户失败!");
                         }
                     });
                 }
@@ -103,42 +106,46 @@ Ext.onReady(function(){
             {
                 text: '取 消',
                 handler: function() {
-                    employeeUpdateWin.hide();
+                    customerUpdateWin.hide();
                 }
             }
         ]
     });
 
-    var employeeDetailForm = new Ext.form.FormPanel({
+    var customerDetailForm = new Ext.form.FormPanel({
         labelAlign: 'right',
         labelWidth: 80,
         frame: true,
-        url: '/foundation/employee/detailJSON',
+        url: '/foundation/customer/detailJSON',
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
             {fieldLabel: '姓名',name: 'name',xtype: 'textfield', readOnly:true},
             {fieldLabel: '性别',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), readOnly:true, emptyText:'请选择性别',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
-            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d', readOnly:true},
-            {fieldLabel: '书籍',hiddenName: 'book',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'book',emptyText:'请选择书籍', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/book/associationListJSON', fields:['id', 'book'],  root: 'root', totalProperty: 'total'}), readOnly:true},
-            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'}), readOnly:true}
+            {fieldLabel: '手机',name: 'mobile',xtype: 'textfield', readOnly:true},
+            {fieldLabel: '身份证号',name: 'identityCardNum',xtype: 'textfield', readOnly:true},
+            {fieldLabel: '等级',name: 'level',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['普通'],['高级'],['VIP']]}), readOnly:true, emptyText:'请选择等级',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
+            {fieldLabel: '余额',name: 'balance',xtype: 'textfield', readOnly:true},
+            {fieldLabel: '生日',name: 'birthday',xtype: 'textfield', readOnly:true},
+            {fieldLabel: '创建时间',name: 'dateCreated',xtype:'datefield',format:'Y-m-d', readOnly:true},
+            {fieldLabel: '最近更新',name: 'lastUpdated',xtype:'datefield',format:'Y-m-d', readOnly:true}
         ]
     });
 
-    var employeeDetailWin = new Ext.Window({
-        el: 'employeeDetailWin',
+    var customerDetailWin = new Ext.Window({
+        el: 'customerDetailWin',
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '员工明细',
+        title: '客户明细',
         height: 300,
         closeAction: 'hide',
-        items: [employeeDetailForm],
+        items: [customerDetailForm],
         buttons: [
             {
                 text: '确定',
                 handler: function() {
-                    employeeDetailWin.hide();
+                    customerDetailWin.hide();
                 }
             }
         ]
@@ -151,13 +158,13 @@ Ext.onReady(function(){
         text: '新建',
         icon: '/foundation/images/skin/database_add.png',
         handler:function() {
-            employeeCreateWin.show(this);
+            customerCreateWin.show(this);
         }
     }, {
         text: '修改',
         icon: '/foundation/images/skin/database_edit.png',
         handler: function() {
-           updateEmployee();
+           updateCustomer();
         }
     }, {
         text: '删除',
@@ -175,7 +182,7 @@ Ext.onReady(function(){
                 Ext.MessageBox.confirm('信息', '您确定删除编号为' + id + '的记录吗?', function(btn) {
                     if (btn == 'yes') {
                         Ext.Ajax.request({
-                            url: '/foundation/employee/deleteJSON',
+                            url: '/foundation/customer/deleteJSON',
                             params: {id:id},
                             success: function(result) {
                                 var json_str = Ext.util.JSON.decode(result.responseText);
@@ -199,15 +206,15 @@ Ext.onReady(function(){
             if (id == null) {
                 Ext.foundation.msg('注意', "请选择要显示的记录");
             }else{
-                employeeDetailForm.getForm().load({
-                    url:'/foundation/employee/detailJSON?id=' + id,
+                customerDetailForm.getForm().load({
+                    url:'/foundation/customer/detailJSON?id=' + id,
                     success:function(form, action) {
                     },
                     failure:function() {
                         Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
                     }
                 });
-                employeeDetailWin.show();
+                customerDetailWin.show();
             }
         }
     },{
@@ -242,14 +249,18 @@ Ext.onReady(function(){
         {header:'编号',dataIndex:'id'} ,
         {header:'姓名',dataIndex:'name'} ,
         {header:'性别',dataIndex:'gender'} ,
-        {header:'生日',dataIndex:'birthday', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} ,
-        {header:'书籍',dataIndex:'book'},
-        {header:'公司',dataIndex:'company'}
+        {header:'手机',dataIndex:'mobile'} ,
+        {header:'身份证号',dataIndex:'identityCardNum'} ,
+        {header:'等级',dataIndex:'level'} ,
+        {header:'余额',dataIndex:'balance'} ,
+        {header:'生日',dataIndex:'birthday'} ,
+        {header:'创建时间',dataIndex:'dateCreated', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} ,
+        {header:'最近更新',dataIndex:'lastUpdated', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} 
     ]);
 
     var store = new Ext.data.Store({
         autoLoad:true,
-        proxy: new Ext.data.HttpProxy({url:'/foundation/employee/listJSON'}),
+        proxy: new Ext.data.HttpProxy({url:'/foundation/customer/listJSON'}),
         reader: new Ext.data.JsonReader({
             totalProperty:'total',
             root:'root'
@@ -257,9 +268,13 @@ Ext.onReady(function(){
             {name:'id'  } ,
             {name:'name'  } ,
             {name:'gender'  } ,
-            {name:'birthday' , type:'date', dateFormat:'c' } ,
-            {name:'book'},
-            {name:'company'}
+            {name:'mobile'  } ,
+            {name:'identityCardNum'  } ,
+            {name:'level'  } ,
+            {name:'balance'  } ,
+            {name:'birthday'  } ,
+            {name:'dateCreated' , type:'date', dateFormat:'c' } ,
+            {name:'lastUpdated' , type:'date', dateFormat:'c' } 
         ])
     });
 
@@ -290,19 +305,19 @@ Ext.onReady(function(){
 
     store.load({params:{start:0,limit:10}});
     grid.on('dblclick', function(e) {
-        updateEmployee();
+        updateCustomer();
     });
 
-    function updateEmployee()
+    function updateCustomer()
     {
         var id = (grid.getSelectionModel().getSelected()).id;
         if (id == null) {
             Ext.foundation.msg('注意', "请选择要修改的记录");
         } else {
-            employeeUpdateForm.getForm().load({
-                url:'/foundation/employee/detailJSON?id=' + id,
+            customerUpdateForm.getForm().load({
+                url:'/foundation/customer/detailJSON?id=' + id,
                 success:function(form, action) {
-                    employeeUpdateWin.show();
+                    customerUpdateWin.show();
                 },
                 failure:function() {
                     Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
@@ -316,8 +331,8 @@ Ext.onReady(function(){
     <body>
         <div id="toolbar"></div>
         <div id="grid"></div>
-        <div id="employeeCreateWin"></div>
-        <div id="employeeUpdateWin"></div>
-        <div id="employeeDetailWin"></div>
+        <div id="customerCreateWin"></div>
+        <div id="customerUpdateWin"></div>
+        <div id="customerDetailWin"></div>
     </body>
 </html>
