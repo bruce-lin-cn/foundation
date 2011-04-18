@@ -15,7 +15,7 @@ package business
 
 class Book {
 
-    static cgDomain=[chinese:"书籍", searchBar:true, navigation:[group:"业务管理",weight:1]]
+    static cgDomain=[chinese:"书籍", searchBar:true, navigation:[group:"绩效管理",weight:1]]
     static cgLayout=[:]
 
     String string1
@@ -26,6 +26,7 @@ class Book {
     int ingeger1
     float float1
     boolean boolean1=false
+    Company company
 
     static constraints = {
 	    string1(attributes:[chinese:"字符串1"], size: 4..32)

@@ -85,6 +85,15 @@
                                 </td>
                             </tr>
                         
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="company"><g:message code="book.company.label" default="Company" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: bookInstance, field: 'company', 'errors')}">
+                                    <g:select name="company.id" from="${business.Company.list()}" optionKey="id" value="${bookInstance?.company?.id}"  />
+                                </td>
+                            </tr>
+                        
                         </tbody>
                     </table>
                 </div>

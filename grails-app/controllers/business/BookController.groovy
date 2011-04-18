@@ -75,7 +75,7 @@ class BookController {
             lists = Book.findAll()[start..end]
             def renderList=[]
             lists.each{item ->
-                renderList.add(new HashMap(id: item.id,string1: item.string1,string2: item.string2,date1: item.date1,ingeger1: item.ingeger1,float1: item.float1,boolean1: item.boolean1))
+                renderList.add(new HashMap(id: item.id,string1: item.string1,string2: item.string2,date1: item.date1,ingeger1: item.ingeger1,float1: item.float1,boolean1: item.boolean1,company: item.company.toString()))
             }
             def json = renderList as grails.converters.JSON
             def output = "{total:" + total + ",root:" + json + "}"
@@ -93,7 +93,7 @@ class BookController {
         if (bookInstance) {
             try {
 
-                def map=new HashMap(id: bookInstance.id,string1: bookInstance.string1,string2: bookInstance.string2,date1: bookInstance.date1,ingeger1: bookInstance.ingeger1,float1: bookInstance.float1,boolean1: bookInstance.boolean1)
+                def map=new HashMap(id: bookInstance.id,string1: bookInstance.string1,string2: bookInstance.string2,date1: bookInstance.date1,ingeger1: bookInstance.ingeger1,float1: bookInstance.float1,boolean1: bookInstance.boolean1,company: bookInstance.company.toString())
 
                 def json=map as grails.converters.JSON
 
@@ -120,6 +120,8 @@ class BookController {
         book.float1=params.float1.toFloat()
         book.boolean1=params.boolean1?true:false
 
+        book.company=Company.get(params.company)
+
         book.save()
 
         render "{success:true,msg:'记录已创建'}";
@@ -138,6 +140,8 @@ class BookController {
         book.ingeger1=params.ingeger1.toInteger()
         book.float1=params.float1.toFloat()
         book.boolean1=params.boolean1?true:false
+
+        book.company=Company.get(params.company)
 
         book.save()
 

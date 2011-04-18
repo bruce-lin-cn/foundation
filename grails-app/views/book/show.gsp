@@ -71,6 +71,13 @@
                             
                         </tr>
                     
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="book.company.label" default="Company" /></td>
+                            
+                            <td valign="top" class="value"><g:link controller="company" action="show" id="${bookInstance?.company?.id}">${bookInstance?.company?.encodeAsHTML()}</g:link></td>
+                            
+                        </tr>
+                    
                     </tbody>
                 </table>
             </div>

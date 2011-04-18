@@ -22,7 +22,8 @@ Ext.onReady(function(){
             {fieldLabel: '日期1',name: 'date1',xtype:'datefield',format:'Y-m-d'},
             {fieldLabel: '整数1',name: 'ingeger1',xtype:'numberfield'},
             {fieldLabel: '浮点1',name: 'float1',xtype:'numberfield',allowDecimals:true},
-            {boxLabel: '真假',name: 'boolean1',xtype:'checkbox'}        ]
+            {boxLabel: '真假',name: 'boolean1',xtype:'checkbox'},
+            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'})}        ]
     });
 
     var bookCreateWin = new Ext.Window({
@@ -72,7 +73,8 @@ Ext.onReady(function(){
             {fieldLabel: '日期1',name: 'date1',xtype:'datefield',format:'Y-m-d'},
             {fieldLabel: '整数1',name: 'ingeger1',xtype:'numberfield'},
             {fieldLabel: '浮点1',name: 'float1',xtype:'numberfield',allowDecimals:true},
-            {boxLabel: '真假',name: 'boolean1',xtype:'checkbox'}
+            {boxLabel: '真假',name: 'boolean1',xtype:'checkbox'},
+            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'})}
         ]
     });
 
@@ -123,7 +125,8 @@ Ext.onReady(function(){
             {fieldLabel: '日期1',name: 'date1',xtype:'datefield',format:'Y-m-d', readOnly:true},
             {fieldLabel: '整数1',name: 'ingeger1',xtype:'numberfield', readOnly:true},
             {fieldLabel: '浮点1',name: 'float1',xtype:'numberfield',allowDecimals:true, readOnly:true},
-            {boxLabel: '真假',name: 'boolean1',xtype:'checkbox', readOnly:true}
+            {boxLabel: '真假',name: 'boolean1',xtype:'checkbox', readOnly:true},
+            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'}), readOnly:true}
         ]
     });
 
@@ -247,7 +250,8 @@ Ext.onReady(function(){
         {header:'日期1',dataIndex:'date1', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} ,
         {header:'整数1',dataIndex:'ingeger1'} ,
         {header:'浮点1',dataIndex:'float1'} ,
-        {header:'真假',dataIndex:'boolean1', renderer: function(value){if(value==true)return '是'; else return '否';}} 
+        {header:'真假',dataIndex:'boolean1', renderer: function(value){if(value==true)return '是'; else return '否';}} ,
+        {header:'公司',dataIndex:'company'}
     ]);
 
     var store = new Ext.data.Store({
@@ -263,7 +267,8 @@ Ext.onReady(function(){
             {name:'date1' , type:'date', dateFormat:'c' } ,
             {name:'ingeger1'  } ,
             {name:'float1'  } ,
-            {name:'boolean1'  } 
+            {name:'boolean1'  } ,
+            {name:'company'}
         ])
     });
 
