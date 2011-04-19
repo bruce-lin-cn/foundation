@@ -77,7 +77,7 @@
                     domainName=domain.clazz.name.toString().tokenize('.')[-1].toLowerCase()
                     domainChinese=domain.clazz.cgDomain.chinese
                     domainUrl="/foundation/${domainName}/tab"
-                    out << "<a id=\"${domainName}\" href=\"#\"><center>${domainChinese}</center></a><br>"
+                    out << "<a id=\"${domainName}\" href=\"#\"><center><img src=\"/foundation/images/navigation/package.png\"/><br>${domainChinese}</center></a>"
                 }
             }
             out <<"',iconCls: 'settings'}"
@@ -88,17 +88,7 @@
     }
 %>
 
-                    ,{
-                    contentEl: 'west',
-                    title: 'Navigation',
-                    border: false,
-                    iconCls: 'nav' // see the HEAD section for style used
-                }, {
-                    title: 'Settings',
-                    html: '<p>Some settings in here.</p>',
-                    border: false,
-                    iconCls: 'settings'
-                }]
+                    ]
             },
 
             new Ext.TabPanel({
@@ -110,10 +100,6 @@
                     contentEl: 'center1',
                     title: 'Close Me',
                     closable: true,
-                    autoScroll: true
-                }, {
-                    contentEl: 'center2',
-                    title: 'Center Panel',
                     autoScroll: true
                 }]
             })]
@@ -138,6 +124,7 @@
             if (!mainTabPanel.getComponent(domain)) {
                 tp = new Ext.TabPanel({
                     iconCls : 'tab',
+                    margins: '0 0 0 0',
                     id : domain,
                     enableTabScroll : true,
                     xtype : 'tabpanel',
@@ -156,9 +143,8 @@
     </script>
 </head>
 <body>
-    <div id="west" class="x-hide-display">
-        <p>Hi. I'm the west panel.</p>
-    </div>
+
+
     <div id="center2" class="x-hide-display">
         <a id="hideit" href="#">Toggle the west region</a>
         <p>My closable attribute is set to false so you can't close me. The other center panels can be closed.</p>
