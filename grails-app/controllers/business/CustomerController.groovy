@@ -119,7 +119,7 @@ class CustomerController {
         customer.identityCardNum=params.identityCardNum
         customer.level=params.level
         customer.balance=params.balance
-        customer.birthday=params.birthday
+        customer.birthday=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.birthday)
 
         customer.save()
 
@@ -139,7 +139,7 @@ class CustomerController {
         customer.identityCardNum=params.identityCardNum
         customer.level=params.level
         customer.balance=params.balance
-        customer.birthday=params.birthday
+        customer.birthday=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.birthday)
 
         customer.save()
 

@@ -1,0 +1,6 @@
+
+*.license
+/.idea
+/tmp
+*.class
+*.xml

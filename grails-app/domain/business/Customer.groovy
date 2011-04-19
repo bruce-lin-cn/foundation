@@ -24,7 +24,7 @@ class Customer {
     String identityCardNum
     String level
     String balance
-    String birthday
+    Date birthday
 
     Date dateCreated
     Date lastUpdated

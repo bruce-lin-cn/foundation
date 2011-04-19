@@ -87,7 +87,7 @@
                                     <label for="birthday"><g:message code="customer.birthday.label" default="Birthday" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: customerInstance, field: 'birthday', 'errors')}">
-                                    <g:textField name="birthday" value="${customerInstance?.birthday}" />
+                                    <g:datePicker name="birthday" chinese="生日" type="Date" format="yyyy-MM-dd" precision="day" value="${customerInstance?.birthday}"  />
                                 </td>
                             </tr>
                         

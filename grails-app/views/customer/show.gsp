@@ -74,7 +74,7 @@
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="customer.birthday.label" default="Birthday" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: customerInstance, field: "birthday")}</td>
+                            <td valign="top" class="value"><g:formatDate date="${customerInstance?.birthday}" /></td>
                             
                         </tr>
                     

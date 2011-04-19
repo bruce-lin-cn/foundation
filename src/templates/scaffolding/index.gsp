@@ -315,7 +315,7 @@ Ext.onReady(function(){
     });
 
     var tb = new Ext.Toolbar();
-    tb.render('toolbar');
+    tb.render('${domainClass.propertyName}Toolbar');
 
     tb.add({
         text: '新建',
@@ -327,7 +327,20 @@ Ext.onReady(function(){
         text: '修改',
         icon: '/foundation/images/skin/database_edit.png',
         handler: function() {
-           update${className}();
+            var id = (grid.getSelectionModel().getSelected()).id;
+            if (id == null) {
+                Ext.foundation.msg('注意', "请选择要修改的记录");
+            }else{
+                ${domainClass.propertyName}UpdateForm.getForm().load({
+                    url:'/foundation/${domainClass.propertyName}/detailJSON?id=' + id,
+                    success:function(form, action) {
+                    },
+                    failure:function() {
+                        Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
+                    }
+                });
+                ${domainClass.propertyName}UpdateWin.show();
+            }
         }
     }, {
         text: '删除',
@@ -439,7 +452,7 @@ Ext.onReady(function(){
     });
 
     var grid = new Ext.grid.GridPanel({
-        renderTo: 'grid',
+        renderTo: '${domainClass.propertyName}Grid',
         store: store,
         enableColumnMove:false,
         enableColumnResize:true,
@@ -464,12 +477,8 @@ Ext.onReady(function(){
     });
 
     store.load({params:{start:0,limit:10}});
-    grid.on('dblclick', function(e) {
-        update${className}();
-    });
 
-    function update${className}()
-    {
+    grid.on('dblclick', function(e) {
         var id = (grid.getSelectionModel().getSelected()).id;
         if (id == null) {
             Ext.foundation.msg('注意', "请选择要修改的记录");
@@ -477,20 +486,20 @@ Ext.onReady(function(){
             ${domainClass.propertyName}UpdateForm.getForm().load({
                 url:'/foundation/${domainClass.propertyName}/detailJSON?id=' + id,
                 success:function(form, action) {
-                    ${domainClass.propertyName}UpdateWin.show();
                 },
                 failure:function() {
                     Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
                 }
             });
-        }
-    }
 
+            ${domainClass.propertyName}UpdateWin.show();
+        }
+    });
 });
     </script>
     <body>
-        <div id="toolbar"></div>
-        <div id="grid"></div>
+        <div id="${domainClass.propertyName}Toolbar"></div>
+        <div id="${domainClass.propertyName}Grid"></div>
         <div id="${domainClass.propertyName}CreateWin"></div>
         <div id="${domainClass.propertyName}UpdateWin"></div>
         <div id="${domainClass.propertyName}DetailWin"></div>

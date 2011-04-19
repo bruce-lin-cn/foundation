@@ -23,7 +23,7 @@ Ext.onReady(function(){
             {fieldLabel: '身份证号',name: 'identityCardNum',xtype: 'textfield', maxLength: 18, maxLengthText: '身份证号至多包含18个字符', minLength: 18, minLengthText: '身份证号至少包含18个字符'},
             {fieldLabel: '等级',name: 'level',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['普通'],['高级'],['VIP']]}), emptyText:'请选择等级',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '余额',name: 'balance',xtype: 'textfield'},
-            {fieldLabel: '生日',name: 'birthday',xtype: 'textfield'}        ]
+            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d'}        ]
     });
 
     var customerCreateWin = new Ext.Window({
@@ -74,7 +74,7 @@ Ext.onReady(function(){
             {fieldLabel: '身份证号',name: 'identityCardNum',xtype: 'textfield', maxLength: 18, maxLengthText: '身份证号至多包含18个字符', minLength: 18, minLengthText: '身份证号至少包含18个字符'},
             {fieldLabel: '等级',name: 'level',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['普通'],['高级'],['VIP']]}), emptyText:'请选择等级',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '余额',name: 'balance',xtype: 'textfield'},
-            {fieldLabel: '生日',name: 'birthday',xtype: 'textfield'}
+            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d'}
         ]
     });
 
@@ -126,7 +126,7 @@ Ext.onReady(function(){
             {fieldLabel: '身份证号',name: 'identityCardNum',xtype: 'textfield', readOnly:true},
             {fieldLabel: '等级',name: 'level',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['普通'],['高级'],['VIP']]}), readOnly:true, emptyText:'请选择等级',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '余额',name: 'balance',xtype: 'textfield', readOnly:true},
-            {fieldLabel: '生日',name: 'birthday',xtype: 'textfield', readOnly:true},
+            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d', readOnly:true},
             {fieldLabel: '创建时间',name: 'dateCreated',xtype:'datefield',format:'Y-m-d', readOnly:true},
             {fieldLabel: '最近更新',name: 'lastUpdated',xtype:'datefield',format:'Y-m-d', readOnly:true}
         ]
@@ -253,7 +253,7 @@ Ext.onReady(function(){
         {header:'身份证号',dataIndex:'identityCardNum'} ,
         {header:'等级',dataIndex:'level'} ,
         {header:'余额',dataIndex:'balance'} ,
-        {header:'生日',dataIndex:'birthday'} ,
+        {header:'生日',dataIndex:'birthday', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} ,
         {header:'创建时间',dataIndex:'dateCreated', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} ,
         {header:'最近更新',dataIndex:'lastUpdated', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} 
     ]);
@@ -272,7 +272,7 @@ Ext.onReady(function(){
             {name:'identityCardNum'  } ,
             {name:'level'  } ,
             {name:'balance'  } ,
-            {name:'birthday'  } ,
+            {name:'birthday' , type:'date', dateFormat:'c' } ,
             {name:'dateCreated' , type:'date', dateFormat:'c' } ,
             {name:'lastUpdated' , type:'date', dateFormat:'c' } 
         ])

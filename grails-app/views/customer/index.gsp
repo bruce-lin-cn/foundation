@@ -24,7 +24,7 @@ Ext.onReady(function(){
             {fieldLabel: '身份证号',name: 'identityCardNum',xtype: 'textfield', maxLength: 18, maxLengthText: '身份证号至多包含18个字符', minLength: 18, minLengthText: '身份证号至少包含18个字符'},
             {fieldLabel: '等级',name: 'level',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['普通'],['高级'],['VIP']]}), emptyText:'请选择等级',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '余额',name: 'balance',xtype: 'textfield'},
-            {fieldLabel: '生日',name: 'birthday',xtype: 'textfield'}        ]
+            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d'}        ]
     });
 
     var customerCreateWin = new Ext.Window({
@@ -75,7 +75,7 @@ Ext.onReady(function(){
             {fieldLabel: '身份证号',name: 'identityCardNum',xtype: 'textfield', maxLength: 18, maxLengthText: '身份证号至多包含18个字符', minLength: 18, minLengthText: '身份证号至少包含18个字符'},
             {fieldLabel: '等级',name: 'level',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['普通'],['高级'],['VIP']]}), emptyText:'请选择等级',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '余额',name: 'balance',xtype: 'textfield'},
-            {fieldLabel: '生日',name: 'birthday',xtype: 'textfield'}
+            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d'}
         ]
     });
 
@@ -127,7 +127,7 @@ Ext.onReady(function(){
             {fieldLabel: '身份证号',name: 'identityCardNum',xtype: 'textfield', readOnly:true},
             {fieldLabel: '等级',name: 'level',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['普通'],['高级'],['VIP']]}), readOnly:true, emptyText:'请选择等级',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '余额',name: 'balance',xtype: 'textfield', readOnly:true},
-            {fieldLabel: '生日',name: 'birthday',xtype: 'textfield', readOnly:true},
+            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d', readOnly:true},
             {fieldLabel: '创建时间',name: 'dateCreated',xtype:'datefield',format:'Y-m-d', readOnly:true},
             {fieldLabel: '最近更新',name: 'lastUpdated',xtype:'datefield',format:'Y-m-d', readOnly:true}
         ]
@@ -153,7 +153,7 @@ Ext.onReady(function(){
     });
 
     var tb = new Ext.Toolbar();
-    tb.render('toolbar');
+    tb.render('customerToolbar');
 
     tb.add({
         text: '新建',
@@ -165,7 +165,20 @@ Ext.onReady(function(){
         text: '修改',
         icon: '/foundation/images/skin/database_edit.png',
         handler: function() {
-           updateCustomer();
+            var id = (grid.getSelectionModel().getSelected()).id;
+            if (id == null) {
+                Ext.foundation.msg('注意', "请选择要修改的记录");
+            }else{
+                customerUpdateForm.getForm().load({
+                    url:'/foundation/customer/detailJSON?id=' + id,
+                    success:function(form, action) {
+                    },
+                    failure:function() {
+                        Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
+                    }
+                });
+                customerUpdateWin.show();
+            }
         }
     }, {
         text: '删除',
@@ -254,7 +267,7 @@ Ext.onReady(function(){
         {header:'身份证号',dataIndex:'identityCardNum'} ,
         {header:'等级',dataIndex:'level'} ,
         {header:'余额',dataIndex:'balance'} ,
-        {header:'生日',dataIndex:'birthday'} ,
+        {header:'生日',dataIndex:'birthday', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} ,
         {header:'创建时间',dataIndex:'dateCreated', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} ,
         {header:'最近更新',dataIndex:'lastUpdated', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} 
     ]);
@@ -273,14 +286,14 @@ Ext.onReady(function(){
             {name:'identityCardNum'  } ,
             {name:'level'  } ,
             {name:'balance'  } ,
-            {name:'birthday'  } ,
+            {name:'birthday' , type:'date', dateFormat:'c' } ,
             {name:'dateCreated' , type:'date', dateFormat:'c' } ,
             {name:'lastUpdated' , type:'date', dateFormat:'c' } 
         ])
     });
 
     var grid = new Ext.grid.GridPanel({
-        renderTo: 'grid',
+        renderTo: 'customerGrid',
         store: store,
         enableColumnMove:false,
         enableColumnResize:true,
@@ -305,12 +318,8 @@ Ext.onReady(function(){
     });
 
     store.load({params:{start:0,limit:10}});
-    grid.on('dblclick', function(e) {
-        updateCustomer();
-    });
 
-    function updateCustomer()
-    {
+    grid.on('dblclick', function(e) {
         var id = (grid.getSelectionModel().getSelected()).id;
         if (id == null) {
             Ext.foundation.msg('注意', "请选择要修改的记录");
@@ -318,20 +327,20 @@ Ext.onReady(function(){
             customerUpdateForm.getForm().load({
                 url:'/foundation/customer/detailJSON?id=' + id,
                 success:function(form, action) {
-                    customerUpdateWin.show();
                 },
                 failure:function() {
                     Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
                 }
             });
-        }
-    }
 
+            customerUpdateWin.show();
+        }
+    });
 });
     </script>
     <body>
-        <div id="toolbar"></div>
-        <div id="grid"></div>
+        <div id="customerToolbar"></div>
+        <div id="customerGrid"></div>
         <div id="customerCreateWin"></div>
         <div id="customerUpdateWin"></div>
         <div id="customerDetailWin"></div>
