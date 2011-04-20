@@ -1,9 +1,9 @@
 /*************************************************
 Copyright by clinking.org, all rights reserved.
 **************************************************
-Domain class: Employee
+Domain class: Department
 Author: bruce_lin_chn@126.com
-Date: 2011-04-09 10:19:02 (星期六)
+Date: 2011-04-20 22:33:43 (星期三)
 
 Function:
 
@@ -13,22 +13,17 @@ Note:
 
 package business
 
-class Employee {
+class Department {
 
-    static cgDomain=[chinese:"员工", searchBar:true, navigation:[group:"业务管理",weight:1]]
+    static cgDomain=[chinese:"部门", searchBar:true, navigation:[group:"人事管理",weight:1]]
     static cgLayout=[:]
 
     String name
-    String gender
-    Date birthday
-    Department department
+
     //定义包含其他Domain的关联变量必须是模型名称的小写格式
-    Company company
 
     static constraints = {
-	    name(attributes:[chinese:"姓名"],blank:false,unique:true, size: 2..32)
-        gender(attributes:[chinese:"性别"],inList: ["男","女"],blank:false)
-        birthday(attributes:[chinese:"生日"],blank:false)
+	    name(attributes:[chinese:"部门名称"],blank:false,unique:true, size: 2..32)
     }
 
     String toString()

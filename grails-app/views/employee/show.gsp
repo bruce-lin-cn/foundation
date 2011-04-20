@@ -51,16 +51,16 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="employee.book.label" default="Book" /></td>
+                            <td valign="top" class="name"><g:message code="employee.company.label" default="Company" /></td>
                             
-                            <td valign="top" class="value"><g:link controller="book" action="show" id="${employeeInstance?.book?.id}">${employeeInstance?.book?.encodeAsHTML()}</g:link></td>
+                            <td valign="top" class="value"><g:link controller="company" action="show" id="${employeeInstance?.company?.id}">${employeeInstance?.company?.encodeAsHTML()}</g:link></td>
                             
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="employee.company.label" default="Company" /></td>
+                            <td valign="top" class="name"><g:message code="employee.department.label" default="Department" /></td>
                             
-                            <td valign="top" class="value"><g:link controller="company" action="show" id="${employeeInstance?.company?.id}">${employeeInstance?.company?.encodeAsHTML()}</g:link></td>
+                            <td valign="top" class="value"><g:link controller="department" action="show" id="${employeeInstance?.department?.id}">${employeeInstance?.department?.encodeAsHTML()}</g:link></td>
                             
                         </tr>
                     

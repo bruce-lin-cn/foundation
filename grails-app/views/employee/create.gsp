@@ -57,19 +57,19 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="book"><g:message code="employee.book.label" default="Book" /></label>
+                                    <label for="company"><g:message code="employee.company.label" default="Company" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'book', 'errors')}">
-                                    <g:select name="book.id" from="${business.Book.list()}" optionKey="id" value="${employeeInstance?.book?.id}" noSelection="['null': '']" />
+                                <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'company', 'errors')}">
+                                    <g:select name="company.id" from="${business.Company.list()}" optionKey="id" value="${employeeInstance?.company?.id}"  />
                                 </td>
                             </tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="company"><g:message code="employee.company.label" default="Company" /></label>
+                                    <label for="department"><g:message code="employee.department.label" default="Department" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'company', 'errors')}">
-                                    <g:select name="company.id" from="${business.Company.list()}" optionKey="id" value="${employeeInstance?.company?.id}"  />
+                                <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'department', 'errors')}">
+                                    <g:select name="department.id" from="${business.Department.list()}" optionKey="id" value="${employeeInstance?.department?.id}"  />
                                 </td>
                             </tr>
                         

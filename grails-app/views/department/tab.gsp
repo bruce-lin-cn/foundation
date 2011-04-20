@@ -1,50 +1,46 @@
-<%@ page import="business.Employee" %>
+<%@ page import="business.Department" %>
 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title><g:message code="员工管理" /></title>
+        <title><g:message code="部门管理" /></title>
     </head>
     <script>
 Ext.onReady(function(){
     Ext.QuickTips.init();
 
-    var employeeCreateForm = new Ext.form.FormPanel({
+    var departmentCreateForm = new Ext.form.FormPanel({
         labelAlign: 'right',
         labelWidth: 80,
         frame: true,
-        url: '/foundation/employee/createJSON',
+        url: '/foundation/department/createJSON',
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-            {fieldLabel: '姓名',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '姓名为必填项', maxLength: 32, maxLengthText: '姓名至多包含32个字符', minLength: 2, minLengthText: '姓名至少包含2个字符'},
-            {fieldLabel: '性别',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), emptyText:'请选择性别',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
-            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d'},
-            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'})},
-            {fieldLabel: '部门',hiddenName: 'department',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'department',emptyText:'请选择部门', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/department/associationListJSON', fields:['id', 'department'],  root: 'root', totalProperty: 'total'})}        ]
+            {fieldLabel: '部门名称',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '部门名称为必填项', maxLength: 32, maxLengthText: '部门名称至多包含32个字符', minLength: 2, minLengthText: '部门名称至少包含2个字符'}        ]
     });
 
-    var employeeCreateWin = new Ext.Window({
-        el: 'employeeCreateWin',
+    var departmentCreateWin = new Ext.Window({
+        el: 'departmentCreateWin',
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '创建员工',
+        title: '创建部门',
         height: 300,
         closeAction: 'hide',
-        items: [employeeCreateForm],
+        items: [departmentCreateForm],
         buttons: [
             {
                 text:'创建',
                 handler: function() {
-                    employeeCreateForm.getForm().submit({
-                        success:function(employeeCreateForm, action) {
+                    departmentCreateForm.getForm().submit({
+                        success:function(departmentCreateForm, action) {
                             Ext.foundation.msg('信息', action.result.msg);
-                            employeeCreateWin.hide();
+                            departmentCreateWin.hide();
                             store.reload();
                         },
                         failure:function() {
-                            Ext.foundation.msg('错误', "创建员工失败!");
+                            Ext.foundation.msg('错误', "创建部门失败!");
                         }
                     });
                 }
@@ -52,49 +48,45 @@ Ext.onReady(function(){
             {
                 text: '取 消',
                 handler: function() {
-                    employeeCreateWin.hide();
+                    departmentCreateWin.hide();
                 }
             }
         ]
     });
 
-    var employeeUpdateForm = new Ext.form.FormPanel({
+    var departmentUpdateForm = new Ext.form.FormPanel({
         labelAlign: 'right',
         labelWidth: 80,
         frame: true,
-        url: '/foundation/employee/updateJSON',
+        url: '/foundation/department/updateJSON',
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-            {fieldLabel: '姓名',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '姓名为必填项', maxLength: 32, maxLengthText: '姓名至多包含32个字符', minLength: 2, minLengthText: '姓名至少包含2个字符'},
-            {fieldLabel: '性别',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), emptyText:'请选择性别',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
-            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d'},
-            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'})},
-            {fieldLabel: '部门',hiddenName: 'department',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'department',emptyText:'请选择部门', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/department/associationListJSON', fields:['id', 'department'],  root: 'root', totalProperty: 'total'})}
+            {fieldLabel: '部门名称',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '部门名称为必填项', maxLength: 32, maxLengthText: '部门名称至多包含32个字符', minLength: 2, minLengthText: '部门名称至少包含2个字符'}
         ]
     });
 
-    var employeeUpdateWin = new Ext.Window({
-        el: 'employeeUpdateWin',
+    var departmentUpdateWin = new Ext.Window({
+        el: 'departmentUpdateWin',
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '修改员工',
+        title: '修改部门',
         height: 300,
         closeAction: 'hide',
-        items: [employeeUpdateForm],
+        items: [departmentUpdateForm],
         buttons: [
             {
                 text:'更新',
                 handler: function() {
-                    employeeUpdateForm.getForm().submit({
-                        success:function(employeeUpdateForm, action) {
+                    departmentUpdateForm.getForm().submit({
+                        success:function(departmentUpdateForm, action) {
                             Ext.foundation.msg('信息', action.result.msg);
-                            employeeUpdateWin.hide();
+                            departmentUpdateWin.hide();
                             store.reload();
                         },
                         failure:function() {
-                            Ext.foundation.msg('错误', "更新员工失败!");
+                            Ext.foundation.msg('错误', "更新部门失败!");
                         }
                     });
                 }
@@ -102,42 +94,38 @@ Ext.onReady(function(){
             {
                 text: '取 消',
                 handler: function() {
-                    employeeUpdateWin.hide();
+                    departmentUpdateWin.hide();
                 }
             }
         ]
     });
 
-    var employeeDetailForm = new Ext.form.FormPanel({
+    var departmentDetailForm = new Ext.form.FormPanel({
         labelAlign: 'right',
         labelWidth: 80,
         frame: true,
-        url: '/foundation/employee/detailJSON',
+        url: '/foundation/department/detailJSON',
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-            {fieldLabel: '姓名',name: 'name',xtype: 'textfield', readOnly:true},
-            {fieldLabel: '性别',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), readOnly:true, emptyText:'请选择性别',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
-            {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d', readOnly:true},
-            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'}), readOnly:true},
-            {fieldLabel: '部门',hiddenName: 'department',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'department',emptyText:'请选择部门', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/department/associationListJSON', fields:['id', 'department'],  root: 'root', totalProperty: 'total'}), readOnly:true}
+            {fieldLabel: '部门名称',name: 'name',xtype: 'textfield', readOnly:true}
         ]
     });
 
-    var employeeDetailWin = new Ext.Window({
-        el: 'employeeDetailWin',
+    var departmentDetailWin = new Ext.Window({
+        el: 'departmentDetailWin',
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '员工明细',
+        title: '部门明细',
         height: 300,
         closeAction: 'hide',
-        items: [employeeDetailForm],
+        items: [departmentDetailForm],
         buttons: [
             {
                 text: '确定',
                 handler: function() {
-                    employeeDetailWin.hide();
+                    departmentDetailWin.hide();
                 }
             }
         ]
@@ -150,13 +138,13 @@ Ext.onReady(function(){
         text: '新建',
         icon: '/foundation/images/skin/database_add.png',
         handler:function() {
-            employeeCreateWin.show(this);
+            departmentCreateWin.show(this);
         }
     }, {
         text: '修改',
         icon: '/foundation/images/skin/database_edit.png',
         handler: function() {
-           updateEmployee();
+           updateDepartment();
         }
     }, {
         text: '删除',
@@ -174,7 +162,7 @@ Ext.onReady(function(){
                 Ext.MessageBox.confirm('信息', '您确定删除编号为' + id + '的记录吗?', function(btn) {
                     if (btn == 'yes') {
                         Ext.Ajax.request({
-                            url: '/foundation/employee/deleteJSON',
+                            url: '/foundation/department/deleteJSON',
                             params: {id:id},
                             success: function(result) {
                                 var json_str = Ext.util.JSON.decode(result.responseText);
@@ -198,15 +186,15 @@ Ext.onReady(function(){
             if (id == null) {
                 Ext.foundation.msg('注意', "请选择要显示的记录");
             }else{
-                employeeDetailForm.getForm().load({
-                    url:'/foundation/employee/detailJSON?id=' + id,
+                departmentDetailForm.getForm().load({
+                    url:'/foundation/department/detailJSON?id=' + id,
                     success:function(form, action) {
                     },
                     failure:function() {
                         Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
                     }
                 });
-                employeeDetailWin.show();
+                departmentDetailWin.show();
             }
         }
     },{
@@ -239,26 +227,18 @@ Ext.onReady(function(){
     var cm = new Ext.grid.ColumnModel([
         sm,
         {header:'编号',dataIndex:'id'} ,
-        {header:'姓名',dataIndex:'name'} ,
-        {header:'性别',dataIndex:'gender'} ,
-        {header:'生日',dataIndex:'birthday', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} ,
-        {header:'公司',dataIndex:'company'},
-        {header:'部门',dataIndex:'department'}
+        {header:'部门名称',dataIndex:'name'} 
     ]);
 
     var store = new Ext.data.Store({
         autoLoad:true,
-        proxy: new Ext.data.HttpProxy({url:'/foundation/employee/listJSON'}),
+        proxy: new Ext.data.HttpProxy({url:'/foundation/department/listJSON'}),
         reader: new Ext.data.JsonReader({
             totalProperty:'total',
             root:'root'
         }, [
             {name:'id'  } ,
-            {name:'name'  } ,
-            {name:'gender'  } ,
-            {name:'birthday' , type:'date', dateFormat:'c' } ,
-            {name:'company'},
-            {name:'department'}
+            {name:'name'  } 
         ])
     });
 
@@ -289,19 +269,19 @@ Ext.onReady(function(){
 
     store.load({params:{start:0,limit:10}});
     grid.on('dblclick', function(e) {
-        updateEmployee();
+        updateDepartment();
     });
 
-    function updateEmployee()
+    function updateDepartment()
     {
         var id = (grid.getSelectionModel().getSelected()).id;
         if (id == null) {
             Ext.foundation.msg('注意', "请选择要修改的记录");
         } else {
-            employeeUpdateForm.getForm().load({
-                url:'/foundation/employee/detailJSON?id=' + id,
+            departmentUpdateForm.getForm().load({
+                url:'/foundation/department/detailJSON?id=' + id,
                 success:function(form, action) {
-                    employeeUpdateWin.show();
+                    departmentUpdateWin.show();
                 },
                 failure:function() {
                     Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
@@ -315,8 +295,8 @@ Ext.onReady(function(){
     <body>
         <div id="toolbar"></div>
         <div id="grid"></div>
-        <div id="employeeCreateWin"></div>
-        <div id="employeeUpdateWin"></div>
-        <div id="employeeDetailWin"></div>
+        <div id="departmentCreateWin"></div>
+        <div id="departmentUpdateWin"></div>
+        <div id="departmentDetailWin"></div>
     </body>
 </html>

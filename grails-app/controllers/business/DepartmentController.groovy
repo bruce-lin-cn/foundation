@@ -1,6 +1,6 @@
 package business
 
-class EmployeeController {
+class DepartmentController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -19,7 +19,7 @@ class EmployeeController {
 
     def associationListJSON = {
 
-        def total=Employee.count()
+        def total=Department.count()
 
         if(total==0)
         {
@@ -38,11 +38,11 @@ class EmployeeController {
             }
 
 
-            lists = Employee.findAll()[start..end]
+            lists = Department.findAll()[start..end]
 
             def associationList=[]
             lists.each{item ->
-                associationList.add(new HashMap(id:item.id, employee:item.toString()))
+                associationList.add(new HashMap(id:item.id, department:item.toString()))
             }
 
             def json = associationList as grails.converters.JSON
@@ -54,7 +54,7 @@ class EmployeeController {
 
     def listJSON = {
 
-        def total=Employee.count()
+        def total=Department.count()
 
         if(total==0)
         {
@@ -72,10 +72,10 @@ class EmployeeController {
                 end = total - 1
             }
 
-            lists = Employee.findAll()[start..end]
+            lists = Department.findAll()[start..end]
             def renderList=[]
             lists.each{item ->
-                renderList.add(new HashMap(id: item.id,name: item.name,gender: item.gender,birthday: item.birthday,company: item.company.toString(),department: item.department.toString()))
+                renderList.add(new HashMap(id: item.id,name: item.name))
             }
             def json = renderList as grails.converters.JSON
             def output = "{total:" + total + ",root:" + json + "}"
@@ -86,14 +86,14 @@ class EmployeeController {
 
     def detailJSON = {
 
-        def employeeInstance = Employee.get(params.id)
+        def departmentInstance = Department.get(params.id)
 
-        println("AJAX: Detailing "+employeeInstance?.toString())
+        println("AJAX: Detailing "+departmentInstance?.toString())
 
-        if (employeeInstance) {
+        if (departmentInstance) {
             try {
 
-                def map=new HashMap(id: employeeInstance.id,name: employeeInstance.name,gender: employeeInstance.gender,birthday: employeeInstance.birthday,company: employeeInstance.company.toString(),department: employeeInstance.department.toString())
+                def map=new HashMap(id: departmentInstance.id,name: departmentInstance.name)
 
                 def json=map as grails.converters.JSON
 
@@ -111,15 +111,11 @@ class EmployeeController {
     def createJSON = {
         println("AJAX: Creating "+params.toString())
 
-        def employee=new Employee()
+        def department=new Department()
 
-        employee.name=params.name
-        employee.gender=params.gender
-        employee.birthday=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.birthday)
-        employee.company=Company.get(params.company.toLong())
-        employee.department=Department.get(params.department.toLong())
+        department.name=params.name
 
-        employee.save()
+        department.save()
 
         render "{success:true,msg:'记录已创建'}";
 
@@ -128,16 +124,12 @@ class EmployeeController {
     //TODO: 版本判断
     def updateJSON = {
         println("AJAX: Updating "+params.toString())
-        def employeeInstance = Employee.get(params.id)
-        def employee=Employee.get(params.id)
+        def departmentInstance = Department.get(params.id)
+        def department=Department.get(params.id)
 
-        employee.name=params.name
-        employee.gender=params.gender
-        employee.birthday=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.birthday)
-        employee.company=Company.get(params.company.toLong())
-        employee.department=Department.get(params.department.toLong())
+        department.name=params.name
 
-        employee.save()
+        department.save()
 
         render "{success:true,msg:'记录已更新'}";
 
@@ -150,7 +142,7 @@ class EmployeeController {
 
             for(int i=0;i<idList.size();i++)
             {
-                def tmp=Employee.get(idList[i])
+                def tmp=Department.get(idList[i])
 
                 tmp?.delete()
             }

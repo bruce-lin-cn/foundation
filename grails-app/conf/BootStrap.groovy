@@ -10,6 +10,9 @@ class BootStrap {
         new Company(name: "谷歌中国").save()
         new Company(name: "微软中国").save()
 
+        new Department(name: "财务部").save()
+        new Department(name: "市场部").save()
+
         // navigation:[group:"业务管理",weight:1
         grailsApplication.getArtefacts("Domain")*.clazz.each{domain ->
             println domain.name

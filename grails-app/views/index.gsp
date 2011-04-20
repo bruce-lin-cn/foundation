@@ -123,6 +123,8 @@
             var url ="<iframe src='/foundation/"+domain+"/index' scrolling='auto' frameborder='0' style='width:100%; height:100%;overflow:hidden;'/>";
             if (!mainTabPanel.getComponent(domain)) {
                 tp = new Ext.TabPanel({
+                    header: true,
+
                     iconCls : 'tab',
                     margins: '0 0 0 0',
                     id : domain,
@@ -130,7 +132,8 @@
                     xtype : 'tabpanel',
                     closable : true,
                     title : chinese+"管理",
-                    html: url
+                    html: url,
+                    scripts: true
                 });
                 mainTabPanel.add(tp);
                 mainTabPanel.setActiveTab(domain);

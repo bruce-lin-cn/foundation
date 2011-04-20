@@ -63,9 +63,8 @@
             out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
             println ""
         } else if (p.isAssociation() && p.oneToOne) {
-            println ""
-            out << "        ${domainClass.propertyName}.${p.name}=${p.name.capitalize()}.get(params.${p.name})"
-            println ""
+            println "        ${domainClass.propertyName}.${p.name}=${p.name.capitalize()}.get(params.${p.name}.toLong())"
+
         } else {
                 out << "        ${p}"
                 out << "class: ${domainClass}"
