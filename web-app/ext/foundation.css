@@ -56,3 +56,5 @@ pre.code{
 .x-grid3-row-body p {
     margin:5px 5px 10px 5px !important;
 }
+
+.hideHeader {      display:none; } 

@@ -124,7 +124,6 @@
             if (!mainTabPanel.getComponent(domain)) {
                 tp = new Ext.TabPanel({
                     header: true,
-
                     iconCls : 'tab',
                     margins: '0 0 0 0',
                     id : domain,
@@ -133,7 +132,8 @@
                     closable : true,
                     title : chinese+"管理",
                     html: url,
-                    scripts: true
+                    scripts: true,
+                    headerCfg: {cls: 'hideHeader'}
                 });
                 mainTabPanel.add(tp);
                 mainTabPanel.setActiveTab(domain);
