@@ -63,7 +63,9 @@
             out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
             println ""
         } else if (p.isAssociation() && p.oneToOne) {
-            println "        ${domainClass.propertyName}.${p.name}=${p.name.capitalize()}.get(params.${p.name}?.tokenize(\"@@\")[0].toLong())"
+            //临时解决方案针对： combo加载后初始值错误的问题
+            println "        matcher= params.${p.name}=~pattern; value=matcher[0][1..-2]"
+            println "        ${domainClass.propertyName}.${p.name}=${p.name.capitalize()}.get(value.toLong())"
         } else {
                 out << "        ${p}"
                 out << "class: ${domainClass}"
@@ -71,6 +73,10 @@
     }
 
 %>
+    def pattern= ~/\\[[0-9]+\\]/
+    def matcher=null
+    def value =null
+
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def afterInterceptor = { model ->
@@ -111,7 +117,8 @@
 
             def associationList=[]
             lists.each{item ->
-                associationList.add(new HashMap(value:item.id+"@@"+item.toString()))
+                //临时解决方案针对： combo加载后初始值错误的问题
+                associationList.add(new HashMap(value:"["+item.id+"]"+item.toString()))
             }
 
             def json = associationList as grails.converters.JSON
@@ -200,7 +207,8 @@
                                         out << "${p.name}:"
                                         if(p.isAssociation())
                                         {
-                                            out << " ${propertyName}.${p.name}.id+'@@'+${propertyName}.${p.name}.toString()"
+                                            //临时解决方案针对： combo加载后初始值错误的问题
+                                            out << " '['+${propertyName}.${p.name}.id+']'+${propertyName}.${p.name}.toString()"
                                         }else{
                                             out << " ${propertyName}.${p.name}"
                                         }

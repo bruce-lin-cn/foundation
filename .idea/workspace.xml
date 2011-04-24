@@ -23,7 +23,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/grails-app/controllers/business/EmployeeController.groovy" line="111" class="Class at EmployeeController.groovy:115" package="">
+      <breakpoint url="file://$PROJECT_DIR$/grails-app/controllers/business/EmployeeController.groovy" line="116" class="Class at EmployeeController.groovy:115" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -128,19 +128,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.gsp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/index.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="440" column="22" selection-start="18034" selection-end="18034" vertical-scroll-proportion="13.160606">
+            <state line="440" column="22" selection-start="18034" selection-end="18034" vertical-scroll-proportion="-85.15686">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Controller.groovy" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Controller.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="201" column="41" selection-start="8217" selection-end="8217" vertical-scroll-proportion="0.0">
+            <state line="120" column="66" selection-start="4550" selection-end="4550" vertical-scroll-proportion="0.32020998">
               <folding />
             </state>
           </provider>
@@ -149,7 +149,7 @@
       <file leaf-file-name="EmployeeController.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/EmployeeController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="0" selection-start="985" selection-end="985" vertical-scroll-proportion="24.391304">
+            <state line="52" column="0" selection-start="1106" selection-end="1106" vertical-scroll-proportion="24.391304">
               <folding />
             </state>
           </provider>
@@ -158,7 +158,7 @@
       <file leaf-file-name="CompanyController.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/CompanyController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="0" selection-start="981" selection-end="981" vertical-scroll-proportion="-7.2608695">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
@@ -167,7 +167,7 @@
       <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/index.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="159" selection-start="2699" selection-end="2699" vertical-scroll-proportion="-4.5">
+            <state line="146" column="16" selection-start="5055" selection-end="5055" vertical-scroll-proportion="-94.07692">
               <folding />
             </state>
           </provider>
@@ -202,12 +202,12 @@
         <option value="$PROJECT_DIR$/grails-app/domain/business/DepartmentEmployee.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/business/Employee.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/employee/index.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/index.gsp" />
         <option value="$PROJECT_DIR$/src/templates/artifacts/DomainClass.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/departmentEmployee/index.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/business/EmployeeController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/business/CompanyController.groovy" />
         <option value="$PROJECT_DIR$/src/templates/scaffolding/index.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/index.gsp" />
         <option value="$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy" />
       </list>
     </option>
@@ -779,10 +779,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1288" height="778" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.6771653" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21574803" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -793,11 +794,10 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31442463" sideWeight="0.6913386" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30866143" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30866143" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33228347" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -889,16 +889,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/index.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="159" selection-start="2699" selection-end="2699" vertical-scroll-proportion="-4.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/CompanyController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="0" selection-start="981" selection-end="981" vertical-scroll-proportion="-7.2608695">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
           <folding />
         </state>
       </provider>
@@ -915,7 +908,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/business/EmployeeController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="0" selection-start="985" selection-end="985" vertical-scroll-proportion="24.391304">
+        <state line="52" column="0" selection-start="1106" selection-end="1106" vertical-scroll-proportion="24.391304">
           <folding />
         </state>
       </provider>
@@ -930,9 +923,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/departmentEmployee/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="201" column="41" selection-start="8217" selection-end="8217" vertical-scroll-proportion="0.0">
+        <state line="113" column="54" selection-start="5036" selection-end="5036" vertical-scroll-proportion="35.824326">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/index.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="440" column="22" selection-start="18034" selection-end="18034" vertical-scroll-proportion="-85.15686">
           <folding />
         </state>
       </provider>
@@ -944,16 +944,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/departmentEmployee/index.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="54" selection-start="5036" selection-end="5036" vertical-scroll-proportion="35.824326">
+        <state line="146" column="16" selection-start="5055" selection-end="5055" vertical-scroll-proportion="-94.07692">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/index.gsp">
+    <entry file="file://$PROJECT_DIR$/src/templates/scaffolding/Controller.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="440" column="22" selection-start="18034" selection-end="18034" vertical-scroll-proportion="13.160606">
+        <state line="120" column="66" selection-start="4550" selection-end="4550" vertical-scroll-proportion="0.32020998">
           <folding />
         </state>
       </provider>

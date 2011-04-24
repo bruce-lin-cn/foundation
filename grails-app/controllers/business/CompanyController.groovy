@@ -2,6 +2,10 @@ package business
 
 class CompanyController {
 
+    def pattern= ~/\[[0-9]+\]/
+    def matcher=null
+    def value =null
+
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def afterInterceptor = { model ->
@@ -42,7 +46,8 @@ class CompanyController {
 
             def associationList=[]
             lists.each{item ->
-                associationList.add(new HashMap(value:item.id+"@@"+item.toString()))
+                //临时解决方案针对： combo加载后初始值错误的问题
+                associationList.add(new HashMap(value:"["+item.id+"]"+item.toString()))
             }
 
             def json = associationList as grails.converters.JSON

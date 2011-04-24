@@ -2,6 +2,10 @@ package business
 
 class EmployeeController {
 
+    def pattern= ~/\[[0-9]+\]/
+    def matcher=null
+    def value =null
+
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def afterInterceptor = { model ->
@@ -42,7 +46,8 @@ class EmployeeController {
 
             def associationList=[]
             lists.each{item ->
-                associationList.add(new HashMap(value:item.id+"@@"+item.toString()))
+                //临时解决方案针对： combo加载后初始值错误的问题
+                associationList.add(new HashMap(value:"["+item.id+"]"+item.toString()))
             }
 
             def json = associationList as grails.converters.JSON
@@ -93,7 +98,7 @@ class EmployeeController {
         if (employeeInstance) {
             try {
 
-                def map=new HashMap(id: employeeInstance.id,name: employeeInstance.name,gender: employeeInstance.gender,birthday: employeeInstance.birthday,company: employeeInstance.company.id+'@@'+employeeInstance.company.toString())
+                def map=new HashMap(id: employeeInstance.id,name: employeeInstance.name,gender: employeeInstance.gender,birthday: employeeInstance.birthday,company: '['+employeeInstance.company.id+']'+employeeInstance.company.toString())
 
                 def json=map as grails.converters.JSON
 
@@ -115,7 +120,8 @@ class EmployeeController {
         employee.name=params.name
         employee.gender=params.gender
         employee.birthday=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.birthday)
-        employee.company=Company.get(params.company?.tokenize("@@")[0].toLong())
+        matcher= params.company=~pattern; value=matcher[0][1..-2]
+        employee.company=Company.get(value.toLong())
 
         employee.save()
 
@@ -132,7 +138,8 @@ class EmployeeController {
         employee.name=params.name
         employee.gender=params.gender
         employee.birthday=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.birthday)
-        employee.company=Company.get(params.company?.tokenize("@@")[0].toLong())
+        matcher= params.company=~pattern; value=matcher[0][1..-2]
+        employee.company=Company.get(value.toLong())
 
         employee.save()
 
