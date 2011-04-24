@@ -63,8 +63,7 @@
             out << "        ${domainClass.propertyName}.${p.name}=params.${p.name}"
             println ""
         } else if (p.isAssociation() && p.oneToOne) {
-            println "        ${domainClass.propertyName}.${p.name}=${p.name.capitalize()}.get(params.${p.name}.toLong())"
-
+            println "        ${domainClass.propertyName}.${p.name}=${p.name.capitalize()}.get(params.${p.name}?.tokenize(\"@@\")[0].toLong())"
         } else {
                 out << "        ${p}"
                 out << "class: ${domainClass}"
@@ -112,7 +111,7 @@
 
             def associationList=[]
             lists.each{item ->
-                associationList.add(new HashMap(id:item.id, ${domainClass.propertyName}:item.toString()))
+                associationList.add(new HashMap(value:item.id+"@@"+item.toString()))
             }
 
             def json = associationList as grails.converters.JSON
@@ -201,7 +200,7 @@
                                         out << "${p.name}:"
                                         if(p.isAssociation())
                                         {
-                                            out << " ${propertyName}.${p.name}.toString()"
+                                            out << " ${propertyName}.${p.name}.id+'@@'+${propertyName}.${p.name}.toString()"
                                         }else{
                                             out << " ${propertyName}.${p.name}"
                                         }
@@ -230,7 +229,6 @@
         println("AJAX: Creating "+params.toString())
 
         def ${domainClass.propertyName}=new ${className}()
-
 <%  excludedProps = Event.allEvents.toList() << 'version'<< 'dateCreated' << 'lastUpdated'
                     persistentPropNames = domainClass.persistentProperties*.name
                     props = domainClass.properties.findAll { persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) }

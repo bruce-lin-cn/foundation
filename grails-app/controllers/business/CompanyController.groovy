@@ -42,7 +42,7 @@ class CompanyController {
 
             def associationList=[]
             lists.each{item ->
-                associationList.add(new HashMap(id:item.id, company:item.toString()))
+                associationList.add(new HashMap(value:item.id+"@@"+item.toString()))
             }
 
             def json = associationList as grails.converters.JSON
@@ -112,7 +112,6 @@ class CompanyController {
         println("AJAX: Creating "+params.toString())
 
         def company=new Company()
-
         company.name=params.name
 
         company.save()

@@ -31,7 +31,7 @@ h2 {
 	border-left:1px solid #DCEAFB;
 	background:#ecf5fe url( info-bg.gif ) repeat-x;
 	font-size:10px;
-	padding:8px;
+	padding:0px;
 }
 pre.code{
 	background: #F8F8F8;
@@ -48,7 +48,7 @@ pre.code{
 }
 #msg-div {
     position:absolute;
-    left:35%;
+    left:1%;
     top:10px;
     width:250px;
     z-index:20000;
@@ -57,4 +57,4 @@ pre.code{
     margin:5px 5px 10px 5px !important;
 }
 
-.hideHeader {      display:none; } 
+.hideHeader {      display:none; }

@@ -1,6 +1,6 @@
 package business
 
-class EmployeeController {
+class DepartmentEmployeeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -19,7 +19,7 @@ class EmployeeController {
 
     def associationListJSON = {
 
-        def total=Employee.count()
+        def total=DepartmentEmployee.count()
 
         if(total==0)
         {
@@ -38,11 +38,11 @@ class EmployeeController {
             }
 
 
-            lists = Employee.findAll()[start..end]
+            lists = DepartmentEmployee.findAll()[start..end]
 
             def associationList=[]
             lists.each{item ->
-                associationList.add(new HashMap(value:item.id+"@@"+item.toString()))
+                associationList.add(new HashMap(id:item.id, departmentEmployee:item.toString()))
             }
 
             def json = associationList as grails.converters.JSON
@@ -54,7 +54,7 @@ class EmployeeController {
 
     def listJSON = {
 
-        def total=Employee.count()
+        def total=DepartmentEmployee.count()
 
         if(total==0)
         {
@@ -72,10 +72,10 @@ class EmployeeController {
                 end = total - 1
             }
 
-            lists = Employee.findAll()[start..end]
+            lists = DepartmentEmployee.findAll()[start..end]
             def renderList=[]
             lists.each{item ->
-                renderList.add(new HashMap(id: item.id,name: item.name,gender: item.gender,birthday: item.birthday,company: item.company.toString()))
+                renderList.add(new HashMap(id: item.id,department: item.department.toString(),employee: item.employee.toString()))
             }
             def json = renderList as grails.converters.JSON
             def output = "{total:" + total + ",root:" + json + "}"
@@ -86,14 +86,14 @@ class EmployeeController {
 
     def detailJSON = {
 
-        def employeeInstance = Employee.get(params.id)
+        def departmentEmployeeInstance = DepartmentEmployee.get(params.id)
 
-        println("AJAX: Detailing "+employeeInstance?.toString())
+        println("AJAX: Detailing "+departmentEmployeeInstance?.toString())
 
-        if (employeeInstance) {
+        if (departmentEmployeeInstance) {
             try {
 
-                def map=new HashMap(id: employeeInstance.id,name: employeeInstance.name,gender: employeeInstance.gender,birthday: employeeInstance.birthday,company: employeeInstance.company.id+'@@'+employeeInstance.company.toString())
+                def map=new HashMap(id: departmentEmployeeInstance.id,department: departmentEmployeeInstance.department.toString(),employee: departmentEmployeeInstance.employee.toString())
 
                 def json=map as grails.converters.JSON
 
@@ -111,13 +111,12 @@ class EmployeeController {
     def createJSON = {
         println("AJAX: Creating "+params.toString())
 
-        def employee=new Employee()
-        employee.name=params.name
-        employee.gender=params.gender
-        employee.birthday=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.birthday)
-        employee.company=Company.get(params.company?.tokenize("@@")[0].toLong())
+        def departmentEmployee=new DepartmentEmployee()
 
-        employee.save()
+        departmentEmployee.department=Department.get(params.department.toLong())
+        departmentEmployee.employee=Employee.get(params.employee.toLong())
+
+        departmentEmployee.save()
 
         render "{success:true,msg:'记录已创建'}";
 
@@ -126,15 +125,13 @@ class EmployeeController {
     //TODO: 版本判断
     def updateJSON = {
         println("AJAX: Updating "+params.toString())
-        def employeeInstance = Employee.get(params.id)
-        def employee=Employee.get(params.id)
+        def departmentEmployeeInstance = DepartmentEmployee.get(params.id)
+        def departmentEmployee=DepartmentEmployee.get(params.id)
 
-        employee.name=params.name
-        employee.gender=params.gender
-        employee.birthday=(new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(params.birthday)
-        employee.company=Company.get(params.company?.tokenize("@@")[0].toLong())
+        departmentEmployee.department=Department.get(params.department.toLong())
+        departmentEmployee.employee=Employee.get(params.employee.toLong())
 
-        employee.save()
+        departmentEmployee.save()
 
         render "{success:true,msg:'记录已更新'}";
 
@@ -147,7 +144,7 @@ class EmployeeController {
 
             for(int i=0;i<idList.size();i++)
             {
-                def tmp=Employee.get(idList[i])
+                def tmp=DepartmentEmployee.get(idList[i])
 
                 tmp?.delete()
             }

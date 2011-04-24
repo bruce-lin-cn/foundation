@@ -32,8 +32,6 @@
                         
                             <th><g:message code="employee.company.label" default="Company" /></th>
                         
-                            <th><g:message code="employee.department.label" default="Department" /></th>
-                        
                         </tr>
                     </thead>
                     <tbody>
@@ -49,8 +47,6 @@
                             <td><g:formatDate date="${employeeInstance.birthday}" /></td>
                         
                             <td>${fieldValue(bean: employeeInstance, field: "company")}</td>
-                        
-                            <td>${fieldValue(bean: employeeInstance, field: "department")}</td>
                         
                         </tr>
                     </g:each>

@@ -1,10 +1,10 @@
 
-<%@ page import="business.Employee" %>
+<%@ page import="business.DepartmentEmployee" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'employee.label', default: 'Employee')}" />
+        <g:set var="entityName" value="${message(code: 'departmentEmployee.label', default: 'DepartmentEmployee')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -23,37 +23,23 @@
                     <tbody>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="employee.id.label" default="Id" /></td>
+                            <td valign="top" class="name"><g:message code="departmentEmployee.id.label" default="Id" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: employeeInstance, field: "id")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="employee.name.label" default="Name" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: employeeInstance, field: "name")}</td>
+                            <td valign="top" class="value">${fieldValue(bean: departmentEmployeeInstance, field: "id")}</td>
                             
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="employee.gender.label" default="Gender" /></td>
+                            <td valign="top" class="name"><g:message code="departmentEmployee.department.label" default="Department" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: employeeInstance, field: "gender")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="employee.birthday.label" default="Birthday" /></td>
-                            
-                            <td valign="top" class="value"><g:formatDate date="${employeeInstance?.birthday}" /></td>
+                            <td valign="top" class="value"><g:link controller="department" action="show" id="${departmentEmployeeInstance?.department?.id}">${departmentEmployeeInstance?.department?.encodeAsHTML()}</g:link></td>
                             
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="employee.company.label" default="Company" /></td>
+                            <td valign="top" class="name"><g:message code="departmentEmployee.employee.label" default="Employee" /></td>
                             
-                            <td valign="top" class="value"><g:link controller="company" action="show" id="${employeeInstance?.company?.id}">${employeeInstance?.company?.encodeAsHTML()}</g:link></td>
+                            <td valign="top" class="value"><g:link controller="employee" action="show" id="${departmentEmployeeInstance?.employee?.id}">${departmentEmployeeInstance?.employee?.encodeAsHTML()}</g:link></td>
                             
                         </tr>
                     
@@ -62,7 +48,7 @@
             </div>
             <div class="buttons">
                 <g:form>
-                    <g:hiddenField name="id" value="${employeeInstance?.id}" />
+                    <g:hiddenField name="id" value="${departmentEmployeeInstance?.id}" />
                     <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </g:form>

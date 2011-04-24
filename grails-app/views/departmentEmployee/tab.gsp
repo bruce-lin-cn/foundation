@@ -1,47 +1,47 @@
-<%@ page import="business.Company" %>
+<%@ page import="business.DepartmentEmployee" %>
 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <g:extjs />
-        <title><g:message code="公司管理" /></title>
+        <title><g:message code="模型管理" /></title>
     </head>
     <script>
 Ext.onReady(function(){
     Ext.QuickTips.init();
 
-    var companyCreateForm = new Ext.form.FormPanel({
+    var departmentEmployeeCreateForm = new Ext.form.FormPanel({
         labelAlign: 'right',
         labelWidth: 80,
         frame: true,
-        url: '/foundation/company/createJSON',
+        url: '/foundation/departmentEmployee/createJSON',
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-            {fieldLabel: '名称',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '名称为必填项', maxLength: 32, maxLengthText: '名称至多包含32个字符', minLength: 4, minLengthText: '名称至少包含4个字符'}        ]
+            {fieldLabel: '部门',hiddenName: 'department',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'department',emptyText:'请选择部门', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/department/associationListJSON', fields:['id', 'department'],  root: 'root', totalProperty: 'total'})},
+            {fieldLabel: '员工',hiddenName: 'employee',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'employee',emptyText:'请选择员工', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/employee/associationListJSON', fields:['id', 'employee'],  root: 'root', totalProperty: 'total'})}        ]
     });
 
-    var companyCreateWin = new Ext.Window({
-        el: 'companyCreateWin',
+    var departmentEmployeeCreateWin = new Ext.Window({
+        el: 'departmentEmployeeCreateWin',
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '创建公司',
+        title: '创建模型',
         height: 300,
         closeAction: 'hide',
-        items: [companyCreateForm],
+        items: [departmentEmployeeCreateForm],
         buttons: [
             {
                 text:'创建',
                 handler: function() {
-                    companyCreateForm.getForm().submit({
-                        success:function(companyCreateForm, action) {
+                    departmentEmployeeCreateForm.getForm().submit({
+                        success:function(departmentEmployeeCreateForm, action) {
                             Ext.foundation.msg('信息', action.result.msg);
-                            companyCreateWin.hide();
+                            departmentEmployeeCreateWin.hide();
                             store.reload();
                         },
                         failure:function() {
-                            Ext.foundation.msg('错误', "创建公司失败!");
+                            Ext.foundation.msg('错误', "创建模型失败!");
                         }
                     });
                 }
@@ -49,45 +49,46 @@ Ext.onReady(function(){
             {
                 text: '取 消',
                 handler: function() {
-                    companyCreateWin.hide();
+                    departmentEmployeeCreateWin.hide();
                 }
             }
         ]
     });
 
-    var companyUpdateForm = new Ext.form.FormPanel({
+    var departmentEmployeeUpdateForm = new Ext.form.FormPanel({
         labelAlign: 'right',
         labelWidth: 80,
         frame: true,
-        url: '/foundation/company/updateJSON',
+        url: '/foundation/departmentEmployee/updateJSON',
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-            {fieldLabel: '名称',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '名称为必填项', maxLength: 32, maxLengthText: '名称至多包含32个字符', minLength: 4, minLengthText: '名称至少包含4个字符'}
+            {fieldLabel: '部门',hiddenName: 'department',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'department',emptyText:'请选择部门', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/department/associationListJSON', fields:['id', 'department'],  root: 'root', totalProperty: 'total'})},
+            {fieldLabel: '员工',hiddenName: 'employee',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'employee',emptyText:'请选择员工', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/employee/associationListJSON', fields:['id', 'employee'],  root: 'root', totalProperty: 'total'})}
         ]
     });
 
-    var companyUpdateWin = new Ext.Window({
-        el: 'companyUpdateWin',
+    var departmentEmployeeUpdateWin = new Ext.Window({
+        el: 'departmentEmployeeUpdateWin',
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '修改公司',
+        title: '修改模型',
         height: 300,
         closeAction: 'hide',
-        items: [companyUpdateForm],
+        items: [departmentEmployeeUpdateForm],
         buttons: [
             {
                 text:'更新',
                 handler: function() {
-                    companyUpdateForm.getForm().submit({
-                        success:function(companyUpdateForm, action) {
+                    departmentEmployeeUpdateForm.getForm().submit({
+                        success:function(departmentEmployeeUpdateForm, action) {
                             Ext.foundation.msg('信息', action.result.msg);
-                            companyUpdateWin.hide();
+                            departmentEmployeeUpdateWin.hide();
                             store.reload();
                         },
                         failure:function() {
-                            Ext.foundation.msg('错误', "更新公司失败!");
+                            Ext.foundation.msg('错误', "更新模型失败!");
                         }
                     });
                 }
@@ -95,70 +96,58 @@ Ext.onReady(function(){
             {
                 text: '取 消',
                 handler: function() {
-                    companyUpdateWin.hide();
+                    departmentEmployeeUpdateWin.hide();
                 }
             }
         ]
     });
 
-    var companyDetailForm = new Ext.form.FormPanel({
+    var departmentEmployeeDetailForm = new Ext.form.FormPanel({
         labelAlign: 'right',
         labelWidth: 80,
         frame: true,
-        url: '/foundation/company/detailJSON',
+        url: '/foundation/departmentEmployee/detailJSON',
         defaults:{ width:250},
         items: [
             {fieldLabel:'id',name: 'id',xtype: 'numberfield',hidden:true,hideLabel:true},
-            {fieldLabel: '名称',name: 'name',xtype: 'textfield', readOnly:true}
+            {fieldLabel: '部门',hiddenName: 'department',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'department',emptyText:'请选择部门', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/department/associationListJSON', fields:['id', 'department'],  root: 'root', totalProperty: 'total'}), readOnly:true},
+            {fieldLabel: '员工',hiddenName: 'employee',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'employee',emptyText:'请选择员工', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/employee/associationListJSON', fields:['id', 'employee'],  root: 'root', totalProperty: 'total'}), readOnly:true}
         ]
     });
 
-    var companyDetailWin = new Ext.Window({
-        el: 'companyDetailWin',
+    var departmentEmployeeDetailWin = new Ext.Window({
+        el: 'departmentEmployeeDetailWin',
         closable:false,
         layout: 'fit',
         width: 400,
-        title: '公司明细',
+        title: '模型明细',
         height: 300,
         closeAction: 'hide',
-        items: [companyDetailForm],
+        items: [departmentEmployeeDetailForm],
         buttons: [
             {
                 text: '确定',
                 handler: function() {
-                    companyDetailWin.hide();
+                    departmentEmployeeDetailWin.hide();
                 }
             }
         ]
     });
 
     var tb = new Ext.Toolbar();
-    tb.render('companyToolbar');
+    tb.render('toolbar');
 
     tb.add({
         text: '新建',
         icon: '/foundation/images/skin/database_add.png',
         handler:function() {
-            companyCreateWin.show(this);
+            departmentEmployeeCreateWin.show(this);
         }
     }, {
         text: '修改',
         icon: '/foundation/images/skin/database_edit.png',
         handler: function() {
-            var id = (grid.getSelectionModel().getSelected()).id;
-            if (id == null) {
-                Ext.foundation.msg('注意', "请选择要修改的记录");
-            }else{
-                companyUpdateForm.getForm().load({
-                    url:'/foundation/company/detailJSON?id=' + id,
-                    success:function(form, action) {
-                    },
-                    failure:function() {
-                        Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
-                    }
-                });
-                companyUpdateWin.show();
-            }
+           updateDepartmentEmployee();
         }
     }, {
         text: '删除',
@@ -176,7 +165,7 @@ Ext.onReady(function(){
                 Ext.MessageBox.confirm('信息', '您确定删除编号为' + id + '的记录吗?', function(btn) {
                     if (btn == 'yes') {
                         Ext.Ajax.request({
-                            url: '/foundation/company/deleteJSON',
+                            url: '/foundation/departmentEmployee/deleteJSON',
                             params: {id:id},
                             success: function(result) {
                                 var json_str = Ext.util.JSON.decode(result.responseText);
@@ -200,15 +189,15 @@ Ext.onReady(function(){
             if (id == null) {
                 Ext.foundation.msg('注意', "请选择要显示的记录");
             }else{
-                companyDetailForm.getForm().load({
-                    url:'/foundation/company/detailJSON?id=' + id,
+                departmentEmployeeDetailForm.getForm().load({
+                    url:'/foundation/departmentEmployee/detailJSON?id=' + id,
                     success:function(form, action) {
                     },
                     failure:function() {
                         Ext.foundation.msg('错误', '服务器出现错误，稍后再试!');
                     }
                 });
-                companyDetailWin.show();
+                departmentEmployeeDetailWin.show();
             }
         }
     },{
@@ -241,23 +230,25 @@ Ext.onReady(function(){
     var cm = new Ext.grid.ColumnModel([
         sm,
         {header:'编号',dataIndex:'id'} ,
-        {header:'名称',dataIndex:'name'} 
+        {header:'部门',dataIndex:'department'},
+        {header:'员工',dataIndex:'employee'}
     ]);
 
     var store = new Ext.data.Store({
         autoLoad:true,
-        proxy: new Ext.data.HttpProxy({url:'/foundation/company/listJSON'}),
+        proxy: new Ext.data.HttpProxy({url:'/foundation/departmentEmployee/listJSON'}),
         reader: new Ext.data.JsonReader({
             totalProperty:'total',
             root:'root'
         }, [
             {name:'id'  } ,
-            {name:'name'  } 
+            {name:'department'},
+            {name:'employee'}
         ])
     });
 
     var grid = new Ext.grid.GridPanel({
-        renderTo: 'companyGrid',
+        renderTo: 'grid',
         store: store,
         enableColumnMove:false,
         enableColumnResize:true,
@@ -282,31 +273,35 @@ Ext.onReady(function(){
     });
 
     store.load({params:{start:0,limit:10}});
-
     grid.on('dblclick', function(e) {
+        updateDepartmentEmployee();
+    });
+
+    function updateDepartmentEmployee()
+    {
         var id = (grid.getSelectionModel().getSelected()).id;
         if (id == null) {
             Ext.foundation.msg('注意', "请选择要修改的记录");
         } else {
-            companyUpdateForm.getForm().load({
-                url:'/foundation/company/detailJSON?id=' + id,
+            departmentEmployeeUpdateForm.getForm().load({
+                url:'/foundation/departmentEmployee/detailJSON?id=' + id,
                 success:function(form, action) {
+                    departmentEmployeeUpdateWin.show();
                 },
                 failure:function() {
                     Ext.foundation.msg('错误', "服务器出现错误，稍后再试!");
                 }
             });
-
-            companyUpdateWin.show();
         }
-    });
+    }
+
 });
     </script>
     <body>
-        <div id="companyToolbar"></div>
-        <div id="companyGrid"></div>
-        <div id="companyCreateWin"></div>
-        <div id="companyUpdateWin"></div>
-        <div id="companyDetailWin"></div>
+        <div id="toolbar"></div>
+        <div id="grid"></div>
+        <div id="departmentEmployeeCreateWin"></div>
+        <div id="departmentEmployeeUpdateWin"></div>
+        <div id="departmentEmployeeDetailWin"></div>
     </body>
 </html>

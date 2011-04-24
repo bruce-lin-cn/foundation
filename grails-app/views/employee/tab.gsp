@@ -20,8 +20,7 @@ Ext.onReady(function(){
             {fieldLabel: '姓名',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '姓名为必填项', maxLength: 32, maxLengthText: '姓名至多包含32个字符', minLength: 2, minLengthText: '姓名至少包含2个字符'},
             {fieldLabel: '性别',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), emptyText:'请选择性别',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d'},
-            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'})},
-            {fieldLabel: '部门',hiddenName: 'department',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'department',emptyText:'请选择部门', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/department/associationListJSON', fields:['id', 'department'],  root: 'root', totalProperty: 'total'})}        ]
+            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'})}        ]
     });
 
     var employeeCreateWin = new Ext.Window({
@@ -69,8 +68,7 @@ Ext.onReady(function(){
             {fieldLabel: '姓名',name: 'name',xtype: 'textfield', allowBlank: false, blankText: '姓名为必填项', maxLength: 32, maxLengthText: '姓名至多包含32个字符', minLength: 2, minLengthText: '姓名至少包含2个字符'},
             {fieldLabel: '性别',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), emptyText:'请选择性别',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d'},
-            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'})},
-            {fieldLabel: '部门',hiddenName: 'department',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'department',emptyText:'请选择部门', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/department/associationListJSON', fields:['id', 'department'],  root: 'root', totalProperty: 'total'})}
+            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'})}
         ]
     });
 
@@ -119,8 +117,7 @@ Ext.onReady(function(){
             {fieldLabel: '姓名',name: 'name',xtype: 'textfield', readOnly:true},
             {fieldLabel: '性别',name: 'gender',xtype: 'combo',store: new Ext.data.SimpleStore({ fields:['values'], data:[['男'],['女']]}), readOnly:true, emptyText:'请选择性别',mode: 'local', triggerAction: 'all', valueField: 'values', displayField: 'values'},
             {fieldLabel: '生日',name: 'birthday',xtype:'datefield',format:'Y-m-d', readOnly:true},
-            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'}), readOnly:true},
-            {fieldLabel: '部门',hiddenName: 'department',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'department',emptyText:'请选择部门', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/department/associationListJSON', fields:['id', 'department'],  root: 'root', totalProperty: 'total'}), readOnly:true}
+            {fieldLabel: '公司',hiddenName: 'company',xtype: 'combo',triggerAction: 'all',valueField: 'id', displayField: 'company',emptyText:'请选择公司', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/company/associationListJSON', fields:['id', 'company'],  root: 'root', totalProperty: 'total'}), readOnly:true}
         ]
     });
 
@@ -242,8 +239,7 @@ Ext.onReady(function(){
         {header:'姓名',dataIndex:'name'} ,
         {header:'性别',dataIndex:'gender'} ,
         {header:'生日',dataIndex:'birthday', type: 'date', renderer: Ext.util.Format.dateRenderer('Y-m-d')} ,
-        {header:'公司',dataIndex:'company'},
-        {header:'部门',dataIndex:'department'}
+        {header:'公司',dataIndex:'company'}
     ]);
 
     var store = new Ext.data.Store({
@@ -257,8 +253,7 @@ Ext.onReady(function(){
             {name:'name'  } ,
             {name:'gender'  } ,
             {name:'birthday' , type:'date', dateFormat:'c' } ,
-            {name:'company'},
-            {name:'department'}
+            {name:'company'}
         ])
     });
 

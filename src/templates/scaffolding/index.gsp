@@ -117,7 +117,7 @@
             }
             out << "}"
         }else if(p.isAssociation() && p.oneToOne){
-            out << "{fieldLabel: '${cgDomainProperties[p.name].chinese}',hiddenName: '${p.name}',xtype: 'combo',triggerAction: 'all', forceSelection: true,valueField: 'id', displayField: '${p.name}',emptyText:'请选择${cgDomainProperties[p.name].chinese}', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/${p.name}/associationListJSON', fields:['id', '${p.name}'],  root: 'root', totalProperty: 'total'})"
+            out << "{fieldLabel: '${cgDomainProperties[p.name].chinese}',name: '${p.name}',xtype: 'combo',triggerAction: 'all', forceSelection: true, editable: false, valueField: 'value', displayField: 'value',emptyText:'请选择${cgDomainProperties[p.name].chinese}', mode: 'remote', store: new Ext.data.JsonStore({url: '/foundation/${p.name}/associationListJSON', fields:['value'],  root: 'root', totalProperty: 'total'})"
             if("detail".compareTo(mode)==0)
             {
                 out << ", readOnly:true"

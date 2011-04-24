@@ -5,7 +5,7 @@
     <g:extjs />
     <style type="text/css">
     html, body {
-        font:normal 12px Yahei;
+        font:normal 12px verdana;
         margin:0;
         padding:0;
         border:0 none;
@@ -15,12 +15,7 @@
     p {
         margin:2px;
     }
-    .settings {
-        background-image:url(../shared/icons/fam/folder_wrench.png);
-    }
-    .nav {
-        background-image:url(../shared/icons/fam/folder_go.png);
-    }
+
     </style>
 	<script>
     Ext.onReady(function(){
@@ -34,11 +29,24 @@
         // should ensure that stable state ids are set for stateful components in real apps.
         Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
 
+
+        var banner = {
+            region: 'north',
+            height: 30,
+            xtype: 'toolbar',
+            items: [
+                {
+                    text: '福建富士通信息软件有限公司',
+                    xtype: 'label',
+                    enable: false
+                }
+            ],
+            margins: '0 0 0 0'
+        };
         var viewport = new Ext.Viewport({
             layout: 'border',
             items: [
-            // create instance immediately
-                {} , {
+                banner,{
                 // lazily created panel (xtype:'panel' is default)
                 region: 'south',
                 contentEl: 'south',
@@ -47,7 +55,7 @@
                 minSize: 100,
                 maxSize: 200,
                 collapsible: true,
-                title: 'South',
+                title: '',
                 margins: '0 0 0 0'
             }, {
             }, {
@@ -56,8 +64,8 @@
                 title: '功能导航',
                 split: true,
                 width: 200,
-                minSize: 175,
-                maxSize: 400,
+                minSize: 125,
+                maxSize: 200,
                 collapsible: true,
                 margins: '0 0 0 5',
                 layout: {
@@ -74,9 +82,9 @@
             out << "{title: '${group}', border:false, html: '"
             grailsApplication.domainClasses.each{domain->
                 if(group==domain.clazz.cgDomain?.navigation?.group){
-                    domainName=domain.clazz.name.toString().tokenize('.')[-1].toLowerCase()
+                    domainName=domainName=domain.clazz.name.toString().tokenize('.')[-1][0].toLowerCase()+domain.clazz.name.toString().tokenize('.')[-1][1..-1]
                     domainChinese=domain.clazz.cgDomain.chinese
-                    domainUrl="/foundation/${domainName}/tab"
+                    domainUrl="/foundation/${domainName}/index"
                     out << "<a id=\"${domainName}\" href=\"#\"><center><img src=\"/foundation/images/navigation/package.png\"/><br>${domainChinese}</center></a>"
                 }
             }
@@ -107,7 +115,7 @@
 <%
     grailsApplication.domainClasses.each{domain->
         if(domain.clazz.cgDomain?.navigation?.group!=null){
-            domainName=domain.clazz.name.toString().tokenize('.')[-1].toLowerCase()
+            domainName=domain.clazz.name.toString().tokenize('.')[-1][0].toLowerCase()+domain.clazz.name.toString().tokenize('.')[-1][1..-1]
             domainChinese=domain.clazz.cgDomain.chinese
             domainUrl="/foundation/${domainName}/tab"
 

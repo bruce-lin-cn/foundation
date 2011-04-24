@@ -67,15 +67,6 @@
                                 </td>
                             </tr>
                         
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="department"><g:message code="employee.department.label" default="Department" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: employeeInstance, field: 'department', 'errors')}">
-                                    <g:select name="department.id" from="${business.Department.list()}" optionKey="id" value="${employeeInstance?.department?.id}"  />
-                                </td>
-                            </tr>
-                        
                         </tbody>
                     </table>
                 </div>

@@ -21,8 +21,6 @@ class Employee {
     String name
     String gender
     Date birthday
-    Department department
-    //定义包含其他Domain的关联变量必须是模型名称的小写格式
     Company company
 
     static constraints = {
