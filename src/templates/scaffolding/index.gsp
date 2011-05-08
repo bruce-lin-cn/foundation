@@ -1,5 +1,8 @@
 <% import grails.persistence.Event %><% import org.codehaus.groovy.grails.plugins.PluginManagerHolder %><%=packageName%>
 <%
+    //def app=org.codehaus.groovy.grails.commons.ApplicationHolder.application
+    //println "//${app.config.foundation.app.name}"
+
     cgConstraints=domainClass.getConstrainedProperties()
     cgDomainProperties=[:]
     hasHibernate = PluginManagerHolder.pluginManager.hasGrailsPlugin('hibernate')

@@ -12,12 +12,14 @@ class BootStrap {
 
         new Department(name: "财务部").save()
         new Department(name: "市场部").save()
+        //def ctx = org.codehaus.groovy.grails.web.context.ServletContextHolder.servletContext.getAttribute(org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes.APPLICATION_CONTEXT); or
+        //def ctx = org.codehaus.groovy.grails.commons.ApplicationHolder.application.parentContext
 
         // navigation:[group:"业务管理",weight:1
-        grailsApplication.getArtefacts("Domain")*.clazz.each{domain ->
-            println domain.name
-            println domain.cgDomain.navigation
-        }
+//        grailsApplication.getArtefacts("Domain")*.clazz.each{domain ->
+//            println domain.name
+//            println domain.cgDomain.navigation
+//        }
         //result= generateFile "$templateDir/_index.gsp", "$appDir/views/index.gsp"
 
         //println result

@@ -91,3 +91,5 @@ log4j = {
 }
 
 grails.converters.json.date= 'javascript'
+
+foundation.app.name="福富软件"
